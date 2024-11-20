@@ -8,3 +8,7 @@ pre-commit:
       glob: '*.{ts,tsx,css}'
       run: yarn prettier -w {staged_files}
       stage_fixed: true
+    lint_scss:
+      glob: '*.scss'
+      run: yarn lint:scss -w {staged_files}
+      stage_fixed: true
