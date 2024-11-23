@@ -1,11 +1,12 @@
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { StrictMode } from 'react'
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import { Provider } from 'react-redux'
-import App from './App'
-import './index.scss'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+
 import { store } from './app/store'
+import App from './App'
+
+import './index.scss'
 
 const theme = createTheme()
 
@@ -21,12 +22,10 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <RouterProvider router={router} />
-      </Provider>
-    </ThemeProvider>
-  </StrictMode>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </Provider>
+  </ThemeProvider>,
 )
