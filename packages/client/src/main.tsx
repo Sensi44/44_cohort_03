@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 
-import { store } from './app/store'
-import App from './App'
+// import { store } from './app/store'
+import App from '@Components/App/App'
 
 import './index.scss'
 
@@ -23,9 +23,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <ThemeProvider theme={theme}>
-    <Provider store={store}>
-      <CssBaseline />
-      <RouterProvider router={router} />
-    </Provider>
+    {/*<Provider store={store}>*/}
+    <CssBaseline />
+    <RouterProvider router={router} />
+    {/*</Provider>*/}
   </ThemeProvider>,
 )
