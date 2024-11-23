@@ -1,0 +1,7 @@
+export * from './singUpPage'
+export * from './singInPage'
+export * from './leaderBordPage'
+export * from './forumPage'
+export * from './notFoundPage'
+export * from './errorPage'
+export * from './profilePage'
