@@ -1,13 +1,14 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
-import { useGetCanvasSize, useSetCanvasContext } from '@Hooks/index';
+import {
+  useGetCanvasSize,
+  useSetCanvasContext,
+  useGameLoop,
+} from '@Hooks/index';
 import { useRender, useUpdate } from '@Game/index';
+import { DebugPanel } from '@Components/DebugPanel/DebugPanel';
 
 import './App.scss';
-
-const globalState = {
-  gameState: false, // true - игра запущена, false - остановлена
-};
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,33 +18,7 @@ function App() {
   const render = useRender(ctx);
   const update = useUpdate();
 
-  const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);
-
-  const gameLoop = () => {
-    if (globalState.gameState) {
-      update();
-      render();
-      const id = requestAnimationFrame(gameLoop);
-      setAnimationFrameId(id);
-    }
-  };
-
-  const startGame = () => {
-    if (!globalState.gameState) {
-      globalState.gameState = true;
-      gameLoop();
-    }
-  };
-
-  const stopGame = () => {
-    if (globalState.gameState) {
-      globalState.gameState = false;
-      if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-        setAnimationFrameId(null);
-      }
-    }
-  };
+  const { startGame, stopGame } = useGameLoop(update, render);
 
   useEffect(() => {
     startGame();
@@ -54,17 +29,20 @@ function App() {
   }, [ctx]);
 
   return (
-    <>
-      <h1 className='App'>Космолёт с бобрами</h1>
-      <canvas
-        className={'game-field'}
-        ref={canvasRef}
-        width={width}
-        height={height}
-      />
-      <button onClick={startGame}>Запустить игру</button>
-      <button onClick={stopGame}>Остановить игру</button>
-    </>
+    <article className={'game-page'}>
+      <h1 className='game-page__title'>Космолёт с бобрами</h1>
+
+      <section className={'game-field'}>
+        <DebugPanel onStart={startGame} onStop={stopGame} />
+
+        <canvas
+          className={'game-field__canvas'}
+          ref={canvasRef}
+          width={width}
+          height={height}
+        />
+      </section>
+    </article>
   );
 }
 
