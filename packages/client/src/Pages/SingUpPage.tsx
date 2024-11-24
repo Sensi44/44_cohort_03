@@ -1,5 +1,3 @@
-function SingUn() {
+export const SingUpPage = () => {
   return <div>Hello страница SingUp.</div>
 }
-
-export default SingUn

@@ -1,5 +1,3 @@
-function Forum() {
+export const ForumPage = () => {
   return <div>Hello страница Forum.</div>
 }
-
-export default Forum

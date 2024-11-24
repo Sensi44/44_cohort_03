@@ -6,16 +6,14 @@ import { Provider } from 'react-redux'
 import App from './App'
 import './index.scss'
 import { store } from './app/store'
-import {
-  ProfilePage,
-  SingInPage,
-  SingUpPage,
-  ForumPage,
-  LeaderBordPage,
-  NotFoundPage,
-  ErrorPage,
-} from './pages'
-import PrivateRoutes from './privateRoutes'
+import { PrivateRoutes } from './privateRoutes'
+import { ErrorPage } from './Pages/ErrorPage'
+import { ForumPage } from './Pages/ForumPage'
+import { LeaderBordPage } from './Pages/LeaderBordPage'
+import { ProfilePage } from './Pages/ProfilePage'
+import { SingInPage } from './Pages/SingInPage'
+import { SingUpPage } from './Pages/SingUpPage'
+import { NotFoundPage } from './Pages/NotFoundPage'
 
 const theme = createTheme()
 

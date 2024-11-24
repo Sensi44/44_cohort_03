@@ -1,5 +1,3 @@
-function Profile() {
+export const ProfilePage = () => {
   return <div>Hello страница Profile.</div>
 }
-
-export default Profile

@@ -1,5 +1,3 @@
-function LeaderBord() {
+export const LeaderBordPage = () => {
   return <div>Hello страница LeaderBord.</div>
 }
-
-export default LeaderBord

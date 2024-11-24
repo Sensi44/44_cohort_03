@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
-const PrivateRoutes = () => {
+export const PrivateRoutes = () => {
   const location = useLocation()
   const isAuth = true //TODO: тут должна быть проверка авторизации
 
@@ -10,5 +10,3 @@ const PrivateRoutes = () => {
     <Navigate to="/sing-up" replace state={{ from: location }} />
   )
 }
-
-export default PrivateRoutes
