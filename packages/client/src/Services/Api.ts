@@ -15,11 +15,7 @@ export type FetchOptions = {
   contentType?: string
 }
 
-type FetchMethod = (
-  url: string,
-  options?: FetchOptions,
-  timeout?: number,
-) => Promise<unknown>
+type FetchMethod = (url: string, options?: FetchOptions) => Promise<unknown>
 
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2'
 
@@ -37,38 +33,22 @@ function queryStringify(data: FetchData) {
 
 export class Api {
   get: FetchMethod = (url, options = {}) => {
-    return this.request(
-      url,
-      { ...options, method: METHODS.GET },
-      options.timeout,
-    )
+    return this.request(url, { ...options, method: METHODS.GET })
   }
 
   post: FetchMethod = (url, options = {}) => {
-    return this.request(
-      url,
-      { ...options, method: METHODS.POST },
-      options.timeout,
-    )
+    return this.request(url, { ...options, method: METHODS.POST })
   }
 
   put: FetchMethod = (url, options = {}) => {
-    return this.request(
-      url,
-      { ...options, method: METHODS.PUT },
-      options.timeout,
-    )
+    return this.request(url, { ...options, method: METHODS.PUT })
   }
 
   delete: FetchMethod = (url, options = {}) => {
-    return this.request(
-      url,
-      { ...options, method: METHODS.DELETE },
-      options.timeout,
-    )
+    return this.request(url, { ...options, method: METHODS.DELETE })
   }
 
-  request: FetchMethod = (url, options = {}, timeout = 5000) => {
+  request: FetchMethod = (url, options = {}) => {
     const { method, data } = options
     const fetchUrl =
       method === METHODS.GET
@@ -81,7 +61,6 @@ export class Api {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-      signal: AbortSignal.timeout(timeout),
     }).then(response => {
       const data = response.json()
 
