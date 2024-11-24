@@ -1,11 +1,10 @@
 import { useRef, useEffect } from 'react';
 
-import {
-  useGetCanvasSize,
-  useSetCanvasContext,
-  useGameLoop,
-} from '@Hooks/index';
-import { useRender, useUpdate } from '@Game/index';
+import { useGetCanvasSize } from '@Hooks/UseGetCanvasSize';
+import { useSetCanvasContext } from '@Hooks/UseSetCanvasContext';
+import { useGameLoop } from '@Hooks/UseGameLoop';
+import { useRender } from '@Game/UseRender';
+import { useUpdate } from '@Game/UseUpdate';
 import { DebugPanel } from '@Components/DebugPanel/DebugPanel';
 
 import './App.scss';
