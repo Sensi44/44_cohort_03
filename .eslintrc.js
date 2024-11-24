@@ -17,5 +17,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     '@typescript-eslint/ban-ts-comment': 1,
+    semi: ['error', 'always'],
+    'jsx-quotes': ['error', 'prefer-single'],
   },
-}
+};
