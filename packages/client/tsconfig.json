@@ -18,10 +18,12 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["src/*"],
-      "@Components/*": ["src/Components/*"],
+      "@Components/*": ["Components/*"],
       "@Pages/*": ["Pages/*"],
       "@Utils/*": ["Utils/*"],
-      "@State/*": ["Store/*"]
+      "@State/*": ["Store/*"],
+      "@Types/*": ["Types/*"],
+      "@Services/*": ["Services/*"]
       // Добавим другие по мере необходимости
     }
   },

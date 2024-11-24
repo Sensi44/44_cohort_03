@@ -21,6 +21,7 @@ export default defineConfig({
       '@Pages': resolve(__dirname, 'src/Pages'),
       '@Utils': resolve(__dirname, 'src/Utils'),
       '@State': resolve(__dirname, 'src/Store'),
+      '@Services': resolve(__dirname, 'src/Services'),
       // Добавим другие по мере необходимости
     },
   },

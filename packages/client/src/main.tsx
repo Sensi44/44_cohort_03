@@ -7,17 +7,34 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import App from '@Components/App/App'
 
 import './index.scss'
+import SignUp from '@Pages/SignUp/SignUp'
+import { green, purple } from '@mui/material/colors'
 
-const theme = createTheme()
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[400],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+})
 
-const Routes = {
+export const Routes = {
   Main: '/',
+  SignUp: '/sign-up',
+  SignIn: '/sign-in',
 } as const
 
 const router = createBrowserRouter([
   {
     path: Routes.Main,
     element: <App />,
+  },
+  {
+    path: Routes.SignUp,
+    element: <SignUp />,
   },
 ])
 
