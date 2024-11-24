@@ -52,21 +52,20 @@ export class Api {
     const { method, data } = options
     const fetchUrl =
       method === METHODS.GET
-        ? `${BASE_URL}${url}${queryStringify(data as FetchData)}`
+        ? `${BASE_URL}${url}${data ? queryStringify(data as FetchData) : ''}`
         : `${BASE_URL}${url}`
 
     return fetch(fetchUrl, {
+      credentials: 'include',
       method,
       body: data ? JSON.stringify(data) : null,
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
     }).then(response => {
-      const data = response.json()
-
       return response.status === 200
-        ? data
-        : data.then(err => {
+        ? response
+        : response.json().then(err => {
             throw err
           })
     })

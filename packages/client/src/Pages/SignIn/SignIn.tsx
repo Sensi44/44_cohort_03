@@ -1,45 +1,56 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Typography, Container } from '@mui/material'
 
-import SignUpForm from '@Components/SignUpForm/SignUpForm'
 import ErrorNotification from '@Components/ErrorNotification/ErrorNotification'
-import { UserCreate } from '@Types/UserCreate'
 import { useAuthApi } from '@Services/AuthService'
 import { Routes } from '../../main'
 import { useState } from 'react'
 
-import './SignUp.scss'
+import './SignIn.scss'
+import SignInForm from '@Components/SignInForm/SignInForm'
+import { UserLogin } from '@Types/UserLogin'
+import { useDispatch } from 'react-redux'
+import { ProfileDataState, updateProfileData } from '@State/Store'
 
-export default function SignUp() {
+export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate()
+  const authApi = useAuthApi()
+  const dispatch = useDispatch()
 
-  const handleSubmitForm = async (profileData: UserCreate) => {
+  const handleSubmitForm = async (profileData: UserLogin) => {
     setIsLoading(true)
-    const result = await useAuthApi().signUp(profileData)
-    setIsLoading(false)
+    const result = await authApi.signIn(profileData)
 
     if (result.isSuccess) {
-      navigate(Routes.SignIn)
+      const userInfo = await authApi.getUserInfo()
+
+      if (userInfo.result) {
+        dispatch(updateProfileData(userInfo.result as ProfileDataState))
+        navigate(Routes.Main)
+      } else {
+        setErrorMessage(result.error)
+      }
     } else {
       setErrorMessage(result.error)
     }
+
+    setIsLoading(false)
   }
 
   return (
     <Container className="page">
       <Typography className="title" variant="h4" color="primary">
-        Регистрация
+        Вход
       </Typography>
-      <SignUpForm
+      <SignInForm
         className="form"
         isLoading={isLoading}
         whenSubmitForm={handleSubmitForm}
       />
       <Typography className="info-message" variant="body2">
-        {'Уже зарегистрированы? '}
-        <NavLink to={Routes.SignIn}>Войти</NavLink>
+        <NavLink to={Routes.SignUp}>Нет аккаунта?</NavLink>
       </Typography>
       <ErrorNotification
         isOpen={errorMessage.length > 0}

@@ -1,16 +1,11 @@
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material'
 import { HTMLAttributes, useState } from 'react'
-import './SignUpForm.scss'
-import { SignUpFormProps } from './SignUp.props'
+import './SignInForm.scss'
+import { SignInFormProps } from './SignIn.props'
 
 enum TextFieldsKeys {
-  email = 'email',
   login = 'login',
-  firstName = 'firstName',
-  secondName = 'secondName',
-  phone = 'phone',
   password = 'password',
-  repeatPassword = 'repeatPassword',
 }
 
 const textFieldsList = [
@@ -21,39 +16,9 @@ const textFieldsList = [
     type: 'text',
   },
   {
-    id: TextFieldsKeys.email,
-    name: 'email',
-    label: 'Почта',
-    type: 'email',
-  },
-  {
-    id: TextFieldsKeys.firstName,
-    name: 'first_name',
-    label: 'Имя',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.secondName,
-    name: 'second_name',
-    label: 'Фамилия',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.phone,
-    name: 'phone',
-    label: 'Телефон',
-    type: 'text',
-  },
-  {
     id: TextFieldsKeys.password,
     name: 'password',
     label: 'Пароль',
-    type: 'password',
-  },
-  {
-    id: TextFieldsKeys.repeatPassword,
-    name: 'repeat_password',
-    label: 'Пароль (еще раз)',
     type: 'password',
   },
 ]
@@ -62,17 +27,12 @@ type FormData = Record<TextFieldsKeys, string>
 const defaultFormData: FormData = {
   [TextFieldsKeys.login]: '',
   [TextFieldsKeys.password]: '',
-  [TextFieldsKeys.email]: '',
-  [TextFieldsKeys.firstName]: '',
-  [TextFieldsKeys.secondName]: '',
-  [TextFieldsKeys.phone]: '',
-  [TextFieldsKeys.repeatPassword]: '',
 }
 
 export default function SignUpForm({
   isLoading,
   whenSubmitForm,
-}: SignUpFormProps & HTMLAttributes<HTMLDivElement>) {
+}: SignInFormProps & HTMLAttributes<HTMLDivElement>) {
   const [formData, setFormData] = useState(defaultFormData)
   const [errors, setErrors] = useState(defaultFormData)
 
@@ -84,17 +44,9 @@ export default function SignUpForm({
   }
 
   const handleSubmitForm = () => {
-    const { email, login, firstName, secondName, phone, password } = formData
     //TODO добавить валидацию - использовать errors
 
-    whenSubmitForm({
-      first_name: firstName,
-      second_name: secondName,
-      login,
-      email,
-      password,
-      phone,
-    })
+    whenSubmitForm(formData)
   }
 
   return (
@@ -126,7 +78,7 @@ export default function SignUpForm({
         onClick={handleSubmitForm}
         size="large"
         variant="contained">
-        Зарегистрироваться
+        Авторизоваться
       </Button>
     </form>
   )
