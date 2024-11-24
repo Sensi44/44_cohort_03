@@ -1,16 +1,20 @@
 import type { TCanvas } from '@Types/common.types';
 
-let a = 1;
+let a = 0;
 
 export const testDrawFunction = (ctx: TCanvas) => {
   if (!ctx) return;
 
-  a += 3;
+  if (a < 400) {
+    a += 2;
+  } else if (a === 400) {
+    a = -400;
+  }
 
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  const size = 100; // Размер квадрата
-  const x = (ctx.canvas.width - size) / 2 + a; // Положение по X
-  const y = (ctx.canvas.height - size) / 2 + a; // Положение по Y
+  const size = 100;
+  const x = (ctx.canvas.width - size) / 2 + a;
+  const y = (ctx.canvas.height - size) / 2 + a / 4;
 
   const colors = ['red', 'green', 'blue', 'yellow'];
   const lineWidth = 4;

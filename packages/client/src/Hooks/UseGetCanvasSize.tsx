@@ -7,7 +7,7 @@ export const useGetCanvasSize = () => {
   });
 
   useEffect(() => {
-    const canvasContainer = document.querySelector('.gameField');
+    const canvasContainer = document.querySelector('.game-field');
     if (canvasContainer) {
       setCanvasSize({
         x: canvasContainer.clientWidth - 22,
