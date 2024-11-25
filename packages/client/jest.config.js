@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from 'dotenv';
+dotenv.config();
 
 export default {
   preset: 'ts-jest',
@@ -10,8 +10,11 @@ export default {
   },
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '^@Hooks/(.*)$': '<rootDir>/src/Hooks/$1',
+    '^@Game/(.*)$': '<rootDir>/src/GameEngine/$1',
+    '^@Components/(.*)$': '<rootDir>/src/Components/$1',
   },
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
-}
+};
