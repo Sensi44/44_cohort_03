@@ -1,12 +1,11 @@
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
 import { HTMLAttributes, useState } from 'react';
 import './SignInForm.scss';
-import { SignInFormProps } from './SignIn.props';
-
-enum TextFieldsKeys {
-  login = 'login',
-  password = 'password',
-}
+import {
+  SignInFormData,
+  SignInFormProps,
+  TextFieldsKeys,
+} from './SignInForm.props';
 
 const textFieldsList = [
   {
@@ -22,9 +21,8 @@ const textFieldsList = [
     type: 'password',
   },
 ];
-type FormData = Record<TextFieldsKeys, string>;
 
-const defaultFormData: FormData = {
+const defaultFormData: SignInFormData = {
   [TextFieldsKeys.login]: '',
   [TextFieldsKeys.password]: '',
 };
