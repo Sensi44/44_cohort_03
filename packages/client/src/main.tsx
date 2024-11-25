@@ -5,13 +5,13 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 // import { Provider } from 'react-redux';
 
 import { PrivateRoutes } from './privateRoutes';
-import { ErrorPage } from '@Pages/ErrorPage';
-import { ForumPage } from '@Pages/ForumPage';
-import { LeaderBordPage } from '@Pages/LeaderBordPage';
-import { ProfilePage } from '@Pages/ProfilePage';
-import { SingInPage } from '@Pages/SingInPage';
-import { SingUpPage } from '@Pages/SingUpPage';
-import { NotFoundPage } from '@Pages/NotFoundPage';
+import { ErrorPage } from '@Pages/ErrorPage/ErrorPage';
+import { ForumPage } from '@Pages/ForumPage/ForumPage';
+import { LeaderBordPage } from '@Pages/LeaderBordPage/LeaderBordPage';
+import { ProfilePage } from '@Pages/ProfilePage/ProfilePage';
+import { SingInPage } from '@Pages/SingInPage/SingInPage';
+import { SingUpPage } from '@Pages/SingUpPage/SingUpPage';
+import { NotFoundPage } from '@Pages/NotFoundPage/NotFoundPage';
 
 // import { store } from './app/store'
 import App from '@Components/App/App';
