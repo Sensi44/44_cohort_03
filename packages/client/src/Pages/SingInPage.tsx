@@ -1,3 +1,3 @@
 export const SingInPage = () => {
-  return <div>Hello страница SingIp.</div>
-}
+  return <div>Hello страница SingIp.</div>;
+};

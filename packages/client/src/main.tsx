@@ -1,21 +1,24 @@
-import { createRoot } from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { StrictMode } from 'react'
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
-import { Provider } from 'react-redux'
-import App from './App'
-import './index.scss'
-import { store } from './app/store'
-import { PrivateRoutes } from './privateRoutes'
-import { ErrorPage } from './Pages/ErrorPage'
-import { ForumPage } from './Pages/ForumPage'
-import { LeaderBordPage } from './Pages/LeaderBordPage'
-import { ProfilePage } from './Pages/ProfilePage'
-import { SingInPage } from './Pages/SingInPage'
-import { SingUpPage } from './Pages/SingUpPage'
-import { NotFoundPage } from './Pages/NotFoundPage'
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { StrictMode } from 'react';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+// import { Provider } from 'react-redux';
 
-const theme = createTheme()
+import { PrivateRoutes } from './privateRoutes';
+import { ErrorPage } from '@Pages/ErrorPage';
+import { ForumPage } from '@Pages/ForumPage';
+import { LeaderBordPage } from '@Pages/LeaderBordPage';
+import { ProfilePage } from '@Pages/ProfilePage';
+import { SingInPage } from '@Pages/SingInPage';
+import { SingUpPage } from '@Pages/SingUpPage';
+import { NotFoundPage } from '@Pages/NotFoundPage';
+
+// import { store } from './app/store'
+import App from '@Components/App/App';
+
+import './index.scss';
+
+const theme = createTheme();
 
 const Routes = {
   Main: '/',
@@ -24,7 +27,7 @@ const Routes = {
   Forum: 'forum',
   LeaderBord: 'leader-bord',
   Profile: 'profile',
-} as const
+} as const;
 
 const router = createBrowserRouter(
   [
@@ -72,15 +75,15 @@ const router = createBrowserRouter(
       v7_skipActionErrorRevalidation: true,
     },
   },
-)
+);
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <RouterProvider router={router} future={{ v7_startTransition: true }} />
-      </Provider>
+      {/* <Provider store={store}> */}
+      <CssBaseline />
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+      {/* </Provider> */}
     </ThemeProvider>
   </StrictMode>,
-)
+);

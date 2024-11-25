@@ -1,3 +1,3 @@
 export const SingUpPage = () => {
-  return <div>Hello страница SingUp.</div>
-}
+  return <div>Hello страница SingUp.</div>;
+};
