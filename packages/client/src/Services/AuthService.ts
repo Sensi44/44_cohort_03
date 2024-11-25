@@ -1,6 +1,7 @@
 import { UserCreate } from '@Types/UserCreate';
 import { Api } from '@Services/Api';
 import { UserLogin } from '@Types/UserLogin';
+import { ProfileDataState } from '@State/Store';
 
 const api = new Api();
 
@@ -18,7 +19,7 @@ export const useAuthApi = () => {
     } catch (e) {
       return {
         isSuccess: false,
-        error: `Не удалось зарегистрироваться ${JSON.stringify((e as { reason: string })?.reason ?? '')}`,
+        error: `Не удалось зарегистрироваться ${(e as { reason: string })?.reason ?? ''}`,
       };
     }
   };
@@ -43,20 +44,14 @@ export const useAuthApi = () => {
     }
   };
 
-  const getUserInfo = async () => {
+  const getUserInfo = async (): Promise<ProfileDataState | null> => {
     try {
       const response = (await api.get(`${urlBase}/user`)) as Response;
-      const result = await response.json();
+      const userInfo = (await response.json()) as ProfileDataState;
 
-      return {
-        result,
-        error: '',
-      };
-    } catch (e) {
-      return {
-        result: null,
-        error: `Не удалось зарегистрироваться ${JSON.stringify((e as { reason: string })?.reason ?? '')}`,
-      };
+      return userInfo;
+    } catch {
+      return null;
     }
   };
 

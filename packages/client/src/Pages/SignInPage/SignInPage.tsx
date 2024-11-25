@@ -9,7 +9,7 @@ import { useState } from 'react';
 import SignInForm from '@Components/SignInForm/SignInForm';
 import { UserLogin } from '@Types/UserLogin';
 import { useDispatch } from 'react-redux';
-import { ProfileDataState, updateProfileData } from '@State/Store';
+import { updateProfileData } from '@State/Store';
 
 import './SignInPage.scss';
 
@@ -27,8 +27,8 @@ export const SignInPage = () => {
     if (result.isSuccess) {
       const userInfo = await authApi.getUserInfo();
 
-      if (userInfo.result) {
-        dispatch(updateProfileData(userInfo.result as ProfileDataState));
+      if (userInfo) {
+        dispatch(updateProfileData(userInfo));
         navigate(Routes.Main);
       } else {
         setErrorMessage(result.error);
