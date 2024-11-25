@@ -1,6 +1,6 @@
-import { UserCreate } from '@Types/UserCreate'
+import { UserCreate } from '@Types/UserCreate';
 
 export type SignUpFormProps = {
-  isLoading: boolean
-  whenSubmitForm: (userInfo: UserCreate) => void
-}
+  isLoading: boolean;
+  whenSubmitForm: (userInfo: UserCreate) => void;
+};

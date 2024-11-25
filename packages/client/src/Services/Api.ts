@@ -5,55 +5,55 @@ export enum METHODS {
   DELETE = 'DELETE',
 }
 
-export type FetchData = Record<string, unknown>
+export type FetchData = Record<string, unknown>;
 
 export type FetchOptions = {
-  method?: METHODS
-  data?: unknown
-  headers?: Record<string, string>
-  timeout?: number
-  contentType?: string
-}
+  method?: METHODS;
+  data?: unknown;
+  headers?: Record<string, string>;
+  timeout?: number;
+  contentType?: string;
+};
 
-type FetchMethod = (url: string, options?: FetchOptions) => Promise<unknown>
+type FetchMethod = (url: string, options?: FetchOptions) => Promise<unknown>;
 
-export const BASE_URL = 'https://ya-praktikum.tech/api/v2'
+export const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 
 function queryStringify(data: FetchData) {
   if (typeof data !== 'object') {
-    throw new Error('Data must be object')
+    throw new Error('Data must be object');
   }
 
-  const keys = Object.keys(data)
+  const keys = Object.keys(data);
 
   return keys.reduce((result, key, index) => {
-    return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`
-  }, '?')
+    return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
+  }, '?');
 }
 
 export class Api {
   get: FetchMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHODS.GET })
-  }
+    return this.request(url, { ...options, method: METHODS.GET });
+  };
 
   post: FetchMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHODS.POST })
-  }
+    return this.request(url, { ...options, method: METHODS.POST });
+  };
 
   put: FetchMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHODS.PUT })
-  }
+    return this.request(url, { ...options, method: METHODS.PUT });
+  };
 
   delete: FetchMethod = (url, options = {}) => {
-    return this.request(url, { ...options, method: METHODS.DELETE })
-  }
+    return this.request(url, { ...options, method: METHODS.DELETE });
+  };
 
   request: FetchMethod = (url, options = {}) => {
-    const { method, data } = options
+    const { method, data } = options;
     const fetchUrl =
       method === METHODS.GET
         ? `${BASE_URL}${url}${data ? queryStringify(data as FetchData) : ''}`
-        : `${BASE_URL}${url}`
+        : `${BASE_URL}${url}`;
 
     return fetch(fetchUrl, {
       credentials: 'include',
@@ -66,8 +66,8 @@ export class Api {
       return response.status === 200
         ? response
         : response.json().then(err => {
-            throw err
-          })
-    })
-  }
+            throw err;
+          });
+    });
+  };
 }

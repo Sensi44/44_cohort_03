@@ -1,7 +1,7 @@
-import { TextField, Button, FormControl, FormHelperText } from '@mui/material'
-import { HTMLAttributes, useState } from 'react'
-import './SignUpForm.scss'
-import { SignUpFormProps } from './SignUp.props'
+import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
+import { HTMLAttributes, useState } from 'react';
+import './SignUpForm.scss';
+import { SignUpFormProps } from './SignUp.props';
 
 enum TextFieldsKeys {
   email = 'email',
@@ -56,8 +56,8 @@ const textFieldsList = [
     label: 'Пароль (еще раз)',
     type: 'password',
   },
-]
-type FormData = Record<TextFieldsKeys, string>
+];
+type FormData = Record<TextFieldsKeys, string>;
 
 const defaultFormData: FormData = {
   [TextFieldsKeys.login]: '',
@@ -67,24 +67,24 @@ const defaultFormData: FormData = {
   [TextFieldsKeys.secondName]: '',
   [TextFieldsKeys.phone]: '',
   [TextFieldsKeys.repeatPassword]: '',
-}
+};
 
 export default function SignUpForm({
   isLoading,
   whenSubmitForm,
 }: SignUpFormProps & HTMLAttributes<HTMLDivElement>) {
-  const [formData, setFormData] = useState(defaultFormData)
-  const [errors, setErrors] = useState(defaultFormData)
+  const [formData, setFormData] = useState(defaultFormData);
+  const [errors, setErrors] = useState(defaultFormData);
 
   const handleChangeForm = (value: string, fieldKey: TextFieldsKeys) => {
     setFormData({
       ...formData,
       [fieldKey]: value,
-    })
-  }
+    });
+  };
 
   const handleSubmitForm = () => {
-    const { email, login, firstName, secondName, phone, password } = formData
+    const { email, login, firstName, secondName, phone, password } = formData;
     //TODO добавить валидацию - использовать errors
 
     whenSubmitForm({
@@ -94,17 +94,17 @@ export default function SignUpForm({
       email,
       password,
       phone,
-    })
-  }
+    });
+  };
 
   return (
-    <form className="form">
+    <form className='form'>
       {textFieldsList.map(field => (
         <FormControl
-          className="field"
+          className='field'
           key={field.id}
           error={errors[field.id].length > 0}
-          variant="standard">
+          variant='standard'>
           <TextField
             disabled={isLoading}
             fullWidth
@@ -113,7 +113,7 @@ export default function SignUpForm({
             name={field.name}
             type={field.type}
             value={formData[field.id]}
-            variant="outlined"
+            variant='outlined'
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleChangeForm(event.target.value, field.id)
             }
@@ -124,10 +124,10 @@ export default function SignUpForm({
       <Button
         disabled={Object.values(errors).filter(Boolean).length > 0}
         onClick={handleSubmitForm}
-        size="large"
-        variant="contained">
+        size='large'
+        variant='contained'>
         Зарегистрироваться
       </Button>
     </form>
-  )
+  );
 }

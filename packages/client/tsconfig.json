@@ -23,7 +23,8 @@
       "@State/*": ["Store/*"],
       "@Types/*": ["Types/*"],
       "@Services/*": ["Services/*"],
-      "@Game/*": ["GameEngine/*"]
+      "@Game/*": ["GameEngine/*"],
+      "@Hooks/*": ["Hooks/*"]
       // Добавим другие по мере необходимости
     }
   },

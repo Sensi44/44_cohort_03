@@ -1,5 +1,5 @@
-import { Snackbar, Alert } from '@mui/material'
-import { ErrorNotificationProps } from './ErrorNotification.props'
+import { Snackbar, Alert } from '@mui/material';
+import { ErrorNotificationProps } from './ErrorNotification.props';
 
 export default function ErrorNotification({
   isOpen,
@@ -14,11 +14,11 @@ export default function ErrorNotification({
       onClose={whenClose}>
       <Alert
         onClose={whenClose}
-        severity="error"
-        variant="filled"
+        severity='error'
+        variant='filled'
         sx={{ width: '100%' }}>
         {errorText}
       </Alert>
     </Snackbar>
-  )
+  );
 }
