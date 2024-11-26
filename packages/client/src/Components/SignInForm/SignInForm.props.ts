@@ -5,9 +5,9 @@ export type SignInFormProps = {
   whenSubmitForm: (userInfo: UserLogin) => void;
 };
 
-export enum TextFieldsKeys {
+export enum SignInTextFieldsKeys {
   login = 'login',
   password = 'password',
 }
 
-export type SignInFormData = Record<TextFieldsKeys, string>;
+export type SignInFormData = Record<SignInTextFieldsKeys, string>;

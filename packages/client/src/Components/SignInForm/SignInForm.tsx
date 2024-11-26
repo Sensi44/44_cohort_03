@@ -1,40 +1,19 @@
+import { useState, FC, HTMLAttributes } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
-import { HTMLAttributes, useState } from 'react';
 import './SignInForm.scss';
+import { SignInFormProps, SignInTextFieldsKeys } from './SignInForm.props';
 import {
-  SignInFormData,
-  SignInFormProps,
-  TextFieldsKeys,
-} from './SignInForm.props';
+  signInFormDefaultFormData,
+  signInTextFieldsList,
+} from '@Constants/InputForms';
 
-const textFieldsList = [
-  {
-    id: TextFieldsKeys.login,
-    name: 'login',
-    label: 'Логин',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.password,
-    name: 'password',
-    label: 'Пароль',
-    type: 'password',
-  },
-];
+export const SignInForm: FC<
+  SignInFormProps & HTMLAttributes<HTMLDivElement>
+> = ({ isLoading, whenSubmitForm }) => {
+  const [formData, setFormData] = useState(signInFormDefaultFormData);
+  const [errors, setErrors] = useState(signInFormDefaultFormData);
 
-const defaultFormData: SignInFormData = {
-  [TextFieldsKeys.login]: '',
-  [TextFieldsKeys.password]: '',
-};
-
-export default function SignUpForm({
-  isLoading,
-  whenSubmitForm,
-}: SignInFormProps & HTMLAttributes<HTMLDivElement>) {
-  const [formData, setFormData] = useState(defaultFormData);
-  const [errors, setErrors] = useState(defaultFormData);
-
-  const handleChangeForm = (value: string, fieldKey: TextFieldsKeys) => {
+  const handleChangeForm = (value: string, fieldKey: SignInTextFieldsKeys) => {
     setFormData({
       ...formData,
       [fieldKey]: value,
@@ -49,7 +28,7 @@ export default function SignUpForm({
 
   return (
     <form className='form'>
-      {textFieldsList.map(field => (
+      {signInTextFieldsList.map(field => (
         <FormControl
           className='field'
           key={field.id}
@@ -80,4 +59,4 @@ export default function SignUpForm({
       </Button>
     </form>
   );
-}
+};

@@ -1,15 +1,14 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Typography, Container } from '@mui/material';
 
-import ErrorNotification from '@Components/ErrorNotification/ErrorNotification';
-import { useAuthApi } from '@Services/AuthService';
+import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
 import { Routes } from '../../main';
-import { useState } from 'react';
-
-import SignInForm from '@Components/SignInForm/SignInForm';
+import { SignInForm } from '@Components/SignInForm/SignInForm';
 import { UserLogin } from '@Types/UserLogin';
-import { useDispatch } from 'react-redux';
 import { updateProfileData } from '@State/Store';
+import { useAuthApi } from '@Services/AuthService';
 
 import './SignInPage.scss';
 

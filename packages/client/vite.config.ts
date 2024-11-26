@@ -24,6 +24,7 @@ export default defineConfig({
       '@Hooks': resolve(__dirname, 'src/Hooks'),
       '@Types': resolve(__dirname, 'src/Types'),
       '@Game': resolve(__dirname, 'src/GameEngine'),
+      '@Constants': resolve(__dirname, 'src/Constants'),
       // Добавим другие по мере необходимости
     },
   },

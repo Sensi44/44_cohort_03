@@ -18,6 +18,7 @@
     "jsx": "react-jsx",
     "paths": {
       "@Components/*": ["Components/*"],
+      "@Constants/*": ["Constants/*"],
       "@Pages/*": ["Pages/*"],
       "@Utils/*": ["Utils/*"],
       "@State/*": ["Store/*"],

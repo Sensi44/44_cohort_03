@@ -1,75 +1,19 @@
+import { FC, HTMLAttributes, useState } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
-import { HTMLAttributes, useState } from 'react';
 import './SignUpForm.scss';
+import { SignUpFormProps, SignUpTextFieldsKeys } from './SignUpForm.props';
 import {
-  SignUpFormProps,
-  TextFieldsKeys,
-  SignUpFormData,
-} from './SignUpForm.props';
+  signUpDefaultFormData,
+  signUpTextFieldsList,
+} from '@Constants/InputForms';
 
-const textFieldsList = [
-  {
-    id: TextFieldsKeys.login,
-    name: 'login',
-    label: 'Логин',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.email,
-    name: 'email',
-    label: 'Почта',
-    type: 'email',
-  },
-  {
-    id: TextFieldsKeys.firstName,
-    name: 'first_name',
-    label: 'Имя',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.secondName,
-    name: 'second_name',
-    label: 'Фамилия',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.phone,
-    name: 'phone',
-    label: 'Телефон',
-    type: 'text',
-  },
-  {
-    id: TextFieldsKeys.password,
-    name: 'password',
-    label: 'Пароль',
-    type: 'password',
-  },
-  {
-    id: TextFieldsKeys.repeatPassword,
-    name: 'repeat_password',
-    label: 'Пароль (еще раз)',
-    type: 'password',
-  },
-];
+export const SignUpForm: FC<
+  SignUpFormProps & HTMLAttributes<HTMLDivElement>
+> = ({ isLoading, whenSubmitForm }) => {
+  const [formData, setFormData] = useState(signUpDefaultFormData);
+  const [errors, setErrors] = useState(signUpDefaultFormData);
 
-const defaultFormData: SignUpFormData = {
-  [TextFieldsKeys.login]: '',
-  [TextFieldsKeys.password]: '',
-  [TextFieldsKeys.email]: '',
-  [TextFieldsKeys.firstName]: '',
-  [TextFieldsKeys.secondName]: '',
-  [TextFieldsKeys.phone]: '',
-  [TextFieldsKeys.repeatPassword]: '',
-};
-
-export default function SignUpForm({
-  isLoading,
-  whenSubmitForm,
-}: SignUpFormProps & HTMLAttributes<HTMLDivElement>) {
-  const [formData, setFormData] = useState(defaultFormData);
-  const [errors, setErrors] = useState(defaultFormData);
-
-  const handleChangeForm = (value: string, fieldKey: TextFieldsKeys) => {
+  const handleChangeForm = (value: string, fieldKey: SignUpTextFieldsKeys) => {
     setFormData({
       ...formData,
       [fieldKey]: value,
@@ -92,7 +36,7 @@ export default function SignUpForm({
 
   return (
     <form className='form'>
-      {textFieldsList.map(field => (
+      {signUpTextFieldsList.map(field => (
         <FormControl
           className='field'
           key={field.id}
@@ -123,4 +67,4 @@ export default function SignUpForm({
       </Button>
     </form>
   );
-}
+};

@@ -1,11 +1,12 @@
+import { FC } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 import { ErrorNotificationProps } from './ErrorNotification.props';
 
-export default function ErrorNotification({
+export const ErrorNotification: FC<ErrorNotificationProps> = ({
   isOpen,
   errorText,
   whenClose,
-}: ErrorNotificationProps) {
+}) => {
   return (
     <Snackbar
       open={isOpen}
@@ -21,4 +22,4 @@ export default function ErrorNotification({
       </Alert>
     </Snackbar>
   );
-}
+};

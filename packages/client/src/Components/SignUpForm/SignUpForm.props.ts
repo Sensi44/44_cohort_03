@@ -5,7 +5,7 @@ export type SignUpFormProps = {
   whenSubmitForm: (userInfo: UserCreate) => void;
 };
 
-export enum TextFieldsKeys {
+export enum SignUpTextFieldsKeys {
   email = 'email',
   login = 'login',
   firstName = 'firstName',
@@ -15,4 +15,4 @@ export enum TextFieldsKeys {
   repeatPassword = 'repeatPassword',
 }
 
-export type SignUpFormData = Record<TextFieldsKeys, string>;
+export type SignUpFormData = Record<SignUpTextFieldsKeys, string>;

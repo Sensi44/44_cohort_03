@@ -1,12 +1,12 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Typography, Container } from '@mui/material';
 
-import SignUpForm from '@Components/SignUpForm/SignUpForm';
-import ErrorNotification from '@Components/ErrorNotification/ErrorNotification';
+import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
+import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
 import { UserCreate } from '@Types/UserCreate';
 import { useAuthApi } from '@Services/AuthService';
 import { Routes } from '../../main';
-import { useState } from 'react';
 
 import './SignUpPage.scss';
 
