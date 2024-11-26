@@ -23,6 +23,7 @@ module.exports = {
     ],
     '@typescript-eslint/ban-ts-comment': 1,
     semi: ['error', 'always'],
+    'arrow-parens': ['error', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
   },
 };
