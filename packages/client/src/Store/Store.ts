@@ -1,8 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface ProfileDataState {
+export interface IProfileDataState {
   first_name: string;
   second_name: string;
   display_name: string;
@@ -24,7 +23,7 @@ const profileDataSlice = createSlice({
     phone: '',
   },
   reducers: {
-    updateProfileData(state, action: PayloadAction<ProfileDataState>) {
+    updateProfileData(state, action: PayloadAction<IProfileDataState>) {
       return {
         ...state,
         ...action.payload,

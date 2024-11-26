@@ -1,14 +1,14 @@
-import { UserCreate } from '@Types/UserCreate';
 import { Api } from '@Services/Api';
-import { UserLogin } from '@Types/UserLogin';
-import { ProfileDataState } from '@State/Store';
+
+import type { IUserCreate, IUserLogin } from '@Types/User.types';
+import type { IProfileDataState } from '@State/Store';
 
 const api = new Api();
 
 const urlBase = '/auth';
 
 export const useAuthApi = () => {
-  const signUp = async (profileData: UserCreate) => {
+  const signUp = async (profileData: IUserCreate) => {
     try {
       await api.post(`${urlBase}/signup`, { data: profileData });
 
@@ -24,7 +24,7 @@ export const useAuthApi = () => {
     }
   };
 
-  const signIn = async (payload: UserLogin) => {
+  const signIn = async (payload: IUserLogin) => {
     try {
       await api.post(`${urlBase}/signin`, { data: payload });
 
@@ -44,10 +44,10 @@ export const useAuthApi = () => {
     }
   };
 
-  const getUserInfo = async (): Promise<ProfileDataState | null> => {
+  const getUserInfo = async (): Promise<IProfileDataState | null> => {
     try {
       const response = (await api.get(`${urlBase}/user`)) as Response;
-      const userInfo = (await response.json()) as ProfileDataState;
+      const userInfo = (await response.json()) as IProfileDataState;
 
       return userInfo;
     } catch {

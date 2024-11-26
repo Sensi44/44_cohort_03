@@ -4,7 +4,7 @@ import { Typography, Container } from '@mui/material';
 
 import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import { UserCreate } from '@Types/UserCreate';
+import type { IUserCreate } from '@Types/User.types';
 import { useAuthApi } from '@Services/AuthService';
 import { Routes } from '../../main';
 
@@ -15,7 +15,7 @@ export const SignUpPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmitForm = async (profileData: UserCreate) => {
+  const handleSubmitForm = async (profileData: IUserCreate) => {
     setIsLoading(true);
     const result = await useAuthApi().signUp(profileData);
     setIsLoading(false);
@@ -28,16 +28,15 @@ export const SignUpPage = () => {
   };
 
   return (
-    <Container className='page'>
-      <Typography className='title' variant='h4' color='primary'>
+    <Container className='sign-up-page__page'>
+      <Typography className='sign-up-page__title' variant='h4' color='primary'>
         Регистрация
       </Typography>
-      <SignUpForm
-        className='form'
-        isLoading={isLoading}
-        whenSubmitForm={handleSubmitForm}
-      />
-      <Typography className='info-message' variant='body2'>
+      <div className='sign-up-page__form'>
+        <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
+      </div>
+
+      <Typography className='sign-up-page__message' variant='body2'>
         {'Уже зарегистрированы? '}
         <NavLink to={`/${Routes.SignIn}`}>Войти</NavLink>
       </Typography>

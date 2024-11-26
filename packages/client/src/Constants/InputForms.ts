@@ -1,11 +1,7 @@
-import {
-  SignInFormData,
-  SignInTextFieldsKeys,
-} from '@Components/SignInForm/SignInForm.props';
-import {
-  SignUpFormData,
-  SignUpTextFieldsKeys,
-} from '@Components/SignUpForm/SignUpForm.props';
+import { SignInTextFieldsKeys } from '@Components/SignInForm/SignInForm.props';
+import { SignUpTextFieldsKeys } from '@Components/SignUpForm/SignUpForm.props';
+import type { ISignInFormData } from '@Components/SignInForm/SignInForm.props';
+import type { ISignUpFormData } from '@Components/SignUpForm/SignUpForm.props';
 
 export const signInTextFieldsList = [
   {
@@ -22,7 +18,7 @@ export const signInTextFieldsList = [
   },
 ];
 
-export const signInFormDefaultFormData: SignInFormData = {
+export const signInFormDefaultFormData: ISignInFormData = {
   [SignInTextFieldsKeys.login]: '',
   [SignInTextFieldsKeys.password]: '',
 };
@@ -72,7 +68,7 @@ export const signUpTextFieldsList = [
   },
 ];
 
-export const signUpDefaultFormData: SignUpFormData = {
+export const signUpDefaultFormData: ISignUpFormData = {
   [SignUpTextFieldsKeys.login]: '',
   [SignUpTextFieldsKeys.password]: '',
   [SignUpTextFieldsKeys.email]: '',

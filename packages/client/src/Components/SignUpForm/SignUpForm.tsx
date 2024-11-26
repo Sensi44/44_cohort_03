@@ -1,15 +1,19 @@
-import { FC, HTMLAttributes, useState } from 'react';
+import { useState } from 'react';
+import type { FC } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
+
 import './SignUpForm.scss';
-import { SignUpFormProps, SignUpTextFieldsKeys } from './SignUpForm.props';
+import type { ISignUpFormProps } from './SignUpForm.props';
+import { SignUpTextFieldsKeys } from './SignUpForm.props';
 import {
   signUpDefaultFormData,
   signUpTextFieldsList,
 } from '@Constants/InputForms';
 
-export const SignUpForm: FC<
-  SignUpFormProps & HTMLAttributes<HTMLDivElement>
-> = ({ isLoading, whenSubmitForm }) => {
+export const SignUpForm: FC<ISignUpFormProps> = ({
+  isLoading,
+  whenSubmitForm,
+}) => {
   const [formData, setFormData] = useState(signUpDefaultFormData);
   const [errors, setErrors] = useState(signUpDefaultFormData);
 
@@ -35,10 +39,10 @@ export const SignUpForm: FC<
   };
 
   return (
-    <form className='form'>
+    <form className='sign-up-form__form'>
       {signUpTextFieldsList.map(field => (
         <FormControl
-          className='field'
+          className='sign-up-form__field'
           key={field.id}
           error={errors[field.id].length > 0}
           variant='standard'>

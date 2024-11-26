@@ -1,15 +1,19 @@
-import { useState, FC, HTMLAttributes } from 'react';
+import { useState } from 'react';
+import type { FC } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
+
 import './SignInForm.scss';
-import { SignInFormProps, SignInTextFieldsKeys } from './SignInForm.props';
+import { SignInTextFieldsKeys } from './SignInForm.props';
+import type { ISignInFormProps } from './SignInForm.props';
 import {
   signInFormDefaultFormData,
   signInTextFieldsList,
 } from '@Constants/InputForms';
 
-export const SignInForm: FC<
-  SignInFormProps & HTMLAttributes<HTMLDivElement>
-> = ({ isLoading, whenSubmitForm }) => {
+export const SignInForm: FC<ISignInFormProps> = ({
+  isLoading,
+  whenSubmitForm,
+}) => {
   const [formData, setFormData] = useState(signInFormDefaultFormData);
   const [errors, setErrors] = useState(signInFormDefaultFormData);
 
@@ -27,10 +31,10 @@ export const SignInForm: FC<
   };
 
   return (
-    <form className='form'>
+    <form className='sign-in-form__form'>
       {signInTextFieldsList.map(field => (
         <FormControl
-          className='field'
+          className='sign-in-form__field'
           key={field.id}
           error={errors[field.id].length > 0}
           variant='standard'>

@@ -1,8 +1,8 @@
-import { UserCreate } from '@Types/UserCreate';
+import type { IUserCreate } from '@Types/User.types';
 
-export type SignUpFormProps = {
+export type ISignUpFormProps = {
   isLoading: boolean;
-  whenSubmitForm: (userInfo: UserCreate) => void;
+  whenSubmitForm: (userInfo: IUserCreate) => void;
 };
 
 export enum SignUpTextFieldsKeys {
@@ -15,4 +15,4 @@ export enum SignUpTextFieldsKeys {
   repeatPassword = 'repeatPassword',
 }
 
-export type SignUpFormData = Record<SignUpTextFieldsKeys, string>;
+export type ISignUpFormData = Record<SignUpTextFieldsKeys, string>;

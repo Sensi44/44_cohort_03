@@ -1,8 +1,8 @@
-import { UserLogin } from '@Types/UserLogin';
+import type { IUserLogin } from '@Types/User.types';
 
-export type SignInFormProps = {
+export type ISignInFormProps = {
   isLoading: boolean;
-  whenSubmitForm: (userInfo: UserLogin) => void;
+  whenSubmitForm: (userInfo: IUserLogin) => void;
 };
 
 export enum SignInTextFieldsKeys {
@@ -10,4 +10,4 @@ export enum SignInTextFieldsKeys {
   password = 'password',
 }
 
-export type SignInFormData = Record<SignInTextFieldsKeys, string>;
+export type ISignInFormData = Record<SignInTextFieldsKeys, string>;
