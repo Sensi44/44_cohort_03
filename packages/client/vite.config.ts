@@ -20,9 +20,11 @@ export default defineConfig({
       '@Pages': resolve(__dirname, 'src/Pages'),
       '@Utils': resolve(__dirname, 'src/Utils'),
       '@State': resolve(__dirname, 'src/Store'),
+      '@Services': resolve(__dirname, 'src/Services'),
       '@Hooks': resolve(__dirname, 'src/Hooks'),
       '@Types': resolve(__dirname, 'src/Types'),
       '@Game': resolve(__dirname, 'src/GameEngine'),
+      '@Constants': resolve(__dirname, 'src/Constants'),
       // Добавим другие по мере необходимости
     },
   },

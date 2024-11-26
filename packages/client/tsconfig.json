@@ -18,12 +18,14 @@
     "jsx": "react-jsx",
     "paths": {
       "@Components/*": ["Components/*"],
+      "@Constants/*": ["Constants/*"],
       "@Pages/*": ["Pages/*"],
       "@Utils/*": ["Utils/*"],
       "@State/*": ["Store/*"],
-      "@Hooks/*": ["Hooks/*"],
       "@Types/*": ["Types/*"],
-      "@Game/*": ["GameEngine/*"]
+      "@Services/*": ["Services/*"],
+      "@Game/*": ["GameEngine/*"],
+      "@Hooks/*": ["Hooks/*"]
       // Добавим другие по мере необходимости
     }
   },

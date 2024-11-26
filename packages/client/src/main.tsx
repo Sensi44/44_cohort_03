@@ -2,28 +2,38 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { StrictMode } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
+import { green, purple } from '@mui/material/colors';
 
 import { PrivateRoutes } from './privateRoutes';
 import { ErrorPage } from '@Pages/ErrorPage/ErrorPage';
 import { ForumPage } from '@Pages/ForumPage/ForumPage';
 import { LeaderBordPage } from '@Pages/LeaderBordPage/LeaderBordPage';
 import { ProfilePage } from '@Pages/ProfilePage/ProfilePage';
-import { SingInPage } from '@Pages/SingInPage/SingInPage';
-import { SingUpPage } from '@Pages/SingUpPage/SingUpPage';
+import { SignUpPage } from '@Pages/SignUpPage/SignUpPage';
+import { SignInPage } from '@Pages/SignInPage/SignInPage';
 import { NotFoundPage } from '@Pages/NotFoundPage/NotFoundPage';
 
-// import { store } from './app/store'
+import { store } from '@State/Store';
 import App from '@Components/App/App';
 
 import './index.scss';
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: purple[400],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
 
-const Routes = {
+export const Routes = {
   Main: '/',
-  SingUp: 'sing-up',
-  SingIn: 'sing-in',
+  SignUp: 'sign-up',
+  SignIn: 'sign-in',
   Forum: 'forum',
   LeaderBord: 'leader-bord',
   Profile: 'profile',
@@ -54,12 +64,12 @@ const router = createBrowserRouter(
       ],
     },
     {
-      path: Routes.SingIn,
-      element: <SingInPage />,
+      path: Routes.SignIn,
+      element: <SignInPage />,
     },
     {
-      path: Routes.SingUp,
-      element: <SingUpPage />,
+      path: Routes.SignUp,
+      element: <SignUpPage />,
     },
     {
       path: '*',
@@ -80,10 +90,10 @@ const router = createBrowserRouter(
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      {/* <Provider store={store}> */}
-      <CssBaseline />
-      <RouterProvider router={router} future={{ v7_startTransition: true }} />
-      {/* </Provider> */}
+      <Provider store={store}>
+        <CssBaseline />
+        <RouterProvider router={router} future={{ v7_startTransition: true }} />
+      </Provider>
     </ThemeProvider>
   </StrictMode>,
 );
