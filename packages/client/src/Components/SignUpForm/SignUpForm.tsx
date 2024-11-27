@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import type { FC } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
 
-import './SignUpForm.scss';
-import type { ISignUpFormProps } from './SignUpForm.props';
-import { SignUpTextFieldsKeys } from './SignUpForm.props';
 import {
   signUpDefaultFormData,
   signUpTextFieldsList,
 } from '@Constants/InputForms';
+
+import type { ISignUpFormProps } from './SignUpForm.props';
+import type { FC, ChangeEvent } from 'react';
+import type { SignUpTextFieldsKeys } from './SignUpForm.props';
+
+import './SignUpForm.scss';
 
 export const SignUpForm: FC<ISignUpFormProps> = ({
   isLoading,
@@ -40,7 +42,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({
 
   return (
     <form className='sign-up-form__form'>
-      {signUpTextFieldsList.map(field => (
+      {signUpTextFieldsList.map((field) => (
         <FormControl
           className='sign-up-form__field'
           key={field.id}
@@ -55,7 +57,7 @@ export const SignUpForm: FC<ISignUpFormProps> = ({
             type={field.type}
             value={formData[field.id]}
             variant='outlined'
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
               handleChangeForm(event.target.value, field.id)
             }
           />

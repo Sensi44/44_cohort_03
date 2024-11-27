@@ -62,10 +62,10 @@ export class Api {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
-    }).then(response => {
+    }).then((response) => {
       return response.status === 200
         ? response
-        : response.json().then(err => {
+        : response.json().then((err) => {
             throw err;
           });
     });

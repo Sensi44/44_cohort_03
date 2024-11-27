@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import type { FC } from 'react';
 import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
 
-import './SignInForm.scss';
 import { SignInTextFieldsKeys } from './SignInForm.props';
-import type { ISignInFormProps } from './SignInForm.props';
 import {
   signInFormDefaultFormData,
   signInTextFieldsList,
 } from '@Constants/InputForms';
+
+import type { ISignInFormProps } from './SignInForm.props';
+import type { FC, ChangeEvent } from 'react';
+
+import './SignInForm.scss';
 
 export const SignInForm: FC<ISignInFormProps> = ({
   isLoading,
@@ -32,7 +34,7 @@ export const SignInForm: FC<ISignInFormProps> = ({
 
   return (
     <form className='sign-in-form__form'>
-      {signInTextFieldsList.map(field => (
+      {signInTextFieldsList.map((field) => (
         <FormControl
           className='sign-in-form__field'
           key={field.id}
@@ -47,7 +49,7 @@ export const SignInForm: FC<ISignInFormProps> = ({
             type={field.type}
             value={formData[field.id]}
             variant='outlined'
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
               handleChangeForm(event.target.value, field.id)
             }
           />
