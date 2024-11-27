@@ -5,10 +5,11 @@ import { Typography, Container } from '@mui/material';
 
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
 import { SignInForm } from '@Components/SignInForm/SignInForm';
-import type { IUserLogin } from '@Types/User.types';
-import { Routes } from '../../main';
-import { updateProfileData } from '@State/Store';
+import { Routes } from '@Constants/Routes';
+import { updateProfileData } from '../../StoreOld/Store';
 import { useAuthApi } from '@Services/AuthService';
+
+import type { IUserLogin } from '@Types/User.types';
 
 import './SignInPage.scss';
 

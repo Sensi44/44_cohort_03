@@ -19,7 +19,7 @@ export default defineConfig({
       '@Components': resolve(__dirname, 'src/Components'),
       '@Pages': resolve(__dirname, 'src/Pages'),
       '@Utils': resolve(__dirname, 'src/Utils'),
-      '@State': resolve(__dirname, 'src/Store'),
+      '@Store': resolve(__dirname, 'src/Store'),
       '@Services': resolve(__dirname, 'src/Services'),
       '@Hooks': resolve(__dirname, 'src/Hooks'),
       '@Types': resolve(__dirname, 'src/Types'),

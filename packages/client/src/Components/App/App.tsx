@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { useGetCanvasSize } from '@Hooks/UseGetCanvasSize';
 import { useSetCanvasContext } from '@Hooks/UseSetCanvasContext';
@@ -6,6 +7,7 @@ import { useGameLoop } from '@Hooks/UseGameLoop';
 import { useRender } from '@Game/UseRender';
 import { useUpdate } from '@Game/UseUpdate';
 import { DebugPanel } from '@Components/DebugPanel/DebugPanel';
+import { Menu } from '@Components/Menu/Menu';
 
 import './App.scss';
 
@@ -30,6 +32,8 @@ function App() {
   return (
     <article className={'game-page'}>
       <h1 className='game-page__title'>Космолёт с бобрами</h1>
+      <Outlet />
+      <Menu />
 
       <section className={'game-field'}>
         <DebugPanel onStart={startGame} onStop={stopGame} />

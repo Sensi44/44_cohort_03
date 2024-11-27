@@ -21,7 +21,7 @@
       "@Constants/*": ["Constants/*"],
       "@Pages/*": ["Pages/*"],
       "@Utils/*": ["Utils/*"],
-      "@State/*": ["Store/*"],
+      "@Store/*": ["Store/*"],
       "@Types/*": ["Types/*"],
       "@Services/*": ["Services/*"],
       "@Game/*": ["GameEngine/*"],
