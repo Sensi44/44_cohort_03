@@ -4,26 +4,23 @@ import { Typography, Stack } from '@mui/material';
 
 import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import { useAuthApi } from '@Services/AuthService';
 import { Routes } from '@Constants/Routes';
 
 import type { IUserCreate } from '@Types/User.types';
+import { useSignUpMutation } from '@Store/Slices/Api/Profile.api';
 
 export const SignUpPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const handleSubmitForm = async (profileData: IUserCreate) => {
-    setIsLoading(true);
-    const result = await useAuthApi().signUp(profileData);
-    setIsLoading(false);
-
-    if (result.isSuccess) {
-      navigate(`/${Routes.SignIn}`);
-    } else {
-      setErrorMessage(result.error);
-    }
+    signUp(profileData)
+      .unwrap()
+      .then(() => navigate(`/${Routes.SignIn}`))
+      .catch((error) => {
+        setErrorMessage(`Не удалось зарегистрироваться ${error}`);
+      });
   };
 
   return (
@@ -34,14 +31,11 @@ export const SignUpPage = () => {
         marginTop: 2,
         alignItems: 'center',
       }}>
-      <Typography sx={{ textAlign: 'center' }} variant='h4' color='primary'>
+      <Typography textAlign='center' variant='h4' color='primary'>
         Регистрация
       </Typography>
-      <div className='sign-up-page__form'>
-        <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
-      </div>
-
-      <Typography sx={{ textAlign: 'center' }} variant='body2'>
+      <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
+      <Typography textAlign='center' variant='body2'>
         {'Уже зарегистрированы? '}
         <NavLink to={`/${Routes.SignIn}`}>Войти</NavLink>
       </Typography>

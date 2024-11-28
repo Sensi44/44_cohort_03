@@ -1,12 +1,6 @@
 import { useState } from 'react';
 import type { FC, ChangeEvent } from 'react';
-import {
-  TextField,
-  Button,
-  FormControl,
-  FormHelperText,
-  Stack,
-} from '@mui/material';
+import { TextField, Button, Stack } from '@mui/material';
 
 import {
   changePasswordFormDefaultFormData,
@@ -51,29 +45,27 @@ export const ChangePasswordForm: FC<IChangePasswordFormProps> = ({
           alignItems: 'center',
         }}>
         {changePasswordTextFieldsList.map((field) => (
-          <FormControl
+          <TextField
             sx={{ width: 340 }}
             key={field.id}
+            helperText={errors[field.id]}
             error={errors[field.id].length > 0}
-            variant='standard'>
-            <TextField
-              disabled={isLoading}
-              fullWidth
-              id={field.id}
-              label={field.label}
-              name={field.name}
-              type={field.type}
-              value={formData[field.id]}
-              variant='outlined'
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                handleChangeForm(event.target.value, field.id)
-              }
-            />
-            <FormHelperText>{errors[field.id]}</FormHelperText>
-          </FormControl>
+            variant='outlined'
+            disabled={isLoading}
+            fullWidth
+            id={field.id}
+            label={field.label}
+            name={field.name}
+            type={field.type}
+            value={formData[field.id]}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              handleChangeForm(event.target.value, field.id)
+            }></TextField>
         ))}
         <Button
-          disabled={Object.values(errors).filter(Boolean).length > 0}
+          disabled={
+            Object.values(errors).filter(Boolean).length > 0 || isLoading
+          }
           onClick={handleSubmitForm}
           size='large'
           variant='contained'>

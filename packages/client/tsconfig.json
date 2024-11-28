@@ -24,7 +24,6 @@
       "@Utils/*": ["Utils/*"],
       "@Store/*": ["Store/*"],
       "@Types/*": ["Types/*"],
-      "@Services/*": ["Services/*"],
       "@Game/*": ["GameEngine/*"],
       "@Hooks/*": ["Hooks/*"]
       // Добавим другие по мере необходимости

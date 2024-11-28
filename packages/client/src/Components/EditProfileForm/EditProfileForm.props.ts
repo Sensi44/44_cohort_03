@@ -1,4 +1,4 @@
-import { IProfileDataState } from '@State/Store';
+import { IProfileDataState } from '@Store/Types/User.types';
 import type { IUserChange } from '@Types/User.types';
 
 export type IEditProfileFormProps = {

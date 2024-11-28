@@ -1,12 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { FC, ChangeEvent } from 'react';
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 
 import { editProfileTextFieldsList } from '@Constants/InputForms';
 import type {
@@ -20,13 +14,24 @@ export const EditProfileForm: FC<IEditProfileFormProps> = ({
   isDisabled,
   whenSubmitForm,
 }) => {
+  useEffect(() => {
+    setFormData({
+      email: profileData.email,
+      login: profileData.login,
+      firstName: profileData.firstName,
+      secondName: profileData.secondName,
+      phone: profileData.phone,
+      displayName: profileData.displayName,
+    });
+  }, [profileData]);
+
   const [formData, setFormData] = useState({
     email: profileData.email,
     login: profileData.login,
-    firstName: profileData.first_name,
-    secondName: profileData.second_name,
+    firstName: profileData.firstName,
+    secondName: profileData.secondName,
     phone: profileData.phone,
-    displayName: profileData.display_name,
+    displayName: profileData.displayName,
   });
 
   const [errors, setErrors] = useState({
@@ -49,18 +54,9 @@ export const EditProfileForm: FC<IEditProfileFormProps> = ({
   };
 
   const handleSubmitForm = () => {
-    const { email, phone, login, firstName, secondName, displayName } =
-      formData;
     //TODO добавить валидацию - использовать errors
 
-    whenSubmitForm({
-      email,
-      login,
-      first_name: firstName,
-      second_name: secondName,
-      phone,
-      display_name: displayName,
-    });
+    whenSubmitForm(formData);
   };
 
   return (
@@ -71,29 +67,28 @@ export const EditProfileForm: FC<IEditProfileFormProps> = ({
           alignItems: 'center',
         }}>
         {editProfileTextFieldsList.map((field) => (
-          <FormControl
+          <TextField
             sx={{ width: 340 }}
             key={field.id}
             error={errors[field.id].length > 0}
-            variant='filled'>
-            <TextField
-              disabled={isLoading || isDisabled}
-              id={field.id}
-              label={field.label}
-              fullWidth
-              name={field.name}
-              type={field.type}
-              value={formData[field.id]}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                handleChangeForm(event.target.value, field.id)
-              }
-            />
-            <FormHelperText>{errors[field.id]}</FormHelperText>
-          </FormControl>
+            variant='filled'
+            helperText={errors[field.id]}
+            disabled={isLoading || isDisabled}
+            id={field.id}
+            label={field.label}
+            name={field.name}
+            type={field.type}
+            value={formData[field.id]}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              handleChangeForm(event.target.value, field.id)
+            }
+          />
         ))}
         {!isDisabled && (
           <Button
-            disabled={Object.values(errors).filter(Boolean).length > 0}
+            disabled={
+              Object.values(errors).filter(Boolean).length > 0 || isLoading
+            }
             onClick={handleSubmitForm}
             size='large'
             variant='contained'>

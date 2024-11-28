@@ -1,27 +1,34 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { IProfileDataState } from '@Store/Types/User.types';
 
-const initialState = {
-  first_name: 'Inga',
-  second_name: 'Baranets',
-  display_name: 'rubi',
-  login: 'rubi2',
+const initialState: IProfileDataState = {
+  id: -1,
+  firstName: '',
+  secondName: '',
+  displayName: '',
+  login: '',
   avatar: '',
-  email: 'i@test.ru',
-  phone: '+79101111111',
+  email: '',
+  phone: '',
 };
 
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setDisabled(state, action: PayloadAction<boolean>) {
+    setProfileData(state, action: PayloadAction<IProfileDataState>) {
       return {
         ...state,
-        disabled: action.payload,
+        ...action.payload,
+      };
+    },
+    resetProfileData() {
+      return {
+        ...initialState,
       };
     },
   },
 });
 
-export const { setDisabled } = profileSlice.actions;
+export const { setProfileData, resetProfileData } = profileSlice.actions;

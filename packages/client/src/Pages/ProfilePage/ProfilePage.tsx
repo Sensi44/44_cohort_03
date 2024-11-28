@@ -1,34 +1,76 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Typography, Button, Stack } from '@mui/material';
+
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
 import type { IUserChange, IUserChangePassword } from '@Types/User.types';
-import { useAuthApi } from '@Services/AuthService';
-
 import { ProfilePageMode } from './ProfilePage.types';
-import { store } from '@State/Store';
 import { ProfileAvatar } from '@Components/ProfileAvatar/ProfileAvatar';
 import { ChangePasswordForm } from '@Components/ChangePasswordForm/ChangePasswordForm';
 import { EditProfileForm } from '@Components/EditProfileForm/EditProfileForm';
+import {
+  useChangeAvatarMutation,
+  useChangePasswordMutation,
+  useEditUserMutation,
+  useLoadUserInfoMutation,
+} from '@Store/Slices/Api/Profile.api';
+import { getProfileData } from '@Store/Slices/Profile/Profile.selector';
 
 export const ProfilePage = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [profileMode, setProfileMode] = useState(ProfilePageMode.profile);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const [loadUserInfo, { isLoading }] = useLoadUserInfoMutation();
+  const [changeAvatar, { isLoading: isLoadingChangeAvatar }] =
+    useChangeAvatarMutation();
+  const [changePassword, { isLoading: isLoadingChangePassword }] =
+    useChangePasswordMutation();
+  const [editProfile, { isLoading: isLoadingEditProfile }] =
+    useEditUserMutation();
+
+  const profileData = useSelector(getProfileData);
+
+  //TODO Временный кусок, надо вынести это в лэйаут сервиса в авторизацию
+  useEffect(() => {
+    if (!profileData.login) {
+      loadUserInfo();
+    }
+  }, []);
 
   const handleChangeAvatar = async (file?: File) => {
-    console.log(file?.name);
+    if (file) {
+      const payload = new FormData();
+      payload.append('avatar', file);
+
+      changeAvatar(payload)
+        .unwrap()
+        .then(() => loadUserInfo().unwrap())
+        .catch((error) => {
+          setErrorMessage(`Не удалось загрузить изображение ${error}`);
+        });
+    } else {
+      setErrorMessage(`Не выбран файл`);
+    }
   };
 
   const handleChangePassword = async (
     changePasswordPayload: IUserChangePassword,
   ) => {
-    console.log(changePasswordPayload);
+    changePassword(changePasswordPayload)
+      .unwrap()
+      .then(() => setProfileMode(ProfilePageMode.profile))
+      .catch((error) => {
+        setErrorMessage(`Не удалось поменять пароль ${error}`);
+      });
   };
 
   const handleEditProfile = async (editProfilePayload: IUserChange) => {
     console.log(editProfilePayload);
+    editProfile(editProfilePayload)
+      .unwrap()
+      .then(() => loadUserInfo().unwrap())
+      .catch((error) => {
+        setErrorMessage(`Не удалось сохранить изменения ${error}`);
+      });
   };
 
   return (
@@ -40,22 +82,24 @@ export const ProfilePage = () => {
         alignItems: 'center',
       }}>
       <ProfileAvatar
-        avatarUrl={store.getState().profileData.avatar}
+        avatarUrl={profileData.avatar}
         whenChangeAvatar={handleChangeAvatar}
       />
-      <Typography sx={{ textAlign: 'center' }} variant='h4' color='primary'>
-        {store.getState().profileData.first_name}
+      <Typography textAlign='center' variant='h4' color='primary'>
+        {profileData.firstName}
       </Typography>
       {profileMode === ProfilePageMode.changePassword ? (
         <ChangePasswordForm
-          isLoading={isLoading}
+          isLoading={
+            isLoading || isLoadingChangeAvatar || isLoadingChangePassword
+          }
           whenSubmitForm={handleChangePassword}
         />
       ) : (
         <EditProfileForm
-          isLoading={isLoading}
+          isLoading={isLoading || isLoadingChangeAvatar || isLoadingEditProfile}
           isDisabled={profileMode === ProfilePageMode.profile}
-          profileData={store.getState().profileData}
+          profileData={profileData}
           whenSubmitForm={handleEditProfile}
         />
       )}
@@ -90,6 +134,11 @@ export const ProfilePage = () => {
           Отменить
         </Button>
       )}
+      <ErrorNotification
+        isOpen={errorMessage.length > 0}
+        errorText={errorMessage}
+        whenClose={() => setErrorMessage('')}
+      />
     </Stack>
   );
 };

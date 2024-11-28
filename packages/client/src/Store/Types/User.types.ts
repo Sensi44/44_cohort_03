@@ -1,7 +1,8 @@
 export interface IProfileDataState {
-  first_name: string;
-  second_name: string;
-  display_name: string;
+  id: number;
+  firstName: string;
+  secondName: string;
+  displayName: string;
   login: string;
   avatar: string;
   email: string;
