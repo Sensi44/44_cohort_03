@@ -34,8 +34,7 @@ export const useAuthApi = () => {
       };
     } catch (e) {
       const reason = (e as { reason: string })?.reason ?? '';
-      const isAlreadyAuthorised =
-        (e as Response).status === 400 && reason === 'User already in system';
+      const isAlreadyAuthorised = reason === 'User already in system';
 
       return {
         isSuccess: isAlreadyAuthorised,
