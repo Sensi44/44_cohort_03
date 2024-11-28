@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
+import {
+  TextField,
+  Button,
+  FormControl,
+  FormHelperText,
+  Stack,
+} from '@mui/material';
 
 import {
   signUpDefaultFormData,
@@ -9,8 +15,6 @@ import {
 import type { ISignUpFormProps } from './SignUpForm.props';
 import type { FC, ChangeEvent } from 'react';
 import type { SignUpTextFieldsKeys } from './SignUpForm.props';
-
-import './SignUpForm.scss';
 
 export const SignUpForm: FC<ISignUpFormProps> = ({
   isLoading,
@@ -41,36 +45,42 @@ export const SignUpForm: FC<ISignUpFormProps> = ({
   };
 
   return (
-    <form className='sign-up-form__form'>
-      {signUpTextFieldsList.map((field) => (
-        <FormControl
-          className='sign-up-form__field'
-          key={field.id}
-          error={errors[field.id].length > 0}
-          variant='standard'>
-          <TextField
-            disabled={isLoading}
-            fullWidth
-            id={field.id}
-            label={field.label}
-            name={field.name}
-            type={field.type}
-            value={formData[field.id]}
-            variant='outlined'
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              handleChangeForm(event.target.value, field.id)
-            }
-          />
-          <FormHelperText>{errors[field.id]}</FormHelperText>
-        </FormControl>
-      ))}
-      <Button
-        disabled={Object.values(errors).filter(Boolean).length > 0}
-        onClick={handleSubmitForm}
-        size='large'
-        variant='contained'>
-        Зарегистрироваться
-      </Button>
+    <form>
+      <Stack
+        spacing={2}
+        sx={{
+          alignItems: 'center',
+        }}>
+        {signUpTextFieldsList.map((field) => (
+          <FormControl
+            sx={{ width: 340 }}
+            key={field.id}
+            error={errors[field.id].length > 0}
+            variant='standard'>
+            <TextField
+              disabled={isLoading}
+              fullWidth
+              id={field.id}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              value={formData[field.id]}
+              variant='outlined'
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleChangeForm(event.target.value, field.id)
+              }
+            />
+            <FormHelperText>{errors[field.id]}</FormHelperText>
+          </FormControl>
+        ))}
+        <Button
+          disabled={Object.values(errors).filter(Boolean).length > 0}
+          onClick={handleSubmitForm}
+          size='large'
+          variant='contained'>
+          Зарегистрироваться
+        </Button>
+      </Stack>
     </form>
   );
 };

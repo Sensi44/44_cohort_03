@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Typography, Container } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
 import { SignInForm } from '@Components/SignInForm/SignInForm';
@@ -10,8 +10,6 @@ import { updateProfileData } from '../../StoreOld/Store';
 import { useAuthApi } from '@Services/AuthService';
 
 import type { IUserLogin } from '@Types/User.types';
-
-import './SignInPage.scss';
 
 export const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,14 +39,18 @@ export const SignInPage = () => {
   };
 
   return (
-    <Container className='sign-in-page__page'>
-      <Typography className='sign-in-page__title' variant='h4' color='primary'>
+    <Stack
+      spacing={2}
+      sx={{
+        padding: '60px 40px 20px',
+        marginTop: 2,
+        alignItems: 'center',
+      }}>
+      <Typography sx={{ textAlign: 'center' }} variant='h4' color='primary'>
         Вход
       </Typography>
-      <div className='sign-in-page__form'>
-        <SignInForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
-      </div>
-      <Typography className='sign-in-page__message' variant='body2'>
+      <SignInForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
+      <Typography sx={{ textAlign: 'center' }} variant='body2'>
         <NavLink to={`/${Routes.SignUp}`}>Нет аккаунта?</NavLink>
       </Typography>
       <ErrorNotification
@@ -56,6 +58,6 @@ export const SignInPage = () => {
         errorText={errorMessage}
         whenClose={() => setErrorMessage('')}
       />
-    </Container>
+    </Stack>
   );
 };

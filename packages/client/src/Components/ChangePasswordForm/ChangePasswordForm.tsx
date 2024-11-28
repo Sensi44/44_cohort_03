@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { FC, ChangeEvent } from 'react';
 import {
   TextField,
   Button,
@@ -7,23 +8,26 @@ import {
   Stack,
 } from '@mui/material';
 
-import { SignInTextFieldsKeys } from './SignInForm.props';
 import {
-  signInFormDefaultFormData,
-  signInTextFieldsList,
+  changePasswordFormDefaultFormData,
+  changePasswordTextFieldsList,
 } from '@Constants/InputForms';
+import type {
+  ChangePasswordTextFieldsKeys,
+  IChangePasswordFormProps,
+} from './ChangePasswordForm.props';
 
-import type { ISignInFormProps } from './SignInForm.props';
-import type { FC, ChangeEvent } from 'react';
-
-export const SignInForm: FC<ISignInFormProps> = ({
+export const ChangePasswordForm: FC<IChangePasswordFormProps> = ({
   isLoading,
   whenSubmitForm,
 }) => {
-  const [formData, setFormData] = useState(signInFormDefaultFormData);
-  const [errors, setErrors] = useState(signInFormDefaultFormData);
+  const [formData, setFormData] = useState(changePasswordFormDefaultFormData);
+  const [errors, setErrors] = useState(changePasswordFormDefaultFormData);
 
-  const handleChangeForm = (value: string, fieldKey: SignInTextFieldsKeys) => {
+  const handleChangeForm = (
+    value: string,
+    fieldKey: ChangePasswordTextFieldsKeys,
+  ) => {
     setFormData({
       ...formData,
       [fieldKey]: value,
@@ -33,7 +37,10 @@ export const SignInForm: FC<ISignInFormProps> = ({
   const handleSubmitForm = () => {
     //TODO добавить валидацию - использовать errors
 
-    whenSubmitForm(formData);
+    whenSubmitForm({
+      oldPassword: formData.oldPassword,
+      newPassword: formData.newPassword,
+    });
   };
 
   return (
@@ -43,7 +50,7 @@ export const SignInForm: FC<ISignInFormProps> = ({
         sx={{
           alignItems: 'center',
         }}>
-        {signInTextFieldsList.map((field) => (
+        {changePasswordTextFieldsList.map((field) => (
           <FormControl
             sx={{ width: 340 }}
             key={field.id}
@@ -70,7 +77,7 @@ export const SignInForm: FC<ISignInFormProps> = ({
           onClick={handleSubmitForm}
           size='large'
           variant='contained'>
-          Авторизоваться
+          Изменить пароль
         </Button>
       </Stack>
     </form>

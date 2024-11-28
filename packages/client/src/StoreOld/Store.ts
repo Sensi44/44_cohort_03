@@ -14,13 +14,13 @@ export interface IProfileDataState {
 const profileDataSlice = createSlice({
   name: 'profileData',
   initialState: {
-    first_name: '',
-    second_name: '',
-    display_name: '',
-    login: '',
+    first_name: 'Inga',
+    second_name: 'Baranets',
+    display_name: 'rubi',
+    login: 'rubi2',
     avatar: '',
-    email: '',
-    phone: '',
+    email: 'i@test.ru',
+    phone: '+79101111111',
   },
   reducers: {
     updateProfileData(state, action: PayloadAction<IProfileDataState>) {

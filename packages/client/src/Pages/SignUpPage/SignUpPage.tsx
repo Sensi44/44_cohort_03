@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Typography, Container } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 
 import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
@@ -8,8 +8,6 @@ import { useAuthApi } from '@Services/AuthService';
 import { Routes } from '@Constants/Routes';
 
 import type { IUserCreate } from '@Types/User.types';
-
-import './SignUpPage.scss';
 
 export const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,15 +27,21 @@ export const SignUpPage = () => {
   };
 
   return (
-    <Container className='sign-up-page__page'>
-      <Typography className='sign-up-page__title' variant='h4' color='primary'>
+    <Stack
+      spacing={2}
+      sx={{
+        padding: '60px 40px 20px',
+        marginTop: 2,
+        alignItems: 'center',
+      }}>
+      <Typography sx={{ textAlign: 'center' }} variant='h4' color='primary'>
         Регистрация
       </Typography>
       <div className='sign-up-page__form'>
         <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
       </div>
 
-      <Typography className='sign-up-page__message' variant='body2'>
+      <Typography sx={{ textAlign: 'center' }} variant='body2'>
         {'Уже зарегистрированы? '}
         <NavLink to={`/${Routes.SignIn}`}>Войти</NavLink>
       </Typography>
@@ -46,6 +50,6 @@ export const SignUpPage = () => {
         errorText={errorMessage}
         whenClose={() => setErrorMessage('')}
       />
-    </Container>
+    </Stack>
   );
 };
