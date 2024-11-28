@@ -12,3 +12,10 @@ pre-commit:
       glob: '*.scss'
       run: yarn lint:scss
       stage_fixed: true
+    fix:
+      glob: '*.{ts,tsx}'
+      run: yarn lint:fix
+    test:
+      glob: '*.{ts,tsx}'
+      run: yarn test
+
