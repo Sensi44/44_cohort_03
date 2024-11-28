@@ -1,13 +1,12 @@
-import type { FC } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 
 import type { IErrorNotificationProps } from './ErrorNotification.props';
 
-export const ErrorNotification: FC<IErrorNotificationProps> = ({
+export const ErrorNotification = ({
   isOpen,
   errorText,
   whenClose,
-}) => {
+}: IErrorNotificationProps) => {
   return (
     <Snackbar
       open={isOpen}
