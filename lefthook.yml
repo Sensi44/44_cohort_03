@@ -18,4 +18,6 @@ pre-commit:
     test:
       glob: '*.{ts,tsx}'
       run: yarn test
+    build:
+      run: yarn build
 
