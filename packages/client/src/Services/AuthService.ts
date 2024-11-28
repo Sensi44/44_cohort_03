@@ -1,7 +1,6 @@
-import { Api } from '@Services/Api';
-
-import type { IUserCreate, IUserLogin } from '@Types/User.types';
-import type { IProfileDataState } from '../StoreOld/Store';
+import type { IUserCreate, IUserLogin } from '@Types';
+import { IProfileDataState } from '@StoreOld';
+import { Api } from './Api';
 
 const api = new Api();
 

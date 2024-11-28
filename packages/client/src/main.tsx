@@ -5,19 +5,20 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { green, purple } from '@mui/material/colors';
 
-import { Routes } from '@Constants/Routes';
-import { store } from '@Store/index';
-import { PrivateRoutes } from './privateRoutes';
-import { ErrorPage } from '@Pages/ErrorPage/ErrorPage';
-import { ForumPage } from '@Pages/ForumPage/ForumPage';
-import { LeaderBordPage } from '@Pages/LeaderBordPage/LeaderBordPage';
-import { ProfilePage } from '@Pages/ProfilePage/ProfilePage';
-import { SignUpPage } from '@Pages/SignUpPage/SignUpPage';
-import { SignInPage } from '@Pages/SignInPage/SignInPage';
-import { NotFoundPage } from '@Pages/NotFoundPage/NotFoundPage';
-import App from '@Components/App/App';
+import { Routes } from '@Constants';
+import { store } from '@Store';
+import {
+  ErrorPage,
+  ForumPage,
+  LeaderBordPage,
+  ProfilePage,
+  SignUpPage,
+  SignInPage,
+  NotFoundPage,
+} from '@Pages';
+import { App } from '@Components';
 
-import './index.scss';
+import { PrivateRoutes } from './privateRoutes';
 
 const theme = createTheme({
   palette: {
