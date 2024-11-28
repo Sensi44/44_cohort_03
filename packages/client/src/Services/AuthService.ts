@@ -54,9 +54,26 @@ export const useAuthApi = () => {
     }
   };
 
+  const logout = async () => {
+    try {
+      await api.post(`${urlBase}/logout`);
+
+      return {
+        isSuccess: true,
+        error: '',
+      };
+    } catch (e) {
+      return {
+        isSuccess: false,
+        error: `Не выйти из системы ${(e as { reason: string })?.reason ?? ''}`,
+      };
+    }
+  };
+
   return {
     signUp,
     signIn,
     getUserInfo,
+    logout,
   };
 };

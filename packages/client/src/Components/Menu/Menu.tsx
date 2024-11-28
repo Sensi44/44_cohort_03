@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button } from '@mui/material';
 
+import { LogoutButton } from '@Components/LogoutButton/LogoutButton';
+
 export const Menu = () => {
   return (
     <AppBar position='static'>
@@ -24,6 +26,7 @@ export const Menu = () => {
         <Button color='inherit' component={Link} to={'profile'}>
           Профиль
         </Button>
+        <LogoutButton />
       </Toolbar>
     </AppBar>
   );
