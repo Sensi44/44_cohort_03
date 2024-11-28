@@ -4,9 +4,10 @@ import { Typography, Container } from '@mui/material';
 
 import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
 import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import type { IUserCreate } from '@Types/User.types';
 import { useAuthApi } from '@Services/AuthService';
-import { Routes } from '../../main';
+import { Routes } from '@Constants/Routes';
+
+import type { IUserCreate } from '@Types/User.types';
 
 import './SignUpPage.scss';
 

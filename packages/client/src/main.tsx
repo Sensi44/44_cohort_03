@@ -5,6 +5,8 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { green, purple } from '@mui/material/colors';
 
+import { Routes } from '@Constants/Routes';
+import { store } from '@Store/index';
 import { PrivateRoutes } from './privateRoutes';
 import { ErrorPage } from '@Pages/ErrorPage/ErrorPage';
 import { ForumPage } from '@Pages/ForumPage/ForumPage';
@@ -13,8 +15,6 @@ import { ProfilePage } from '@Pages/ProfilePage/ProfilePage';
 import { SignUpPage } from '@Pages/SignUpPage/SignUpPage';
 import { SignInPage } from '@Pages/SignInPage/SignInPage';
 import { NotFoundPage } from '@Pages/NotFoundPage/NotFoundPage';
-
-import { store } from '@State/Store';
 import App from '@Components/App/App';
 
 import './index.scss';
@@ -30,17 +30,16 @@ const theme = createTheme({
   },
 });
 
-export const Routes = {
-  Main: '/',
-  SignUp: 'sign-up',
-  SignIn: 'sign-in',
-  Forum: 'forum',
-  LeaderBord: 'leader-bord',
-  Profile: 'profile',
-} as const;
-
 const router = createBrowserRouter(
   [
+    {
+      path: Routes.SignIn,
+      element: <SignInPage />,
+    },
+    {
+      path: Routes.SignUp,
+      element: <SignUpPage />,
+    },
     {
       element: <PrivateRoutes />,
       errorElement: <ErrorPage />,
@@ -49,27 +48,17 @@ const router = createBrowserRouter(
           path: Routes.Main,
           element: <App />,
           errorElement: <ErrorPage />,
-          children: [
-            { path: Routes.Forum, element: <ForumPage /> },
-            {
-              path: Routes.LeaderBord,
-              element: <LeaderBordPage />,
-            },
-            {
-              path: Routes.Profile,
-              element: <ProfilePage />,
-            },
-          ],
         },
       ],
     },
+    { path: Routes.Forum, element: <ForumPage /> },
     {
-      path: Routes.SignIn,
-      element: <SignInPage />,
+      path: Routes.LeaderBord,
+      element: <LeaderBordPage />,
     },
     {
-      path: Routes.SignUp,
-      element: <SignUpPage />,
+      path: Routes.Profile,
+      element: <ProfilePage />,
     },
     {
       path: '*',

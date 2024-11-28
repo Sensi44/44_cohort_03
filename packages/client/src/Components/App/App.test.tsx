@@ -1,5 +1,6 @@
 import App from './App';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 const appContent = 'Космолёт с бобрами';
 
@@ -10,6 +11,10 @@ global.fetch = jest.fn(() =>
 );
 
 test('Example test', async () => {
-  render(<App />);
+  render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
   expect(screen.getByText(appContent)).toBeDefined();
 });
