@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
-  type TypedUseSelectorHook,
   useDispatch,
   useSelector,
+  type TypedUseSelectorHook,
 } from 'react-redux';
 import { rootReducer } from './Slices';
 import { ProfileApi } from './Slices/Api/Profile.api';

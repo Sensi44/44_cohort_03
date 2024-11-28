@@ -1,10 +1,10 @@
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
-import { TextField, Button } from '@mui/material';
 
 import { signInFormDefaultFormData, signInTextFieldsList } from '@Constants';
 
-import { SignInTextFieldsKeys } from './SignInForm.props';
 import type { ISignInFormProps } from './SignInForm.props';
+import { SignInTextFieldsKeys } from './SignInForm.props';
 
 import './SignInForm.scss';
 

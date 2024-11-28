@@ -1,5 +1,5 @@
+import { AppBar, Button, SxProps, Toolbar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { AppBar, Toolbar, Button, SxProps } from '@mui/material';
 
 import { Routes } from '@Constants';
 

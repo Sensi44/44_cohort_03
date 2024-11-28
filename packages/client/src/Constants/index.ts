@@ -1,4 +1,3 @@
-export { Routes } from './Routes';
 export { BASE_URL } from './Api';
 export {
   signInFormDefaultFormData,
@@ -6,3 +5,4 @@ export {
   signUpDefaultFormData,
   signUpTextFieldsList,
 } from './InputForms';
+export { Routes } from './Routes';

@@ -1,13 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { axiosBaseQuery } from '@Utils';
 import { BASE_URL } from '@Constants';
+import type { RootState } from '@Store';
 import type {
-  TUserProfileResponse,
   TUserProfileData,
   TUserProfileParams,
+  TUserProfileResponse,
 } from '@Types';
-import type { RootState } from '@Store';
+import { axiosBaseQuery } from '@Utils';
 
 export const ProfileApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: `${BASE_URL}/user` }),

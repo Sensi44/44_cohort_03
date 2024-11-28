@@ -1,22 +1,22 @@
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { StrictMode } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { Provider } from 'react-redux';
 import { green, purple } from '@mui/material/colors';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { App } from '@Components';
 import { Routes } from '@Constants';
-import { store } from '@Store';
 import {
   ErrorPage,
   ForumPage,
   LeaderBordPage,
-  ProfilePage,
-  SignUpPage,
-  SignInPage,
   NotFoundPage,
+  ProfilePage,
+  SignInPage,
+  SignUpPage,
 } from '@Pages';
-import { App } from '@Components';
+import { store } from '@Store';
 
 import { PrivateRoutes } from './privateRoutes';
 

@@ -5,4 +5,5 @@
   "semi": true,
   "arrowParens": "always",
   "bracketSameLine": true,
+  "plugins": ["prettier-plugin-organize-imports"]
 }

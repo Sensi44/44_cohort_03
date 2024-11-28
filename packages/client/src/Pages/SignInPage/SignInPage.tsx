@@ -1,9 +1,8 @@
+import { Container, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Typography, Container } from '@mui/material';
 
-import { ErrorNotification } from '@Components';
-import { SignInForm } from '@Components';
+import { ErrorNotification, SignInForm } from '@Components';
 import { Routes } from '@Constants';
 import { useAuthApi } from '@Services';
 import { useAppDispatch } from '@Store';

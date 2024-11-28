@@ -1,11 +1,10 @@
-import { useRef, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import { useEffect, useRef } from 'react';
+import { Outlet } from 'react-router-dom';
 
+import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
-import { useGetCanvasSize, useSetCanvasContext, useGameLoop } from '@Hooks';
-import { DebugPanel } from '@Components';
-import { Menu } from '@Components';
+import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
 import './App.scss';
 

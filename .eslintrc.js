@@ -27,4 +27,41 @@ module.exports = {
     'arrow-parens': ['error', 'always'],
     'jsx-quotes': ['error', 'prefer-single'],
   },
+  overrides: [
+    {
+      files: ['client/**/*.{ts,js,tsx,jsx}'],
+      rules: {
+        'import/order': [
+          'error',
+          {
+            groups: [
+              'builtin',
+              'external',
+              'internal',
+              ['parent', 'sibling', 'index'],
+            ],
+            pathGroups: [
+              {
+                pattern: '@/**',
+                group: 'internal',
+                position: 'before',
+              },
+            ],
+            pathGroupsExcludedImportTypes: ['builtin'],
+            'newlines-between': 'always',
+            alphabetize: {
+              order: 'asc',
+              caseInsensitive: true,
+            },
+          },
+        ],
+      },
+    },
+    {
+      files: ['server/**/*.{ts,js,tsx,jsx}'],
+      rules: {
+        'import/order': 'off',
+      },
+    },
+  ],
 };

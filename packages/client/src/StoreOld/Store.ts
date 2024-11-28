@@ -1,5 +1,5 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 export interface IProfileDataState {
   first_name: string;

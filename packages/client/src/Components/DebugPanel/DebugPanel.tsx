@@ -1,4 +1,4 @@
-import { Button, Typography, Box, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 import type { IDebugPanelProps } from './DebugPanel.props';
 

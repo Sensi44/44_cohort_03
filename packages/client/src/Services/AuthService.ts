@@ -1,5 +1,5 @@
-import type { IUserCreate, IUserLogin } from '@Types';
 import { IProfileDataState } from '@StoreOld';
+import type { IUserCreate, IUserLogin } from '@Types';
 import { Api } from './Api';
 
 const api = new Api();

@@ -1,10 +1,10 @@
+import { Container, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Typography, Container } from '@mui/material';
 
-import { SignUpForm, ErrorNotification } from '@Components';
-import { useAuthApi } from '@Services';
+import { ErrorNotification, SignUpForm } from '@Components';
 import { Routes } from '@Constants';
+import { useAuthApi } from '@Services';
 
 import type { IUserCreate } from '@Types';
 
