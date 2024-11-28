@@ -1,21 +1,14 @@
 import { useState } from 'react';
-import { TextField, Button, FormControl, FormHelperText } from '@mui/material';
+import { TextField, Button } from '@mui/material';
+
+import { signInFormDefaultFormData, signInTextFieldsList } from '@Constants';
 
 import { SignInTextFieldsKeys } from './SignInForm.props';
-import {
-  signInFormDefaultFormData,
-  signInTextFieldsList,
-} from '@Constants/InputForms';
-
 import type { ISignInFormProps } from './SignInForm.props';
-import type { FC, ChangeEvent } from 'react';
 
 import './SignInForm.scss';
 
-export const SignInForm: FC<ISignInFormProps> = ({
-  isLoading,
-  whenSubmitForm,
-}) => {
+export const SignInForm = ({ isLoading, whenSubmitForm }: ISignInFormProps) => {
   const [formData, setFormData] = useState(signInFormDefaultFormData);
   const [errors, setErrors] = useState(signInFormDefaultFormData);
 
@@ -35,26 +28,19 @@ export const SignInForm: FC<ISignInFormProps> = ({
   return (
     <form className='sign-in-form__form'>
       {signInTextFieldsList.map((field) => (
-        <FormControl
+        <TextField
           className='sign-in-form__field'
           key={field.id}
           error={errors[field.id].length > 0}
-          variant='standard'>
-          <TextField
-            disabled={isLoading}
-            fullWidth
-            id={field.id}
-            label={field.label}
-            name={field.name}
-            type={field.type}
-            value={formData[field.id]}
-            variant='outlined'
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              handleChangeForm(event.target.value, field.id)
-            }
-          />
-          <FormHelperText>{errors[field.id]}</FormHelperText>
-        </FormControl>
+          disabled={isLoading}
+          id={field.id}
+          label={field.label}
+          name={field.name}
+          type={field.type}
+          value={formData[field.id]}
+          variant='outlined'
+          onChange={(event) => handleChangeForm(event.target.value, field.id)}
+        />
       ))}
       <Button
         disabled={Object.values(errors).filter(Boolean).length > 0}
