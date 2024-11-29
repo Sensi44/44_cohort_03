@@ -1,4 +1,4 @@
-import type { IUserCreate } from '@Types/User.types';
+import type { IUserCreate } from '@Types';
 
 export type ISignUpFormProps = {
   isLoading: boolean;

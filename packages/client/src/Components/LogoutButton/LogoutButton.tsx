@@ -1,9 +1,9 @@
-import React from 'react';
 import { Button } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Routes } from '@Constants/Routes';
-import { useAuthApi } from '@Services/AuthService';
+import { Routes } from '@Constants';
+import { useAuthApi } from '@Services';
 
 export const LogoutButton: React.FC = () => {
   const authApi = useAuthApi();

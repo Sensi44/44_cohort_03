@@ -17,16 +17,17 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@Components/*": ["Components/*"],
-      "@Constants/*": ["Constants/*"],
-      "@Pages/*": ["Pages/*"],
-      "@Utils/*": ["Utils/*"],
-      "@Store/*": ["Store/*"],
-      "@Types/*": ["Types/*"],
-      "@Services/*": ["Services/*"],
-      "@Game/*": ["GameEngine/*"],
-      "@Hooks/*": ["Hooks/*"]
-      // Добавим другие по мере необходимости
+      "@RenderFunctions": ["RenderFunctions"],
+      "@Components": ["Components"],
+      "@Constants": ["Constants"],
+      "@Pages": ["Pages"],
+      "@Utils": ["Utils"],
+      "@Store": ["Store"],
+      "@StoreOld": ["StoreOld"],
+      "@Types": ["Types"],
+      "@Services": ["Services"],
+      "@Game": ["GameEngine"],
+      "@Hooks": ["Hooks"]
     }
   },
   "include": ["src"],

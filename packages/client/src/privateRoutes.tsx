@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-import { Routes } from '@Constants/Routes';
-import { useAuthApi } from '@Services/AuthService';
-import type { IProfileDataState } from '@Store/Types/User.types';
+import { Routes } from '@Constants';
+import { useAuthApi } from '@Services';
 
 export const PrivateRoutes = () => {
   const location = useLocation();
@@ -11,7 +10,7 @@ export const PrivateRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   const checkAuth = async () => {
-    const userInfo: IProfileDataState | null = await authApi.getUserInfo();
+    const userInfo = await authApi.getUserInfo();
     return Boolean(userInfo);
   };
 
