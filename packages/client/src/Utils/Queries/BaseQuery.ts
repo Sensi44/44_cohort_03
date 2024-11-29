@@ -4,14 +4,14 @@ import type { BaseQueryFn } from '@reduxjs/toolkit/dist/query/react';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 
 //todo пример того как можно подключать токен ко всем запросам, заменить на то что используется в ЯП Апи
-const token = <HTMLMetaElement>(
-  document.head.querySelector('meta[name="csrf-token"]')
-);
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// const token = <HTMLMetaElement>(
+//   document.head.querySelector('meta[name="csrf-token"]')
+// );
+// axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-if (token) {
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-}
+// if (token) {
+//   axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+// }
 
 export const axiosBaseQuery =
   (
@@ -35,6 +35,7 @@ export const axiosBaseQuery =
         data,
         params,
         headers,
+        withCredentials: true,
       });
 
       return { data: result.data };

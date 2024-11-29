@@ -1,12 +1,13 @@
-import { Button, TextField } from '@mui/material';
+import { Button, Stack, TextField } from '@mui/material';
 import { useState } from 'react';
 
-import { signInFormDefaultFormData, signInTextFieldsList } from '@Constants';
+import {
+  signInFormDefaultFormData,
+  SignInTextFieldsKeys,
+  signInTextFieldsList,
+} from '@Constants';
 
 import type { ISignInFormProps } from './SignInForm.props';
-import { SignInTextFieldsKeys } from './SignInForm.props';
-
-import './SignInForm.scss';
 
 export const SignInForm = ({ isLoading, whenSubmitForm }: ISignInFormProps) => {
   const [formData, setFormData] = useState(signInFormDefaultFormData);
@@ -26,29 +27,37 @@ export const SignInForm = ({ isLoading, whenSubmitForm }: ISignInFormProps) => {
   };
 
   return (
-    <form className='sign-in-form__form'>
-      {signInTextFieldsList.map((field) => (
-        <TextField
-          className='sign-in-form__field'
-          key={field.id}
-          error={errors[field.id].length > 0}
-          disabled={isLoading}
-          id={field.id}
-          label={field.label}
-          name={field.name}
-          type={field.type}
-          value={formData[field.id]}
-          variant='outlined'
-          onChange={(event) => handleChangeForm(event.target.value, field.id)}
-        />
-      ))}
-      <Button
-        disabled={Object.values(errors).filter(Boolean).length > 0}
-        onClick={handleSubmitForm}
-        size='large'
-        variant='contained'>
-        Авторизоваться
-      </Button>
+    <form>
+      <Stack
+        spacing={2}
+        sx={{
+          alignItems: 'center',
+        }}>
+        {signInTextFieldsList.map((field) => (
+          <TextField
+            sx={{ width: 340 }}
+            key={field.id}
+            error={errors[field.id].length > 0}
+            disabled={isLoading}
+            id={field.id}
+            label={field.label}
+            name={field.name}
+            type={field.type}
+            value={formData[field.id]}
+            variant='outlined'
+            onChange={(event) => handleChangeForm(event.target.value, field.id)}
+          />
+        ))}
+        <Button
+          disabled={
+            Object.values(errors).filter(Boolean).length > 0 || isLoading
+          }
+          onClick={handleSubmitForm}
+          size='large'
+          variant='contained'>
+          Авторизоваться
+        </Button>
+      </Stack>
     </form>
   );
 };
