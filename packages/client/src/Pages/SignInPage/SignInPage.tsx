@@ -4,21 +4,18 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ErrorNotification, SignInForm } from '@Components';
 import { Routes } from '@Constants';
-import { useLoadUserInfoMutation, useSignInMutation } from '@Store';
+import { useSignInMutation } from '@Store';
 
 import type { IUserLogin } from '@Types';
 
 export const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const [loadUserInfo, { isLoading: isLoadingUserInfo }] =
-    useLoadUserInfoMutation();
   const [signIn, { isLoading }] = useSignInMutation();
 
   const handleSubmitForm = async (profileData: IUserLogin) => {
     signIn(profileData)
       .unwrap()
-      .then(() => loadUserInfo().unwrap())
       .then(() => navigate(Routes.Main))
       .catch((error) => {
         setErrorMessage(`Не удалось авторизоваться ${error}`);
@@ -36,10 +33,7 @@ export const SignInPage = () => {
       <Typography textAlign='center' variant='h4' color='primary'>
         Вход
       </Typography>
-      <SignInForm
-        isLoading={isLoading || isLoadingUserInfo}
-        whenSubmitForm={handleSubmitForm}
-      />
+      <SignInForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
       <Typography textAlign='center' variant='body2'>
         <NavLink to={`/${Routes.SignUp}`}>Нет аккаунта?</NavLink>
       </Typography>

@@ -23,14 +23,9 @@ export {
   useChangeAvatarMutation,
   useChangePasswordMutation,
   useEditUserMutation,
-  useLoadUserInfoMutation,
+  useGetUserInfoQuery,
   useLogoutMutation,
   useSignInMutation,
   useSignUpMutation,
 } from './Slices/Api/Profile.api';
-export { getProfileData } from './Slices/Profile/Profile.selector';
-export {
-  resetProfileData,
-  setProfileData,
-} from './Slices/Profile/Profile.slice';
 export type { IProfileDataState } from './Types/User.types';

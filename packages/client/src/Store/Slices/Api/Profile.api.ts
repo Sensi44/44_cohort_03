@@ -7,7 +7,7 @@ import {
   METHODS,
   USER_URL_PATH,
 } from '@Constants';
-import { IProfileDataState, resetProfileData, setProfileData } from '@Store';
+import { IProfileDataState } from '@Store';
 import type {
   IUserChange,
   IUserChangePassword,
@@ -20,7 +20,7 @@ import { axiosBaseQuery } from '@Utils';
 export const ProfileApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
-    loadUserInfo: build.mutation<IProfileDataState, void>({
+    getUserInfo: build.query<IProfileDataState, void>({
       query: () => {
         return {
           url: `${AUTH_URL_PATH}/user`,
@@ -42,14 +42,6 @@ export const ProfileApi = createApi({
         };
       },
       transformErrorResponse: baseTransformErrorResponse,
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setProfileData(data));
-        } catch {
-          dispatch(resetProfileData());
-        }
-      },
     }),
     signUp: build.mutation<void, IUserCreate>({
       query: (payload) => {
@@ -79,10 +71,6 @@ export const ProfileApi = createApi({
         };
       },
       transformErrorResponse: baseTransformErrorResponse,
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        await queryFulfilled;
-        dispatch(resetProfileData());
-      },
     }),
     changeAvatar: build.mutation<void, FormData>({
       query: (payload) => {
@@ -125,7 +113,7 @@ export const ProfileApi = createApi({
 });
 
 export const {
-  useLoadUserInfoMutation,
+  useGetUserInfoQuery,
   useSignUpMutation,
   useSignInMutation,
   useLogoutMutation,

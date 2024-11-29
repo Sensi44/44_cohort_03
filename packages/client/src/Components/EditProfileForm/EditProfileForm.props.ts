@@ -5,7 +5,7 @@ import type { IUserChange } from '@Types';
 export type IEditProfileFormProps = {
   isLoading: boolean;
   isDisabled: boolean;
-  profileData: IProfileDataState;
+  profileData?: IProfileDataState;
   whenSubmitForm: (payload: IUserChange) => void;
 };
 

@@ -14,25 +14,20 @@ export const EditProfileForm = ({
   isDisabled,
   whenSubmitForm,
 }: IEditProfileFormProps) => {
+  const getFormData = () => ({
+    email: profileData?.email ?? '',
+    login: profileData?.login ?? '',
+    firstName: profileData?.firstName ?? '',
+    secondName: profileData?.secondName ?? '',
+    phone: profileData?.phone ?? '',
+    displayName: profileData?.displayName ?? '',
+  });
+
   useEffect(() => {
-    setFormData({
-      email: profileData.email,
-      login: profileData.login,
-      firstName: profileData.firstName,
-      secondName: profileData.secondName,
-      phone: profileData.phone,
-      displayName: profileData.displayName,
-    });
+    setFormData(getFormData());
   }, [profileData]);
 
-  const [formData, setFormData] = useState({
-    email: profileData.email,
-    login: profileData.login,
-    firstName: profileData.firstName,
-    secondName: profileData.secondName,
-    phone: profileData.phone,
-    displayName: profileData.displayName,
-  });
+  const [formData, setFormData] = useState(getFormData());
 
   const [errors, setErrors] = useState({
     email: '',

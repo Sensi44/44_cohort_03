@@ -1,6 +1,5 @@
 import { Button, Stack, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 import {
   ChangePasswordForm,
@@ -9,11 +8,10 @@ import {
   ProfileAvatar,
 } from '@Components';
 import {
-  getProfileData,
   useChangeAvatarMutation,
   useChangePasswordMutation,
   useEditUserMutation,
-  useLoadUserInfoMutation,
+  useGetUserInfoQuery,
 } from '@Store';
 import type { IUserChange, IUserChangePassword } from '@Types';
 
@@ -22,22 +20,13 @@ import { ProfilePageMode } from './ProfilePage.types';
 export const ProfilePage = () => {
   const [profileMode, setProfileMode] = useState(ProfilePageMode.profile);
   const [errorMessage, setErrorMessage] = useState('');
-  const [loadUserInfo, { isLoading }] = useLoadUserInfoMutation();
+  const { data: profileData, isLoading, refetch } = useGetUserInfoQuery();
   const [changeAvatar, { isLoading: isLoadingChangeAvatar }] =
     useChangeAvatarMutation();
   const [changePassword, { isLoading: isLoadingChangePassword }] =
     useChangePasswordMutation();
   const [editProfile, { isLoading: isLoadingEditProfile }] =
     useEditUserMutation();
-
-  const profileData = useSelector(getProfileData);
-
-  //TODO Временный кусок, надо вынести это в лэйаут сервиса в авторизацию
-  useEffect(() => {
-    if (!profileData.login) {
-      loadUserInfo();
-    }
-  }, []);
 
   const handleChangeAvatar = async (file?: File) => {
     if (file) {
@@ -46,7 +35,7 @@ export const ProfilePage = () => {
 
       changeAvatar(payload)
         .unwrap()
-        .then(() => loadUserInfo().unwrap())
+        .then(() => refetch().unwrap())
         .catch((error) => {
           setErrorMessage(`Не удалось загрузить изображение ${error}`);
         });
@@ -69,7 +58,8 @@ export const ProfilePage = () => {
   const handleEditProfile = async (editProfilePayload: IUserChange) => {
     editProfile(editProfilePayload)
       .unwrap()
-      .then(() => loadUserInfo().unwrap())
+      .then(() => refetch().unwrap())
+      .then(() => setProfileMode(ProfilePageMode.profile))
       .catch((error) => {
         setErrorMessage(`Не удалось сохранить изменения ${error}`);
       });
@@ -84,11 +74,11 @@ export const ProfilePage = () => {
         alignItems: 'center',
       }}>
       <ProfileAvatar
-        avatarUrl={profileData.avatar}
+        avatarUrl={profileData?.avatar ?? ''}
         whenChangeAvatar={handleChangeAvatar}
       />
       <Typography textAlign='center' variant='h4' color='primary'>
-        {profileData.firstName}
+        {profileData?.firstName ?? ''}
       </Typography>
       {profileMode === ProfilePageMode.changePassword ? (
         <ChangePasswordForm
