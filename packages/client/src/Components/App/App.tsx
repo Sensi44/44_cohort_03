@@ -5,13 +5,12 @@ import { Outlet } from 'react-router-dom';
 import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
-// import { useAppDispatch } from '@Store';
-// import { movePlayer } from '../../Store/Slices/Game/Game.slice';
+import { movePlayer, useAppDispatch } from '@Store';
 
 import './App.scss';
 
 export const App = () => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useGetCanvasSize();
@@ -36,32 +35,32 @@ export const App = () => {
     };
   }, [ctx]);
 
-  // const handleKeyDown = (event: KeyboardEvent) => {
-  //   switch (event.key) {
-  //     case 'ArrowUp':
-  //       dispatch(movePlayer({ x: 0, y: -6 }));
-  //       break;
-  //     case 'ArrowDown':
-  //       dispatch(movePlayer({ x: 0, y: 6 }));
-  //       break;
-  //     case 'ArrowLeft':
-  //       dispatch(movePlayer({ x: -6, y: 0 }));
-  //       break;
-  //     case 'ArrowRight':
-  //       dispatch(movePlayer({ x: 6, y: 0 }));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
+  const handleKeyDown = (event: KeyboardEvent) => {
+    switch (event.key) {
+      case 'ArrowUp':
+        dispatch(movePlayer({ x: 0, y: -6 }));
+        break;
+      case 'ArrowDown':
+        dispatch(movePlayer({ x: 0, y: 6 }));
+        break;
+      case 'ArrowLeft':
+        dispatch(movePlayer({ x: -6, y: 0 }));
+        break;
+      case 'ArrowRight':
+        dispatch(movePlayer({ x: 6, y: 0 }));
+        break;
+      default:
+        break;
+    }
+  };
 
-  // useEffect(() => {
-  //   window.addEventListener('keydown', handleKeyDown);
-  //
-  //   return () => {
-  //     window.removeEventListener('keydown', handleKeyDown);
-  //   };
-  // }, []);
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <article className={'game-page'}>
