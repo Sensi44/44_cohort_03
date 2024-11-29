@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import type { AxiosError, AxiosRequestConfig } from 'axios';
 import type { BaseQueryFn } from '@reduxjs/toolkit/dist/query/react';
+import type { AxiosError, AxiosRequestConfig } from 'axios';
 
 //todo пример того как можно подключать токен ко всем запросам, заменить на то что используется в ЯП Апи
 // const token = <HTMLMetaElement>(

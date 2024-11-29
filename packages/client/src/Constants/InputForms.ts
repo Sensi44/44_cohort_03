@@ -1,10 +1,13 @@
-import { SignInTextFieldsKeys } from '@Components/SignInForm/SignInForm.props';
-import { SignUpTextFieldsKeys } from '@Components/SignUpForm/SignUpForm.props';
-import type { ISignInFormData } from '@Components/SignInForm/SignInForm.props';
-import type { ISignUpFormData } from '@Components/SignUpForm/SignUpForm.props';
-import type { IChangePasswordFormData } from '@Components/ChangePasswordForm/ChangePasswordForm.props';
-import { ChangePasswordTextFieldsKeys } from '@Components/ChangePasswordForm/ChangePasswordForm.props';
-import { EditProfileTextFieldsKeys } from '@Components/EditProfileForm/EditProfileForm.props';
+import {
+  IChangePasswordFormData,
+  ISignInFormData,
+  ISignUpFormData,
+} from '@Components';
+
+export enum SignInTextFieldsKeys {
+  login = 'login',
+  password = 'password',
+}
 
 export const signInTextFieldsList = [
   {
@@ -22,9 +25,19 @@ export const signInTextFieldsList = [
 ];
 
 export const signInFormDefaultFormData: ISignInFormData = {
-  [SignInTextFieldsKeys.login]: '',
-  [SignInTextFieldsKeys.password]: '',
+  [SignInTextFieldsKeys?.login]: '',
+  [SignInTextFieldsKeys?.password]: '',
 };
+
+export enum SignUpTextFieldsKeys {
+  email = 'email',
+  login = 'login',
+  firstName = 'firstName',
+  secondName = 'secondName',
+  phone = 'phone',
+  password = 'password',
+  repeatPassword = 'repeatPassword',
+}
 
 export const signUpTextFieldsList = [
   {
@@ -81,6 +94,12 @@ export const signUpDefaultFormData: ISignUpFormData = {
   [SignUpTextFieldsKeys.repeatPassword]: '',
 };
 
+export enum ChangePasswordTextFieldsKeys {
+  oldPassword = 'oldPassword',
+  newPassword = 'newPassword',
+  repeatNewPassword = 'repeatNewPassword',
+}
+
 export const changePasswordTextFieldsList = [
   {
     id: ChangePasswordTextFieldsKeys.oldPassword,
@@ -108,39 +127,48 @@ export const changePasswordFormDefaultFormData: IChangePasswordFormData = {
   [ChangePasswordTextFieldsKeys.repeatNewPassword]: '',
 };
 
+export enum EditProfileTextFieldsKeys {
+  email = 'email',
+  login = 'login',
+  firstName = 'firstName',
+  secondName = 'secondName',
+  phone = 'phone',
+  displayName = 'displayName',
+}
+
 export const editProfileTextFieldsList = [
   {
-    id: EditProfileTextFieldsKeys.email,
+    id: EditProfileTextFieldsKeys?.email,
     name: 'email',
     label: 'Почта',
     type: 'email',
   },
   {
-    id: EditProfileTextFieldsKeys.login,
+    id: EditProfileTextFieldsKeys?.login,
     name: 'login',
     label: 'Логин',
     type: 'text',
   },
   {
-    id: EditProfileTextFieldsKeys.firstName,
+    id: EditProfileTextFieldsKeys?.firstName,
     name: 'first_name',
     label: 'Имя',
     type: 'text',
   },
   {
-    id: EditProfileTextFieldsKeys.secondName,
+    id: EditProfileTextFieldsKeys?.secondName,
     name: 'second_name',
     label: 'Фамилия',
     type: 'text',
   },
   {
-    id: EditProfileTextFieldsKeys.displayName,
+    id: EditProfileTextFieldsKeys?.displayName,
     name: 'display_name',
     label: 'Имя в чате',
     type: 'text',
   },
   {
-    id: EditProfileTextFieldsKeys.phone,
+    id: EditProfileTextFieldsKeys?.phone,
     name: 'phone',
     label: 'Телефон',
     type: 'text',

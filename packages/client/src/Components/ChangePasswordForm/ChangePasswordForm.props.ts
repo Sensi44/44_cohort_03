@@ -1,15 +1,10 @@
-import type { IUserChangePassword } from '@Types/User.types';
+import { ChangePasswordTextFieldsKeys } from '@Constants';
+import type { IUserChangePassword } from '@Types';
 
 export type IChangePasswordFormProps = {
   isLoading: boolean;
   whenSubmitForm: (payload: IUserChangePassword) => void;
 };
-
-export enum ChangePasswordTextFieldsKeys {
-  oldPassword = 'oldPassword',
-  newPassword = 'newPassword',
-  repeatNewPassword = 'repeatNewPassword',
-}
 
 export type IChangePasswordFormData = Record<
   ChangePasswordTextFieldsKeys,

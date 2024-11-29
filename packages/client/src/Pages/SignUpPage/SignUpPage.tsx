@@ -1,13 +1,12 @@
+import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Typography, Stack } from '@mui/material';
 
-import { SignUpForm } from '@Components/SignUpForm/SignUpForm';
-import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import { Routes } from '@Constants/Routes';
+import { ErrorNotification, SignUpForm } from '@Components';
+import { Routes } from '@Constants';
+import { useSignUpMutation } from '@Store';
 
-import type { IUserCreate } from '@Types/User.types';
-import { useSignUpMutation } from '@Store/Slices/Api/Profile.api';
+import type { IUserCreate } from '@Types';
 
 export const SignUpPage = () => {
   const navigate = useNavigate();

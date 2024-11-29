@@ -1,10 +1,8 @@
-import { testDrawFunction } from '../RenderFunctions';
+import type { TCanvas } from '@Types';
 
-import type { TCanvas } from '@Types/common.types';
+import { testDrawFunction } from '@RenderFunctions';
 
 export const useRender = (ctx: TCanvas) => {
-  // console.log(ctx);
-
   return () => {
     // todo сюда будут передавать функции на отрисовку всех необходимых сущностей игры
     // drawPlayer(ctx);

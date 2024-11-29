@@ -1,3 +1,1 @@
-import { testDrawFunction } from './TestDrawFunction';
-
-export { testDrawFunction };
+export { testDrawFunction } from './TestDrawFunction';

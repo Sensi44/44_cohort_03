@@ -1,20 +1,23 @@
-import { useState, useEffect } from 'react';
+import { Button, Stack, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Typography, Button, Stack } from '@mui/material';
 
-import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import type { IUserChange, IUserChangePassword } from '@Types/User.types';
-import { ProfilePageMode } from './ProfilePage.types';
-import { ProfileAvatar } from '@Components/ProfileAvatar/ProfileAvatar';
-import { ChangePasswordForm } from '@Components/ChangePasswordForm/ChangePasswordForm';
-import { EditProfileForm } from '@Components/EditProfileForm/EditProfileForm';
 import {
+  ChangePasswordForm,
+  EditProfileForm,
+  ErrorNotification,
+  ProfileAvatar,
+} from '@Components';
+import {
+  getProfileData,
   useChangeAvatarMutation,
   useChangePasswordMutation,
   useEditUserMutation,
   useLoadUserInfoMutation,
-} from '@Store/Slices/Api/Profile.api';
-import { getProfileData } from '@Store/Slices/Profile/Profile.selector';
+} from '@Store';
+import type { IUserChange, IUserChangePassword } from '@Types';
+
+import { ProfilePageMode } from './ProfilePage.types';
 
 export const ProfilePage = () => {
   const [profileMode, setProfileMode] = useState(ProfilePageMode.profile);

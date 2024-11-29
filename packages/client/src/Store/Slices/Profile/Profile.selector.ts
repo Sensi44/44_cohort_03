@@ -1,5 +1,4 @@
-import { IProfileDataState } from '@Store/Types/User.types';
-import type { RootState } from '../..';
+import { IProfileDataState, RootState } from '@Store';
 
 export const getProfileData = (state: RootState): IProfileDataState =>
   state.profile;

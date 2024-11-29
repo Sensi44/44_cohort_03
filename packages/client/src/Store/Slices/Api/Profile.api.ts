@@ -1,23 +1,21 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { axiosBaseQuery } from '@Utils/Queries/BaseQuery';
 import {
   AUTH_URL_PATH,
-  BASE_URL,
   baseTransformErrorResponse,
+  BASE_URL,
   METHODS,
   USER_URL_PATH,
-} from '@Constants/Api';
-
+} from '@Constants';
+import { IProfileDataState, resetProfileData, setProfileData } from '@Store';
 import type {
   IUserChange,
   IUserChangePassword,
   IUserCreate,
   IUserLogin,
   TUserProfileResponse,
-} from '@Types/User.types';
-import { resetProfileData, setProfileData } from '../Profile/Profile.slice';
-import { IProfileDataState } from '@Store/Types/User.types';
+} from '@Types';
+import { axiosBaseQuery } from '@Utils';
 
 export const ProfileApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: BASE_URL }),

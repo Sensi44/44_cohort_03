@@ -1,23 +1,24 @@
-import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { StrictMode } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { Provider } from 'react-redux';
 import { green, purple } from '@mui/material/colors';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Routes } from '@Constants/Routes';
-import { store } from '@Store/index';
+import { App } from '@Components';
+import { Routes } from '@Constants';
+import {
+  ErrorPage,
+  ForumPage,
+  LeaderBordPage,
+  NotFoundPage,
+  ProfilePage,
+  SignInPage,
+  SignUpPage,
+} from '@Pages';
+import { store } from '@Store';
+
 import { PrivateRoutes } from './privateRoutes';
-import { ErrorPage } from '@Pages/ErrorPage/ErrorPage';
-import { ForumPage } from '@Pages/ForumPage/ForumPage';
-import { LeaderBordPage } from '@Pages/LeaderBordPage/LeaderBordPage';
-import { ProfilePage } from '@Pages/ProfilePage/ProfilePage';
-import { SignUpPage } from '@Pages/SignUpPage/SignUpPage';
-import { SignInPage } from '@Pages/SignInPage/SignInPage';
-import { NotFoundPage } from '@Pages/NotFoundPage/NotFoundPage';
-import App from '@Components/App/App';
-
-import './index.scss';
 
 const theme = createTheme({
   palette: {

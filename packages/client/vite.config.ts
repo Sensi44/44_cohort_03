@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
+import { defineConfig } from 'vite';
 dotenv.config();
 
 // https://vitejs.dev/config/
@@ -24,6 +24,8 @@ export default defineConfig({
       '@Types': resolve(__dirname, 'src/Types'),
       '@Game': resolve(__dirname, 'src/GameEngine'),
       '@Constants': resolve(__dirname, 'src/Constants'),
+      '@StoreOld': resolve(__dirname, 'src/StoreOld'),
+      '@RenderFunctions': resolve(__dirname, 'src/RenderFunctions'),
       // Добавим другие по мере необходимости
     },
   },

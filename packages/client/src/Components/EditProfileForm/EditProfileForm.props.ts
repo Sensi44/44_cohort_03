@@ -1,5 +1,6 @@
-import { IProfileDataState } from '@Store/Types/User.types';
-import type { IUserChange } from '@Types/User.types';
+import { EditProfileTextFieldsKeys } from '@Constants';
+import { IProfileDataState } from '@Store';
+import type { IUserChange } from '@Types';
 
 export type IEditProfileFormProps = {
   isLoading: boolean;
@@ -7,14 +8,5 @@ export type IEditProfileFormProps = {
   profileData: IProfileDataState;
   whenSubmitForm: (payload: IUserChange) => void;
 };
-
-export enum EditProfileTextFieldsKeys {
-  email = 'email',
-  login = 'login',
-  firstName = 'firstName',
-  secondName = 'secondName',
-  phone = 'phone',
-  displayName = 'displayName',
-}
 
 export type IEditProfileFormData = Record<EditProfileTextFieldsKeys, string>;

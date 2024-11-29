@@ -1,16 +1,12 @@
+import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Typography, Stack } from '@mui/material';
 
-import { ErrorNotification } from '@Components/ErrorNotification/ErrorNotification';
-import { SignInForm } from '@Components/SignInForm/SignInForm';
-import { Routes } from '@Constants/Routes';
+import { ErrorNotification, SignInForm } from '@Components';
+import { Routes } from '@Constants';
+import { useLoadUserInfoMutation, useSignInMutation } from '@Store';
 
-import type { IUserLogin } from '@Types/User.types';
-import {
-  useLoadUserInfoMutation,
-  useSignInMutation,
-} from '@Store/Slices/Api/Profile.api';
+import type { IUserLogin } from '@Types';
 
 export const SignInPage = () => {
   const [errorMessage, setErrorMessage] = useState('');

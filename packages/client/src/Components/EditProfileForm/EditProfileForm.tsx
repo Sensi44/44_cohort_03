@@ -1,19 +1,19 @@
-import { useState, useEffect } from 'react';
-import type { FC, ChangeEvent } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 
-import { editProfileTextFieldsList } from '@Constants/InputForms';
-import type {
+import {
   EditProfileTextFieldsKeys,
-  IEditProfileFormProps,
-} from './EditProfileForm.props';
+  editProfileTextFieldsList,
+} from '@Constants';
+import type { IEditProfileFormProps } from './EditProfileForm.props';
 
-export const EditProfileForm: FC<IEditProfileFormProps> = ({
+export const EditProfileForm = ({
   isLoading,
   profileData,
   isDisabled,
   whenSubmitForm,
-}) => {
+}: IEditProfileFormProps) => {
   useEffect(() => {
     setFormData({
       email: profileData.email,

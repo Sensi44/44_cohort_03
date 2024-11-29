@@ -1,9 +1,8 @@
-import type { FC } from 'react';
-import { Badge, Avatar, Button, styled } from '@mui/material';
 import AddPhotoIcon from '@mui/icons-material/AddAPhoto';
 import PortraitIcon from '@mui/icons-material/Portrait';
+import { Avatar, Badge, Button, styled } from '@mui/material';
 
-import { BASE_URL } from '@Constants/Api';
+import { BASE_URL } from '@Constants';
 import type { IProfileAvatarProps } from './ProfileAvatar.props';
 
 const VisuallyHiddenInput = styled('input')({
@@ -18,10 +17,10 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-export const ProfileAvatar: FC<IProfileAvatarProps> = ({
+export const ProfileAvatar = ({
   avatarUrl,
   whenChangeAvatar,
-}) => {
+}: IProfileAvatarProps) => {
   return (
     <Badge
       overlap='circular'

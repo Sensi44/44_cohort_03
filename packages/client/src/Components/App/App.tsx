@@ -1,17 +1,14 @@
-import { useRef, useEffect } from 'react';
+import { Typography } from '@mui/material';
+import { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { useGetCanvasSize } from '@Hooks/UseGetCanvasSize';
-import { useSetCanvasContext } from '@Hooks/UseSetCanvasContext';
-import { useGameLoop } from '@Hooks/UseGameLoop';
-import { useRender } from '@Game/UseRender';
-import { useUpdate } from '@Game/UseUpdate';
-import { DebugPanel } from '@Components/DebugPanel/DebugPanel';
-import { Menu } from '@Components/Menu/Menu';
+import { DebugPanel, Menu } from '@Components';
+import { useRender, useUpdate } from '@Game';
+import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
 import './App.scss';
 
-function App() {
+export const App = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useGetCanvasSize();
   const ctx = useSetCanvasContext(canvasRef);
@@ -31,7 +28,13 @@ function App() {
 
   return (
     <article className={'game-page'}>
-      <h1 className='game-page__title'>Космолёт с бобрами</h1>
+      <Typography
+        variant='h1'
+        textAlign='center'
+        fontSize='22px'
+        className='game-page__title'>
+        Космолёт с бобрами
+      </Typography>
       <Outlet />
       <Menu />
 
@@ -47,6 +50,4 @@ function App() {
       </section>
     </article>
   );
-}
-
-export default App;
+};

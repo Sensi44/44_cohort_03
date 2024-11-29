@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { IProfileDataState } from '@Store/Types/User.types';
+import { IProfileDataState } from '@Store';
 
 const initialState: IProfileDataState = {
   id: -1,

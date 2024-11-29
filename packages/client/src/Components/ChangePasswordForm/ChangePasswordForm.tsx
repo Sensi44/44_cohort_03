@@ -1,20 +1,18 @@
+import { Button, Stack, TextField } from '@mui/material';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
-import type { FC, ChangeEvent } from 'react';
-import { TextField, Button, Stack } from '@mui/material';
 
 import {
   changePasswordFormDefaultFormData,
-  changePasswordTextFieldsList,
-} from '@Constants/InputForms';
-import type {
   ChangePasswordTextFieldsKeys,
-  IChangePasswordFormProps,
-} from './ChangePasswordForm.props';
+  changePasswordTextFieldsList,
+} from '@Constants';
+import type { IChangePasswordFormProps } from './ChangePasswordForm.props';
 
-export const ChangePasswordForm: FC<IChangePasswordFormProps> = ({
+export const ChangePasswordForm = ({
   isLoading,
   whenSubmitForm,
-}) => {
+}: IChangePasswordFormProps) => {
   const [formData, setFormData] = useState(changePasswordFormDefaultFormData);
   const [errors, setErrors] = useState(changePasswordFormDefaultFormData);
 
