@@ -1,3 +1,2 @@
-import { testDrawFunction } from './TestDrawFunction';
-
-export { testDrawFunction };
+export { testDrawFunction } from './TestDrawFunction';
+export { drawPlayer } from './DrawPlayer';

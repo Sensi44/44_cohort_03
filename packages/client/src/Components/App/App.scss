@@ -5,6 +5,7 @@
 .game-page {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .game-page__title {
@@ -14,10 +15,18 @@
 
 .game-field {
   display: flex;
+  flex-grow: 1;
+}
+
+.game-field__canvas-container {
+  width: 100%;
 }
 
 .game-field__canvas {
-  width: calc(100% - 300px);
-  height: calc(90vh - 64px);
-  border: 1px solid gray;
+  width: 100%;
+  //width: calc(100% - 300px);
+  //height: calc(90vh - 64px);
+  border: 2px solid red;
+
+  flex-grow: 1;
 }

@@ -1,14 +1,15 @@
-import { testDrawFunction } from '../RenderFunctions';
+import { useSelector } from '@Store/Hooks';
+import { getPlayer } from '@Store/Slices/Game/Game.selector';
+import { testDrawFunction, drawPlayer } from '../RenderFunctions';
 
 import type { TCanvas } from '@Types/common.types';
 
 export const useRender = (ctx: TCanvas) => {
-  // console.log(ctx);
+  const player = useSelector(getPlayer);
+  // console.log('1', player.x);
 
   return () => {
-    // todo сюда будут передавать функции на отрисовку всех необходимых сущностей игры
-    // drawPlayer(ctx);
-    // drawAsteroids(ctx);
-    testDrawFunction(ctx);
+    drawPlayer(ctx, player);
+    // testDrawFunction(ctx);
   };
 };
