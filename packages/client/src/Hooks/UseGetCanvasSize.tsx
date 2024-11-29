@@ -11,11 +11,6 @@ export const useGetCanvasSize = () => {
       '.game-field__canvas-container',
     );
     if (canvasContainer) {
-      console.log(
-        'size:',
-        canvasContainer.clientWidth,
-        canvasContainer.clientHeight,
-      );
       setCanvasSize({
         x: canvasContainer.clientWidth - 22,
         y: canvasContainer.clientHeight - 16,

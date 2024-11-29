@@ -28,7 +28,7 @@ export const App = () => {
   const { startGame, stopGame } = useGameLoop(update, handleRender);
 
   useEffect(() => {
-    startGame();
+    // startGame();
 
     return () => {
       stopGame();
