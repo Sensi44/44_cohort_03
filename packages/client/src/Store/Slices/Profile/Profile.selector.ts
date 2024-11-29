@@ -1,4 +1,4 @@
-import type { RootState } from '../..';
+import { RootState } from '@Store';
 
 export const getDisabled = (state: RootState): boolean =>
   state.profile.disabled;

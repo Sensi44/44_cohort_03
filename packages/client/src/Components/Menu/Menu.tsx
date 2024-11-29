@@ -1,27 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Button } from '@mui/material';
+import { AppBar, Button, SxProps, Toolbar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+
+import { Routes } from '@Constants';
+
+const buttonStyles = {
+  '&.active': {
+    backgroundColor: 'red',
+  },
+} as SxProps;
 
 export const Menu = () => {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <Button color='inherit' component={Link} to={'/'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.Main}>
           Главная
         </Button>
-        <Button color='inherit' component={Link} to={'sign-up'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.SignUp}>
           Регистрация
         </Button>
-        <Button color='inherit' component={Link} to={'sign-in'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.SignIn}>
           Вход
         </Button>
-        <Button color='inherit' component={Link} to={'forum'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.Forum}>
           Форум
         </Button>
-        <Button color='inherit' component={Link} to={'leader-bord'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.LeaderBord}>
           Лидерборд
         </Button>
-        <Button color='inherit' component={Link} to={'profile'}>
+        <Button
+          sx={buttonStyles}
+          color='inherit'
+          component={NavLink}
+          to={Routes.Profile}>
           Профиль
         </Button>
       </Toolbar>

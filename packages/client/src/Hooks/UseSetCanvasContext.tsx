@@ -1,7 +1,7 @@
+import type { RefObject } from 'react';
 import { useEffect, useState } from 'react';
 
-import type { RefObject } from 'react';
-import type { TCanvas } from '@Types/common.types';
+import type { TCanvas } from '@Types';
 
 export const useSetCanvasContext = (
   canvasRef: RefObject<HTMLCanvasElement>,
