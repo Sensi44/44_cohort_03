@@ -1,2 +1,2 @@
-export { testDrawFunction } from './TestDrawFunction';
 export { drawPlayer } from './DrawPlayer';
+export { testDrawFunction } from './TestDrawFunction';

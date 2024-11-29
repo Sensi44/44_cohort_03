@@ -1,5 +1,5 @@
-import type { TCanvas } from '@Types/common.types';
-import type { TPlayer } from '@Store/Slices/Game/Game.slice';
+import type { TCanvas } from '@Types';
+import type { TPlayer } from '../Store/Slices/Game/Game.slice';
 
 const image = new Image();
 image.src = '../../src/Assets/img/beaver-plane.png';

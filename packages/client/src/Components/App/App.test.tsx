@@ -1,6 +1,9 @@
-import App from './App';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+
+import { store } from '@Store';
+import { App } from './App';
 
 const appContent = 'Космолёт с бобрами';
 
@@ -12,9 +15,11 @@ global.fetch = jest.fn(() =>
 
 test('Example test', async () => {
   render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
+    <Provider store={store}>
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    </Provider>,
   );
   expect(screen.getByText(appContent)).toBeDefined();
 });

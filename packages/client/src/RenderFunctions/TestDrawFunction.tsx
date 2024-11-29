@@ -1,4 +1,4 @@
-import type { TCanvas } from '@Types/common.types';
+import type { TCanvas } from '@Types';
 
 let a = 0;
 
