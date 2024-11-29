@@ -17,7 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@Assets/*": ["Assets/*"],
       "@Components/*": ["Components/*"],
       "@Constants/*": ["Constants/*"],
       "@Pages/*": ["Pages/*"],

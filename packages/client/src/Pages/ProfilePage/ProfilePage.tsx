@@ -64,7 +64,6 @@ export const ProfilePage = () => {
   };
 
   const handleEditProfile = async (editProfilePayload: IUserChange) => {
-    console.log(editProfilePayload);
     editProfile(editProfilePayload)
       .unwrap()
       .then(() => loadUserInfo().unwrap())
