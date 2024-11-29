@@ -24,9 +24,9 @@
 
 .game-field__canvas {
   width: 100%;
-  //width: calc(100% - 300px);
-  //height: calc(90vh - 64px);
   border: 2px solid red;
+  background-image: url('../../Assets/img/background.jpg');
+  background-size: cover;
 
   flex-grow: 1;
 }

@@ -23,8 +23,8 @@ const initialState: IGameInitState = {
   player: {
     x: 0,
     y: 50,
-    width: 50,
-    height: 50,
+    width: 128,
+    height: 54,
     speed: 1,
   },
 };

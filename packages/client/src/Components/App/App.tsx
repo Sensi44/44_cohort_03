@@ -22,8 +22,14 @@ function App() {
 
   const render = useRender(ctx);
   const update = useUpdate();
+  const handleRender = () => {
+    if (ctx) {
+      ctx.clearRect(0, 0, width, height);
+      render();
+    }
+  };
 
-  const { startGame, stopGame } = useGameLoop(update, render);
+  const { startGame, stopGame } = useGameLoop(update, handleRender);
 
   useEffect(() => {
     startGame();
