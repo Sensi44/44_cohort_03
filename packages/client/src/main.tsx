@@ -50,16 +50,16 @@ const router = createBrowserRouter(
           element: <App />,
           errorElement: <ErrorPage />,
         },
+        { path: Routes.Forum, element: <ForumPage /> },
+        {
+          path: Routes.LeaderBord,
+          element: <LeaderBordPage />,
+        },
+        {
+          path: Routes.Profile,
+          element: <ProfilePage />,
+        },
       ],
-    },
-    { path: Routes.Forum, element: <ForumPage /> },
-    {
-      path: Routes.LeaderBord,
-      element: <LeaderBordPage />,
-    },
-    {
-      path: Routes.Profile,
-      element: <ProfilePage />,
     },
     {
       path: '*',

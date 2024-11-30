@@ -1,6 +1,7 @@
 import { AppBar, Button, SxProps, Toolbar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
+import { LogoutButton } from '@Components';
 import { Routes } from '@Constants';
 
 const buttonStyles = {
@@ -55,6 +56,7 @@ export const Menu = () => {
           to={Routes.Profile}>
           Профиль
         </Button>
+        <LogoutButton />
       </Toolbar>
     </AppBar>
   );
