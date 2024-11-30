@@ -1,4 +1,6 @@
+import { store } from '@Store';
 import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { App } from './App';
 
@@ -13,7 +15,9 @@ global.fetch = jest.fn(() =>
 test('Example test', async () => {
   render(
     <MemoryRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </MemoryRouter>,
   );
   expect(screen.getByText(appContent)).toBeDefined();
