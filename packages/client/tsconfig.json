@@ -23,9 +23,7 @@
       "@Pages": ["Pages"],
       "@Utils": ["Utils"],
       "@Store": ["Store"],
-      "@StoreOld": ["StoreOld"],
       "@Types": ["Types"],
-      "@Services": ["Services"],
       "@Game": ["GameEngine"],
       "@Hooks": ["Hooks"]
     }

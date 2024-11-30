@@ -12,6 +12,11 @@ export interface IUserLogin {
   password: string;
 }
 
+export interface IUserChangePassword {
+  oldPassword: string;
+  newPassword: string;
+}
+
 export type TUserProfileParams = {
   first_name: string;
   second_name: string;
@@ -42,3 +47,12 @@ export type TUserProfileData = {
   phone: string;
   avatar: string;
 };
+
+export interface IUserChange {
+  firstName: string;
+  secondName: string;
+  displayName: string;
+  login: string;
+  email: string;
+  phone: string;
+}

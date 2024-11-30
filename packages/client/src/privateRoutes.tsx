@@ -2,31 +2,22 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 import { Routes } from '@Constants';
-import { useAuthApi } from '@Services';
+import { useGetUserInfoQuery } from '@Store';
 
 export const PrivateRoutes = () => {
   const location = useLocation();
-  const authApi = useAuthApi();
+  const { data: userInfo, error, isLoading } = useGetUserInfoQuery();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  const checkAuth = async () => {
-    const userInfo = await authApi.getUserInfo();
-    return Boolean(userInfo);
-  };
-
-  // Использование хука useEffect для выполнения асинхронной проверки
   useEffect(() => {
-    (async () => {
-      try {
-        const auth = await checkAuth();
-        setIsAuthenticated(auth);
-      } catch (error) {
-        setIsAuthenticated(false);
-      }
-    })();
-  }, []);
+    if (error) {
+      setIsAuthenticated(false);
+    } else {
+      setIsAuthenticated(Boolean(userInfo));
+    }
+  }, [userInfo, error, isLoading]);
 
-  if (isAuthenticated === null) {
+  if (isLoading) {
     // альтернатива: отображать спиннер или загрузочный индикатор
     return <div>Проверка авторизации...</div>;
   }

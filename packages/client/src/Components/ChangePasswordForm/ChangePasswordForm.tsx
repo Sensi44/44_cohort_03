@@ -1,19 +1,25 @@
 import { Button, Stack, TextField } from '@mui/material';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 
 import {
-  signUpDefaultFormData,
-  SignUpTextFieldsKeys,
-  signUpTextFieldsList,
+  changePasswordFormDefaultFormData,
+  ChangePasswordTextFieldsKeys,
+  changePasswordTextFieldsList,
 } from '@Constants';
+import type { IChangePasswordFormProps } from './ChangePasswordForm.props';
 
-import type { ISignUpFormProps } from './SignUpForm.props';
+export const ChangePasswordForm = ({
+  isLoading,
+  whenSubmitForm,
+}: IChangePasswordFormProps) => {
+  const [formData, setFormData] = useState(changePasswordFormDefaultFormData);
+  const [errors, setErrors] = useState(changePasswordFormDefaultFormData);
 
-export const SignUpForm = ({ isLoading, whenSubmitForm }: ISignUpFormProps) => {
-  const [formData, setFormData] = useState(signUpDefaultFormData);
-  const [errors, setErrors] = useState(signUpDefaultFormData);
-
-  const handleChangeForm = (value: string, fieldKey: SignUpTextFieldsKeys) => {
+  const handleChangeForm = (
+    value: string,
+    fieldKey: ChangePasswordTextFieldsKeys,
+  ) => {
     setFormData({
       ...formData,
       [fieldKey]: value,
@@ -21,16 +27,11 @@ export const SignUpForm = ({ isLoading, whenSubmitForm }: ISignUpFormProps) => {
   };
 
   const handleSubmitForm = () => {
-    const { email, login, firstName, secondName, phone, password } = formData;
     //TODO добавить валидацию - использовать errors
 
     whenSubmitForm({
-      first_name: firstName,
-      second_name: secondName,
-      login,
-      email,
-      password,
-      phone,
+      oldPassword: formData.oldPassword,
+      newPassword: formData.newPassword,
     });
   };
 
@@ -41,20 +42,23 @@ export const SignUpForm = ({ isLoading, whenSubmitForm }: ISignUpFormProps) => {
         sx={{
           alignItems: 'center',
         }}>
-        {signUpTextFieldsList.map((field) => (
+        {changePasswordTextFieldsList.map((field) => (
           <TextField
             sx={{ width: 340 }}
             key={field.id}
+            helperText={errors[field.id]}
             error={errors[field.id].length > 0}
+            variant='outlined'
             disabled={isLoading}
+            fullWidth
             id={field.id}
             label={field.label}
             name={field.name}
             type={field.type}
             value={formData[field.id]}
-            variant='outlined'
-            onChange={(event) => handleChangeForm(event.target.value, field.id)}
-          />
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              handleChangeForm(event.target.value, field.id)
+            }></TextField>
         ))}
         <Button
           disabled={
@@ -63,7 +67,7 @@ export const SignUpForm = ({ isLoading, whenSubmitForm }: ISignUpFormProps) => {
           onClick={handleSubmitForm}
           size='large'
           variant='contained'>
-          Зарегистрироваться
+          Изменить пароль
         </Button>
       </Stack>
     </form>

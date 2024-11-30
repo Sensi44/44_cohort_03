@@ -1,43 +1,41 @@
-import { Container, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ErrorNotification, SignUpForm } from '@Components';
 import { Routes } from '@Constants';
-import { useAuthApi } from '@Services';
+import { useSignUpMutation } from '@Store';
 
 import type { IUserCreate } from '@Types';
 
-import './SignUpPage.scss';
-
 export const SignUpPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [signUp, { isLoading }] = useSignUpMutation();
 
   const handleSubmitForm = async (profileData: IUserCreate) => {
-    setIsLoading(true);
-    const result = await useAuthApi().signUp(profileData);
-    setIsLoading(false);
-
-    if (result.isSuccess) {
-      navigate(`/${Routes.SignIn}`);
-    } else {
-      setErrorMessage(result.error);
-    }
+    signUp(profileData)
+      .unwrap()
+      .then(() => navigate(`/${Routes.SignIn}`))
+      .catch((error) => {
+        setErrorMessage(`Не удалось зарегистрироваться ${error}`);
+      });
   };
 
   return (
-    <Container className='sign-up-page__page'>
+    <Stack
+      spacing={2}
+      sx={{
+        padding: '60px 40px 20px',
+        marginTop: 2,
+        alignItems: 'center',
+      }}>
       <Typography textAlign='center' variant='h4' color='primary'>
         Регистрация
       </Typography>
-      <div className='sign-up-page__form'>
-        <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
-      </div>
-
+      <SignUpForm isLoading={isLoading} whenSubmitForm={handleSubmitForm} />
       <Typography textAlign='center' variant='body2'>
-        {'Уже зарегистрированы?'}
+        {'Уже зарегистрированы? '}
         <NavLink to={`/${Routes.SignIn}`}>Войти</NavLink>
       </Typography>
       <ErrorNotification
@@ -45,6 +43,6 @@ export const SignUpPage = () => {
         errorText={errorMessage}
         whenClose={() => setErrorMessage('')}
       />
-    </Container>
+    </Stack>
   );
 };

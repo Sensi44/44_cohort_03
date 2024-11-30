@@ -1,21 +1,25 @@
 import { Button } from '@mui/material';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-import { Routes } from '@Constants';
-import { useAuthApi } from '@Services';
+// import { Routes } from '@Constants';
+// import { useLogoutMutation } from '@Store';
 
 export const LogoutButton: React.FC = () => {
-  const authApi = useAuthApi();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // const [logout, { isLoading, isError }] = useLogoutMutation();
 
   const handleLogout = () => {
-    authApi.logout().then((result) => {
-      if (!result.isSuccess) {
-        return;
-      }
-      navigate(`/${Routes.SignIn}`);
-    });
+    console.log('logout');
+    // try {
+    //   logout()
+    //     .unwrap()
+    //     .then(() => {
+    //       navigate(`/${Routes.SignIn}`);
+    //     });
+    // } catch (error) {
+    //   return;
+    // }
   };
 
   return (
