@@ -8,10 +8,9 @@ import {
   TableRow,
 } from '@mui/material';
 
-type TableLeaderBord = {
-  rows: any[];
-};
-export const TableLeaderBord = ({ rows }: TableLeaderBord) => {
+import { ITableLeaderBordProps } from './TableLeaderBord.props';
+
+export const TableLeaderBord = ({ rows }: ITableLeaderBordProps) => {
   return (
     <TableContainer
       sx={{

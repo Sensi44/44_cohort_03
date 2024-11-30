@@ -5,26 +5,12 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
 
-import { ErrorNotification, TableLeaderBord } from '@Components';
-import { useGetLeaderBordMutation } from '@Store';
-import { TLeaderBordData } from '@Types';
+import { TableLeaderBord } from '@Components';
+import { useGetLeaderBordQuery } from '@Store';
 
 export const LeaderBordPage = () => {
-  const [rows, setRows] = useState<TLeaderBordData[]>([]);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [leaderBord, { isLoading: isLoadingLeaderBord }] =
-    useGetLeaderBordMutation();
-
-  useEffect(() => {
-    leaderBord()
-      .unwrap()
-      .then((data) => setRows(data))
-      .catch((error) => {
-        setErrorMessage(`Не удалось загрузить список лидеров ${error}`);
-      });
-  }, []);
+  const { data: rows, isLoading } = useGetLeaderBordQuery();
 
   return (
     <Stack
@@ -38,7 +24,7 @@ export const LeaderBordPage = () => {
         <Typography textAlign='center' variant='h4' color='primary'>
           Список лидеров
         </Typography>
-        {isLoadingLeaderBord ? (
+        {isLoading ? (
           <Box
             sx={{
               display: 'flex',
@@ -48,13 +34,8 @@ export const LeaderBordPage = () => {
             <CircularProgress />
           </Box>
         ) : (
-          <TableLeaderBord rows={rows} />
+          <TableLeaderBord rows={rows || []} />
         )}
-        <ErrorNotification
-          isOpen={errorMessage.length > 0}
-          errorText={errorMessage}
-          whenClose={() => setErrorMessage('')}
-        />
       </Container>
     </Stack>
   );

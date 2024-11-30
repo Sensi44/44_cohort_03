@@ -13,7 +13,7 @@ export const LeaderBordApi = createApi({
   reducerPath: 'leaderBord',
   baseQuery: axiosBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (build) => ({
-    getLeaderBord: build.mutation<TLeaderBordData[], void>({
+    getLeaderBord: build.query<TLeaderBordData[], void>({
       query: () => {
         return {
           url: `/leaderboard/beavers`,
@@ -31,4 +31,4 @@ export const LeaderBordApi = createApi({
   }),
 });
 
-export const { useGetLeaderBordMutation } = LeaderBordApi;
+export const { useGetLeaderBordQuery } = LeaderBordApi;
