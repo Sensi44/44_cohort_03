@@ -1,11 +1,10 @@
 import { Button } from '@mui/material';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Routes } from '@Constants';
 import { useLogoutMutation } from '@Store';
 
-export const LogoutButton: React.FC = () => {
+export const LogoutButton = () => {
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
 
