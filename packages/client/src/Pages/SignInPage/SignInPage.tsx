@@ -18,6 +18,9 @@ export const SignInPage = () => {
       .unwrap()
       .then(() => navigate(Routes.Main))
       .catch((error) => {
+        if (error === 'User already in system') {
+          navigate(Routes.Main);
+        }
         setErrorMessage(`Не удалось авторизоваться ${error}`);
       });
   };
