@@ -11,6 +11,7 @@ export type {
   IEditProfileFormProps,
 } from './EditProfileForm/EditProfileForm.props';
 export { ErrorNotification } from './ErrorNotification/ErrorNotification';
+export { LogoutButton } from './LogoutButton/LogoutButton';
 export { Menu } from './Menu/Menu';
 export { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 export type { IProfileAvatarProps } from './ProfileAvatar/ProfileAvatar.props';
