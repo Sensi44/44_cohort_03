@@ -5,12 +5,16 @@ import {
   type TypedUseSelectorHook,
 } from 'react-redux';
 import { rootReducer } from './Slices';
+import { LeaderBordApi } from './Slices/Api/LeaderBord.api';
 import { ProfileApi } from './Slices/Api/Profile.api';
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([ProfileApi.middleware]),
+    getDefaultMiddleware().concat([
+      ProfileApi.middleware,
+      LeaderBordApi.middleware,
+    ]),
   devTools: true,
 });
 
@@ -19,6 +23,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export { useGetLeaderBordMutation } from './Slices/Api/LeaderBord.api';
 export {
   useChangeAvatarMutation,
   useChangePasswordMutation,
