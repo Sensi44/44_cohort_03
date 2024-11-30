@@ -9,15 +9,18 @@ export const PrivateRoutes = () => {
   const { data: userInfo, error, isLoading } = useGetUserInfoQuery();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
+  // Использование хука useEffect для установки состояния аутентификации
   useEffect(() => {
-    if (error) {
+    if (isLoading) {
+      setIsAuthenticated(null);
+    } else if (error) {
       setIsAuthenticated(false);
     } else {
       setIsAuthenticated(Boolean(userInfo));
     }
   }, [userInfo, error, isLoading]);
 
-  if (isLoading) {
+  if (isAuthenticated === null) {
     // альтернатива: отображать спиннер или загрузочный индикатор
     return <div>Проверка авторизации...</div>;
   }
