@@ -1,11 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import {
-  baseTransformErrorResponse,
-  BASE_URL,
-  LEADER_BORD_PARAMS,
-  METHODS,
-} from '@Constants';
+import { BASE_URL, LEADER_BORD_PARAMS, METHODS } from '@Constants';
 import { TLeaderBordData, TLeaderBordResponse } from '@Types';
 import { axiosBaseQuery } from '@Utils';
 
@@ -24,9 +19,8 @@ export const LeaderBordApi = createApi({
       transformResponse: (
         response: TLeaderBordResponse[],
       ): TLeaderBordData[] => {
-        return response.map((obj) => obj.data);
+        return response?.map((obj) => obj.data);
       },
-      transformErrorResponse: baseTransformErrorResponse,
     }),
   }),
 });
