@@ -25,3 +25,4 @@ export type {
   ISignUpFormData,
   ISignUpFormProps,
 } from './SignUpForm/SignUpForm.props';
+export { TableLeaderBord } from './TableLeaderBord/TableLeaderBord';

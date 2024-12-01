@@ -2,6 +2,7 @@ export {
   AUTH_URL_PATH,
   baseTransformErrorResponse,
   BASE_URL,
+  LEADER_BORD_PARAMS,
   METHODS,
   USER_URL_PATH,
 } from './Api';
