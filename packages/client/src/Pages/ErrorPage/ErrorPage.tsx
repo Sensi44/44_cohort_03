@@ -1,3 +1,5 @@
+import { ErrorBlock } from '@Components';
+
 export const ErrorPage = () => {
-  return <div>Hello 500.</div>;
+  return <ErrorBlock title='500' subtitle='Мы уже фиксим' />;
 };
