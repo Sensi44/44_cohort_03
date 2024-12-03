@@ -1,7 +1,9 @@
 {
+  "endOfLine": "auto",
   "singleQuote": true,
-  "semi": false,
-  "arrowParens": "avoid",
+  "jsxSingleQuote": true,
+  "semi": true,
+  "arrowParens": "always",
   "bracketSameLine": true,
-  "width": 50
+  "plugins": ["prettier-plugin-organize-imports"]
 }

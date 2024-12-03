@@ -1,0 +1,18 @@
+:root {
+  --main-color: '#fff';
+}
+
+.game-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.game-field {
+  display: flex;
+}
+
+.game-field__canvas {
+  width: calc(100% - 300px);
+  height: calc(90vh - 64px);
+  border: 1px solid gray;
+}

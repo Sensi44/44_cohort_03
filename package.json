@@ -9,6 +9,8 @@
     "dev": "lerna run dev",
     "test": "lerna run test",
     "lint": "lerna run lint",
+    "lint:scss": "lerna run lint:scss --scope=client",
+    "lint:fix": "lerna run lint:fix",
     "format": "lerna run format",
     "preview": "lerna run preview"
   },
@@ -17,7 +19,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=15"
+    "node": ">=20"
   },
   "devDependencies": {
     "@evilmartians/lefthook": "^1.3.9",
