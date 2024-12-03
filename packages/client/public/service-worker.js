@@ -1,10 +1,10 @@
 self.addEventListener('install', (event) => {
-  console.log('Service Worker installing.');
+  console.log('install');
   // Код для кеширования файлов
 });
 
 self.addEventListener('activate', (event) => {
-  console.log('Service Worker activating.');
+  console.log('activate');
   // Код для активации воркера
 });
 
