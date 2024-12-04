@@ -1,3 +1,5 @@
+import { ErrorBlock } from '@Components';
+
 export const NotFoundPage = () => {
-  return <div>Hello 400</div>;
+  return <ErrorBlock title='404' subtitle='Не туда попали' />;
 };
