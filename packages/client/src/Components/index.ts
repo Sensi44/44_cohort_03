@@ -10,6 +10,8 @@ export type {
   IEditProfileFormData,
   IEditProfileFormProps,
 } from './EditProfileForm/EditProfileForm.props';
+export { ErrorBlock } from './ErrorBlock/ErrorBlock';
+export type { IErrorBlockProps } from './ErrorBlock/ErrorBlock.props';
 export { ErrorNotification } from './ErrorNotification/ErrorNotification';
 export { LogoutButton } from './LogoutButton/LogoutButton';
 export { Menu } from './Menu/Menu';
@@ -25,3 +27,4 @@ export type {
   ISignUpFormData,
   ISignUpFormProps,
 } from './SignUpForm/SignUpForm.props';
+export { TableLeaderBord } from './TableLeaderBord/TableLeaderBord';

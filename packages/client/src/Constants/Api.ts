@@ -13,3 +13,9 @@ export const USER_URL_PATH = '/user';
 export const baseTransformErrorResponse = (error: {
   data: { reason: string };
 }) => error.data?.reason ?? '';
+
+export const LEADER_BORD_PARAMS = {
+  ratingFieldName: 'score',
+  cursor: 0,
+  limit: 20,
+};
