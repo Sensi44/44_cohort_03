@@ -1,4 +1,4 @@
-import { drawBackground, drawPlayer } from '@RenderFunctions';
+import { drawBackground, drawFps, drawPlayer } from '@RenderFunctions';
 import { getPlayer, useAppSelector } from '@Store';
 
 import type { TCanvas } from '@Types';
@@ -9,5 +9,6 @@ export const useRender = (ctx: TCanvas) => {
   return () => {
     drawBackground(ctx);
     drawPlayer(ctx, player);
+    drawFps(ctx);
   };
 };
