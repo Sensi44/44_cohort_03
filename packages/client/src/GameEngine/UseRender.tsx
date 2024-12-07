@@ -1,12 +1,14 @@
+import { drawBackground, drawFps, drawPlayer } from '@RenderFunctions';
+import { getPlayer, useAppSelector } from '@Store';
+
 import type { TCanvas } from '@Types';
 
-import { testDrawFunction } from '@RenderFunctions';
-
 export const useRender = (ctx: TCanvas) => {
+  const player = useAppSelector(getPlayer);
+
   return () => {
-    // todo сюда будут передавать функции на отрисовку всех необходимых сущностей игры
-    // drawPlayer(ctx);
-    // drawAsteroids(ctx);
-    testDrawFunction(ctx);
+    drawBackground(ctx);
+    drawPlayer(ctx, player);
+    drawFps(ctx);
   };
 };

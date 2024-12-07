@@ -33,4 +33,7 @@ export {
   useSignInMutation,
   useSignUpMutation,
 } from './Slices/Api/Profile.api';
+export { getPlayer } from './Slices/Game/Game.selector';
+export { movePlayer, setGameState } from './Slices/Game/Game.slice';
+export type { TPlayer } from './Slices/Game/Game.slice';
 export type { IProfileDataState } from './Types/User.types';
