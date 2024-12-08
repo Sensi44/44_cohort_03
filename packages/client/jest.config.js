@@ -13,6 +13,7 @@ export default {
   },
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
     ...pathsToModuleNameMapper(config.compilerOptions.paths, {
       prefix: '<rootDir>/src/',
     }),
