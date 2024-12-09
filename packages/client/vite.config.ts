@@ -2,6 +2,8 @@ import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
+
 dotenv.config();
 
 // https://vitejs.dev/config/
@@ -13,7 +15,15 @@ export default defineConfig({
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      workbox: {
+        // другие настройки, которые вам могут понадобиться
+      },
+    }),
+  ],
   resolve: {
     alias: {
       '@Components': resolve(__dirname, 'src/Components'),
