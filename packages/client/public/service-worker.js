@@ -35,8 +35,6 @@ self.addEventListener('fetch', (event) => {
 });
 
 async function handleRequest(event) {
-  console.log('cacheData v23');
-
   if (navigator.onLine) {
     return await cacheData(event);
   } else {
