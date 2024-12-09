@@ -19,9 +19,6 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      workbox: {
-        // другие настройки, которые вам могут понадобиться
-      },
     }),
   ],
   resolve: {

@@ -1,13 +1,6 @@
 const CACHE_NAME = 'game-cache-v1';
 
-const urlsToCache = [
-  '/',
-  '/sign-up',
-  '/sign-in',
-  '/forum',
-  '/leader-bord',
-  '/profile',
-];
+const urlsToCache = ['/'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -19,20 +12,6 @@ self.addEventListener('install', (event) => {
       .catch((err) => {
         throw err;
       }),
-  );
-});
-
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-
-      return fetch(event.request).catch(() => {
-        return caches.match('/');
-      });
-    }),
   );
 });
 
@@ -50,3 +29,16 @@ self.addEventListener('activate', (event) => {
     }),
   );
 });
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(handleRequest(event));
+});
+
+async function handleRequest(event) {
+  if (navigator.onLine) {
+    return await fetch(event.request);
+  } else {
+    console.warn('Offline mode');
+    return caches.match('/');
+  }
+}
