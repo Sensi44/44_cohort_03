@@ -2,6 +2,8 @@ import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
+
 dotenv.config();
 
 // https://vitejs.dev/config/
@@ -13,7 +15,12 @@ export default defineConfig({
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate',
+    }),
+  ],
   resolve: {
     alias: {
       '@Components': resolve(__dirname, 'src/Components'),
@@ -25,6 +32,7 @@ export default defineConfig({
       '@Game': resolve(__dirname, 'src/GameEngine'),
       '@Constants': resolve(__dirname, 'src/Constants'),
       '@RenderFunctions': resolve(__dirname, 'src/RenderFunctions'),
+      '@ServiceWorker': resolve(__dirname, 'src/ServiceWorker'),
       // Добавим другие по мере необходимости
     },
   },
