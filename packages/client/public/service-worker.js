@@ -2,21 +2,36 @@ const CACHE_NAME = 'game-cache-v1';
 
 const urlsToCache = [
   '/',
-  // Добавить сюда другие статические файлы, которые нужно закешировать
+  '/sign-up',
+  '/sign-in',
+  '/forum',
+  '/leader-bord',
+  '/profile',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    }),
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        return cache.addAll(urlsToCache);
+      })
+      .catch((err) => {
+        throw err;
+      }),
   );
 });
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
+      if (response) {
+        return response;
+      }
+
+      return fetch(event.request).catch(() => {
+        return caches.match('/');
+      });
     }),
   );
 });
