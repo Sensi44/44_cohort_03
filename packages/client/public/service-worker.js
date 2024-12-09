@@ -1,4 +1,4 @@
-const ACTUAL_CACHE_NAME = 'cache-v1';
+const CACHE_NAME = 'game-cache-v1';
 
 const urlsToCache = [
   '/',
@@ -12,7 +12,7 @@ const urlsToCache = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
-      .open(ACTUAL_CACHE_NAME)
+      .open(CACHE_NAME)
       .then((cache) => {
         return cache.addAll(urlsToCache);
       })
@@ -24,57 +24,28 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    // Пытаемся найти ответ на такой запрос в кеше
     caches.match(event.request).then((response) => {
-      console.log('Fetch v6');
-
-      console.log('Ищем запрос: ', event.request);
-      console.log('Для event: ', event);
-      // Если ответ найден, выдаём его
-      console.log('Найденный ответ: ', response);
       if (response) {
-        console.log('Возвращаем найденный ответ и выходим');
         return response;
       }
 
-      const fetchRequest = event.request.clone();
-      // В противном случае делаем запрос на сервер
-      return (
-        fetch(fetchRequest)
-          // Можно задавать дополнительные параметры запроса, если ответ вернулся некорректный.
-          .then((response) => {
-            // Если что-то пошло не так, выдаём в основной поток результат, но не кладём его в кеш
-            if (
-              !response ||
-              response.status !== 200 ||
-              response.type !== 'basic'
-            ) {
-              return response;
-            }
-
-            const responseToCache = response.clone();
-            // Получаем доступ к кешу по CACHE_NAME
-            caches.open(ACTUAL_CACHE_NAME).then((cache) => {
-              // Записываем в кеш ответ, используя в качестве ключа запрос
-              cache.put(event.request, responseToCache);
-            });
-            // Отдаём в основной поток ответ
-            return response;
-          })
-      );
+      return fetch(event.request).catch(() => {
+        return caches.match('/');
+      });
     }),
   );
 });
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames
-          .filter((name) => {
-            return name !== ACTUAL_CACHE_NAME;
-          })
-          .map((name) => caches.delete(name)),
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName);
+          }
+        }),
       );
     }),
   );
