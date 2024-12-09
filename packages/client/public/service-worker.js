@@ -1,14 +1,37 @@
-self.addEventListener('install', (event) => {
-  console.log('install');
-  // Код для кеширования файлов
-});
+const CACHE_NAME = 'game-cache-v1';
 
-self.addEventListener('activate', (event) => {
-  console.log('activate');
-  // Код для активации воркера
+const urlsToCache = [
+  '/',
+  // Добавить сюда другие статические файлы, которые нужно закешировать
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
+    }),
+  );
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('Fetching:', event.request.url);
-  // Код обработки сетевых запросов
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    }),
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  const cacheWhitelist = [CACHE_NAME];
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (!cacheWhitelist.includes(cacheName)) {
+            return caches.delete(cacheName);
+          }
+        }),
+      );
+    }),
+  );
 });
