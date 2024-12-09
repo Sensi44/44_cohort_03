@@ -15,11 +15,17 @@ export const App = () => {
 
   const render = useRender(ctx);
   const update = useUpdate();
+  const handleRender = () => {
+    if (ctx) {
+      ctx.clearRect(0, 0, width, height);
+      render();
+    }
+  };
 
-  const { startGame, stopGame } = useGameLoop(update, render);
+  const { startGame, stopGame } = useGameLoop(update, handleRender);
 
   useEffect(() => {
-    startGame();
+    // startGame();
 
     return () => {
       stopGame();
@@ -41,12 +47,14 @@ export const App = () => {
       <section className={'game-field'}>
         <DebugPanel onStart={startGame} onStop={stopGame} />
 
-        <canvas
-          className={'game-field__canvas'}
-          ref={canvasRef}
-          width={width}
-          height={height}
-        />
+        <div className={'game-field__canvas-container'}>
+          <canvas
+            className={'game-field__canvas'}
+            ref={canvasRef}
+            width={width}
+            height={height}
+          />
+        </div>
       </section>
     </article>
   );

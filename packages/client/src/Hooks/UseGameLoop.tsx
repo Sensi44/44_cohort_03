@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // todo позже тут будет подключён редакс
 const globalState = {
@@ -8,10 +8,19 @@ const globalState = {
 export const useGameLoop = (update: () => void, render: () => void) => {
   const [animationFrameId, setAnimationFrameId] = useState<number | null>(null);
 
+  const updateRef = useRef(update);
+  const renderRef = useRef(render);
+
+  useEffect(() => {
+    updateRef.current = update;
+    renderRef.current = render;
+  }, [update, render]);
+
   const gameLoop = () => {
     if (globalState.gameState) {
-      update();
-      render();
+      // Используем актуальные функции из рефов
+      updateRef.current();
+      renderRef.current();
       const id = requestAnimationFrame(gameLoop);
       setAnimationFrameId(id);
     }
