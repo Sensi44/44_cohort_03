@@ -35,10 +35,32 @@ self.addEventListener('fetch', (event) => {
 });
 
 async function handleRequest(event) {
+  console.log('cacheData v23');
+
   if (navigator.onLine) {
-    return await fetch(event.request);
+    return await cacheData(event);
   } else {
     console.warn('Offline mode');
     return caches.match('/');
   }
+}
+
+async function cacheData(event) {
+  const cachedResponse = await caches.match(event.request);
+
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const response = await fetch(event.request);
+
+  if (!response || response.status !== 200 || response.type !== 'basic') {
+    return response;
+  }
+
+  const responseToCache = response.clone();
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(event.request, responseToCache);
+
+  return response;
 }
