@@ -16,9 +16,12 @@ import {
   SignInPage,
   SignUpPage,
 } from '@Pages';
+import { startServiceWorker } from '@ServiceWorker';
 import { store } from '@Store';
 
 import { PrivateRoutes } from './privateRoutes';
+
+startServiceWorker();
 
 const theme = createTheme({
   palette: {
