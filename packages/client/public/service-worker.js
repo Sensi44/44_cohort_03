@@ -36,6 +36,7 @@ self.addEventListener('fetch', (event) => {
 
 async function handleRequest(event) {
   if (navigator.onLine) {
+    console.log('Online');
     return await cacheData(event);
   } else {
     console.warn('Offline mode');
