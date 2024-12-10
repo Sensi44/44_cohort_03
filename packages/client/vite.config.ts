@@ -19,6 +19,10 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        globDirectory: resolve(__dirname, 'dist'),
+        globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,svg}'],
+      },
     }),
   ],
   resolve: {
