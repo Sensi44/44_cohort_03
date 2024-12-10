@@ -1,10 +1,5 @@
 export type TMessagesProps = {
-  currentRoomMessages: {
-    id: number;
-    text: string;
-    user: string;
-    time: string;
-  }[];
+  currentRoomMessages: TMessage[];
 };
 
 export type TMessage = {
