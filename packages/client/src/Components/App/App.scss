@@ -23,4 +23,8 @@
   //background-size: cover;
 
   flex-grow: 1;
+  &:fullscreen,
+  &:-webkit-full-screen {
+    background-color: black;
+  }
 }
