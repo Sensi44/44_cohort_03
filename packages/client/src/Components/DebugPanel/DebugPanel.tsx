@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
 
+import { useToggleFullscreen } from '@Hooks';
 import type { IDebugPanelProps } from './DebugPanel.props';
 
 export const DebugPanel = ({ onStart, onStop }: IDebugPanelProps) => {
@@ -16,6 +17,12 @@ export const DebugPanel = ({ onStart, onStop }: IDebugPanelProps) => {
         </Button>
         <Button variant='contained' color='secondary' onClick={onStop}>
           Остановить игру
+        </Button>
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={useToggleFullscreen}>
+          На весь экран
         </Button>
       </Stack>
     </Box>

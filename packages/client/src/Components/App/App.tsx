@@ -4,7 +4,12 @@ import { Outlet } from 'react-router-dom';
 
 import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
-import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
+import {
+  useGameLoop,
+  useGetCanvasSize,
+  useSetCanvasContext,
+  useToggleFullscreen,
+} from '@Hooks';
 
 import './App.scss';
 
@@ -31,6 +36,19 @@ export const App = () => {
       stopGame();
     };
   }, [ctx]);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.shiftKey && event.key === 'F11') {
+        useToggleFullscreen();
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <article className={'game-page'}>
