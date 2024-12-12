@@ -6,6 +6,7 @@ import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
+import { GameIntro } from '../GameIntro/GameIntro';
 import './App.scss';
 
 export const App = () => {
@@ -54,6 +55,7 @@ export const App = () => {
             width={width}
             height={height}
           />
+          <GameIntro onStart={startGame} />
         </div>
       </section>
     </article>
