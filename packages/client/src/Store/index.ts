@@ -42,17 +42,19 @@ export {
 export {
   addEnemy,
   deleteEnemy,
-  EnemyType,
   increaseHitsCount,
   moveEnemy,
   movePlayer,
   setGameState,
 } from './Slices/Game/Game.slice';
+export { EnemyType } from './Types/Games.types';
 export type {
+  IGameInitState,
   TBaseEnemy,
   TBomb,
   TEnemy,
+  TGameState,
   TPirate,
   TPlayer,
-} from './Slices/Game/Game.slice';
+} from './Types/Games.types';
 export type { IProfileDataState } from './Types/User.types';

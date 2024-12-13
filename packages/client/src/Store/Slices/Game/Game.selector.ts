@@ -1,5 +1,5 @@
+import type { TEnemy, TPlayer } from '@Store';
 import type { RootState } from '../..';
-import type { TEnemy, TPlayer } from './Game.slice';
 
 export const getPlayer = (state: RootState): TPlayer => state.game.player;
 export const getEnemiesList = (state: RootState): TEnemy[] =>
