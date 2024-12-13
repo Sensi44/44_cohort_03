@@ -25,7 +25,8 @@
       "@Store": ["Store"],
       "@Types": ["Types"],
       "@Game": ["GameEngine"],
-      "@Hooks": ["Hooks"]
+      "@Hooks": ["Hooks"],
+      "@ServiceWorker": ["ServiceWorker"]
     }
   },
   "include": ["src"],
