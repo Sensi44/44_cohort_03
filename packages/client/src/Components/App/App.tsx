@@ -32,6 +32,33 @@ export const App = () => {
     };
   }, [ctx]);
 
+  const toggleFullscreen = () => {
+    const elem = document.querySelector('.game-field__canvas');
+
+    if (!document.fullscreenElement) {
+      elem?.requestFullscreen().catch((err) => {
+        alert(
+          `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`,
+        );
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.shiftKey && event.key === 'F11') {
+        toggleFullscreen();
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <article className={'game-page'}>
       <Typography
@@ -45,7 +72,11 @@ export const App = () => {
       <Menu />
 
       <section className={'game-field'}>
-        <DebugPanel onStart={startGame} onStop={stopGame} />
+        <DebugPanel
+          onStart={startGame}
+          onStop={stopGame}
+          toggleFullscreen={toggleFullscreen}
+        />
 
         <div className={'game-field__canvas-container'}>
           <canvas
