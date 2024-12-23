@@ -7,14 +7,15 @@ export const useGetCanvasSize = () => {
   });
 
   useEffect(() => {
-    const canvasContainer = document.querySelector('.game-field');
+    const canvasContainer = document.querySelector(
+      '.game-field__canvas-container',
+    );
     if (canvasContainer) {
       setCanvasSize({
         x: canvasContainer.clientWidth - 22,
-        y: canvasContainer.clientHeight - 104,
+        y: canvasContainer.clientHeight - 16,
       });
     }
   }, []);
-
   return [canvasSize.x, canvasSize.y];
 };

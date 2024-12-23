@@ -33,4 +33,28 @@ export {
   useSignInMutation,
   useSignUpMutation,
 } from './Slices/Api/Profile.api';
+export {
+  getEnemiesList,
+  getHitsCount,
+  getMaximumEnemiesCount,
+  getPlayer,
+} from './Slices/Game/Game.selector';
+export {
+  addEnemy,
+  deleteEnemy,
+  increaseHitsCount,
+  moveEnemy,
+  movePlayer,
+  setGameState,
+} from './Slices/Game/Game.slice';
+export { EnemyType } from './Types/Games.types';
+export type {
+  IGameInitState,
+  TBaseEnemy,
+  TBomb,
+  TEnemy,
+  TGameState,
+  TPirate,
+  TPlayer,
+} from './Types/Games.types';
 export type { IProfileDataState } from './Types/User.types';

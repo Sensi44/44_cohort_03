@@ -6,6 +6,7 @@ export {
   METHODS,
   USER_URL_PATH,
 } from './Api';
+export { MAX_ENEMY_SPEED } from './Game';
 export {
   changePasswordFormDefaultFormData,
   ChangePasswordTextFieldsKeys,

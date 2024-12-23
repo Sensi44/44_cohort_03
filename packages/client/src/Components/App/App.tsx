@@ -6,6 +6,7 @@ import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
+import { GameIntro } from '../GameIntro/GameIntro';
 import './App.scss';
 
 export const App = () => {
@@ -15,16 +16,49 @@ export const App = () => {
 
   const render = useRender(ctx);
   const update = useUpdate();
+  const handleRender = () => {
+    if (ctx) {
+      ctx.clearRect(0, 0, width, height);
+      render();
+    }
+  };
 
-  const { startGame, stopGame } = useGameLoop(update, render);
+  const { startGame, stopGame } = useGameLoop(update, handleRender);
 
   useEffect(() => {
-    startGame();
+    // startGame();
 
     return () => {
       stopGame();
     };
   }, [ctx]);
+
+  const toggleFullscreen = () => {
+    const elem = document.querySelector('.game-field__canvas');
+
+    if (!document.fullscreenElement) {
+      elem?.requestFullscreen().catch((err) => {
+        alert(
+          `Error attempting to enable fullscreen mode: ${err.message} (${err.name})`,
+        );
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.shiftKey && event.key === 'F11') {
+        toggleFullscreen();
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <article className={'game-page'}>
@@ -39,14 +73,21 @@ export const App = () => {
       <Menu />
 
       <section className={'game-field'}>
-        <DebugPanel onStart={startGame} onStop={stopGame} />
-
-        <canvas
-          className={'game-field__canvas'}
-          ref={canvasRef}
-          width={width}
-          height={height}
+        <DebugPanel
+          onStart={startGame}
+          onStop={stopGame}
+          toggleFullscreen={toggleFullscreen}
         />
+
+        <div className={'game-field__canvas-container'}>
+          <canvas
+            className={'game-field__canvas'}
+            ref={canvasRef}
+            width={width}
+            height={height}
+          />
+          <GameIntro onStart={startGame} />
+        </div>
       </section>
     </article>
   );

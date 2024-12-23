@@ -1,12 +1,28 @@
+import {
+  drawBackground,
+  drawEnemy,
+  drawFps,
+  drawHitsCount,
+  drawPlayer,
+} from '@RenderFunctions';
+import {
+  getEnemiesList,
+  getHitsCount,
+  getPlayer,
+  useAppSelector,
+} from '@Store';
 import type { TCanvas } from '@Types';
 
-import { testDrawFunction } from '@RenderFunctions';
-
 export const useRender = (ctx: TCanvas) => {
+  const player = useAppSelector(getPlayer);
+  const enemies = useAppSelector(getEnemiesList);
+  const hitsCount = useAppSelector(getHitsCount);
+
   return () => {
-    // todo сюда будут передавать функции на отрисовку всех необходимых сущностей игры
-    // drawPlayer(ctx);
-    // drawAsteroids(ctx);
-    testDrawFunction(ctx);
+    drawBackground(ctx);
+    drawPlayer(ctx, player);
+    drawFps(ctx);
+    drawHitsCount(ctx, hitsCount);
+    enemies.forEach((enemy) => drawEnemy(ctx, enemy));
   };
 };
