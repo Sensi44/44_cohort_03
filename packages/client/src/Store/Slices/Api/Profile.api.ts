@@ -114,7 +114,7 @@ export const ProfileApi = createApi({
     }),
     getServiceId: build.query<TServiceIdResponse, void>({
       query: () => {
-        const redirectUri = encodeURIComponent('http://localhost:3000');
+        const redirectUri = encodeURIComponent(window.location.origin);
         const queryData = `?redirect_uri=${redirectUri}`;
         return {
           url: `${OAUTH_URL_PATH}/yandex/service-id${queryData}`,

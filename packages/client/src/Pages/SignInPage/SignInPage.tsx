@@ -27,7 +27,7 @@ export const SignInPage = () => {
     if (code) {
       const oAuthData = {
         code: code,
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: window.location.origin,
       };
       oAuthSignIn(oAuthData)
         .unwrap()
@@ -52,7 +52,7 @@ export const SignInPage = () => {
 
   const handleOAuth = async () => {
     const serviceId = ServiceIdData?.service_id;
-    const redirectUri = 'http://localhost:3000';
+    const redirectUri = window.location.origin;
 
     const queryParams = `response_type=code&client_id=${serviceId}&redirect_uri=${redirectUri}`;
     window.location.href = `https://oauth.yandex.ru/authorize?${queryParams}`;
