@@ -28,8 +28,10 @@ export {
   useChangeAvatarMutation,
   useChangePasswordMutation,
   useEditUserMutation,
+  useGetServiceIdQuery,
   useGetUserInfoQuery,
   useLogoutMutation,
+  useOAuthSignInMutation,
   useSignInMutation,
   useSignUpMutation,
 } from './Slices/Api/Profile.api';

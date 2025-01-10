@@ -9,6 +9,7 @@ export enum METHODS {
 
 export const AUTH_URL_PATH = '/auth';
 export const USER_URL_PATH = '/user';
+export const OAUTH_URL_PATH = '/oauth';
 
 export const baseTransformErrorResponse = (error: {
   data: { reason: string };
