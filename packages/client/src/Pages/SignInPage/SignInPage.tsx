@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { ErrorNotification, SignInForm } from '@Components';
 import { Routes } from '@Constants';
@@ -13,6 +13,7 @@ import {
 import type { IUserLogin } from '@Types';
 
 export const SignInPage = () => {
+  const location = useLocation();
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const [signIn, { isLoading }] = useSignInMutation();
@@ -33,7 +34,7 @@ export const SignInPage = () => {
         .unwrap()
         .then(() => navigate(Routes.Main))
         .catch((error) => {
-          setErrorMessage(`Не удалось авторизоваться ${error}`);
+          setErrorMessage(`Не удалось авторизоваться через Яндекс: ${error}`);
         });
     }
   }, [location.search]);
