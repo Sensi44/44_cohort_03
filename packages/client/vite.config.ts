@@ -13,6 +13,8 @@ export default defineConfig({
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
+    __EXTERNAL_SERVER_URL__: JSON.stringify(process.env.EXTERNAL_SERVER_URL),
+    __INTERNAL_SERVER_URL__: JSON.stringify(process.env.INTERNAL_SERVER_URL),
   },
   plugins: [react()],
   resolve: {
@@ -29,5 +31,8 @@ export default defineConfig({
       '@ServiceWorker': resolve(__dirname, 'src/ServiceWorker'),
       // Добавим другие по мере необходимости
     },
+  },
+  ssr: {
+    noExternal: ['@mui/icons-material'],
   },
 });

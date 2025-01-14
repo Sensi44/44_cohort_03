@@ -4,14 +4,14 @@ import asteroidImg from '../../src/Assets/img/asteroid.png';
 import bombImg from '../../src/Assets/img/bomb.png';
 import pirateImg from '../../src/Assets/img/pirate.png';
 
-const asteroidImage = new Image();
-asteroidImage.src = asteroidImg;
-const pirateImage = new Image();
-pirateImage.src = pirateImg;
-const bombImage = new Image();
-bombImage.src = bombImg;
-
 export const drawEnemy = (ctx: TCanvas, enemy: TEnemy) => {
+  const asteroidImage = new Image();
+  asteroidImage.src = asteroidImg;
+  const pirateImage = new Image();
+  pirateImage.src = pirateImg;
+  const bombImage = new Image();
+  bombImage.src = bombImg;
+
   if (ctx) {
     const getImage = (enemyType: EnemyType) => {
       switch (enemyType) {
