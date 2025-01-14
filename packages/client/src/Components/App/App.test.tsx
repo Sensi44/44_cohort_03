@@ -18,3 +18,5 @@ test('Example test', async () => {
   // expect(screen.getByText(appContent)).toBeDefined();
   expect(appContent).toBeTruthy();
 });
+
+export {};
