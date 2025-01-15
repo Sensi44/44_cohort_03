@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 import { defineConfig } from 'vite';
 
 dotenv.config();
@@ -16,7 +16,13 @@ export default defineConfig({
     __EXTERNAL_SERVER_URL__: JSON.stringify(process.env.EXTERNAL_SERVER_URL),
     __INTERNAL_SERVER_URL__: JSON.stringify(process.env.INTERNAL_SERVER_URL),
   },
+  build: {
+    outDir: join(__dirname, 'dist/client'),
+  },
   plugins: [react()],
+  ssr: {
+    format: 'cjs',
+  },
   resolve: {
     alias: {
       '@Components': resolve(__dirname, 'src/Components'),
@@ -31,8 +37,5 @@ export default defineConfig({
       '@ServiceWorker': resolve(__dirname, 'src/ServiceWorker'),
       // Добавим другие по мере необходимости
     },
-  },
-  ssr: {
-    noExternal: ['@mui/icons-material'],
   },
 });

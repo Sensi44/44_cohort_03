@@ -1,3 +1,9 @@
+import { store } from '@Store';
+import { render, screen } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import { App } from './App';
+
 const appContent = 'Космолёт с бобрами';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -7,16 +13,12 @@ global.fetch = jest.fn(() =>
 );
 
 test('Example test', async () => {
-  //TODO Поправить тест
-  // render(
-  //   <MemoryRouter>
-  //     <Provider store={store}>
-  //       <App />
-  //     </Provider>
-  //   </MemoryRouter>,
-  // );
-  // expect(screen.getByText(appContent)).toBeDefined();
-  expect(appContent).toBeTruthy();
+  render(
+    <MemoryRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MemoryRouter>,
+  );
+  expect(screen.getByText(appContent)).toBeDefined();
 });
-
-export {};
