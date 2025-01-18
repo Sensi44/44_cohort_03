@@ -4,6 +4,7 @@ export {
   BASE_URL,
   LEADER_BORD_PARAMS,
   METHODS,
+  OAUTH_URL_PATH,
   USER_URL_PATH,
 } from './Api';
 export { MAX_ENEMY_SPEED } from './Game';
