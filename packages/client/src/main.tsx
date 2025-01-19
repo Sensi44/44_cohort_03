@@ -1,25 +1,13 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { green, purple } from '@mui/material/colors';
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { App } from '@Components';
-import { Routes } from '@Constants';
-import {
-  ErrorPage,
-  ForumPage,
-  LeaderBordPage,
-  NotFoundPage,
-  ProfilePage,
-  SignInPage,
-  SignUpPage,
-} from '@Pages';
 import { startServiceWorker } from '@ServiceWorker';
 import { store } from '@Store';
-
-import { PrivateRoutes } from './privateRoutes';
+import { routes } from './routes';
 
 startServiceWorker();
 
@@ -34,53 +22,18 @@ const theme = createTheme({
   },
 });
 
-const router = createBrowserRouter(
-  [
-    {
-      path: Routes.SignIn,
-      element: <SignInPage />,
-    },
-    {
-      path: Routes.SignUp,
-      element: <SignUpPage />,
-    },
-    {
-      element: <PrivateRoutes />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: Routes.Main,
-          element: <App />,
-          errorElement: <ErrorPage />,
-        },
-        { path: Routes.Forum, element: <ForumPage /> },
-        {
-          path: Routes.LeaderBord,
-          element: <LeaderBordPage />,
-        },
-        {
-          path: Routes.Profile,
-          element: <ProfilePage />,
-        },
-      ],
-    },
-    {
-      path: '*',
-      element: <NotFoundPage />,
-    },
-  ],
-  {
-    future: {
-      v7_fetcherPersist: true,
-      v7_relativeSplatPath: true,
-      v7_partialHydration: true,
-      v7_normalizeFormMethod: true,
-      v7_skipActionErrorRevalidation: true,
-    },
+const router = createBrowserRouter(routes, {
+  future: {
+    v7_fetcherPersist: true,
+    v7_relativeSplatPath: true,
+    v7_partialHydration: true,
+    v7_normalizeFormMethod: true,
+    v7_skipActionErrorRevalidation: true,
   },
-);
+});
 
-createRoot(document.getElementById('root') as HTMLElement).render(
+hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
