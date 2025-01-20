@@ -22,11 +22,12 @@ export const routes = [
     element: <SignUpPage />,
   },
   {
+    path: Routes.Main,
     element: <PrivateRoutes />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: Routes.Main,
+        index: true,
         element: <App />,
         errorElement: <ErrorPage />,
       },

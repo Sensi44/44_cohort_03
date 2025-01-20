@@ -8,13 +8,22 @@ import {
   StaticRouterProvider,
 } from 'react-router-dom/server';
 
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { rootReducer } from '@Store';
 import { createFetchRequest } from './entry-service.utils';
 import { routes } from './routes';
-import { rootReducer } from './Store/Slices';
 import { LeaderBordApi } from './Store/Slices/Api/LeaderBord.api';
 import { ProfileApi } from './Store/Slices/Api/Profile.api';
+import { createEmotionCache } from './Utils/createEmotionCache';
 
 export const render = async (req: ExpressRequest) => {
+  const cache = createEmotionCache();
+
+  const { extractCriticalToChunks, constructStyleTagsFromChunks } =
+    createEmotionServer(cache);
+  // Render the component to a string.
+
   // 1.
   const { query, dataRoutes } = createStaticHandler(routes);
   // 2.
@@ -40,13 +49,21 @@ export const render = async (req: ExpressRequest) => {
   // 6.
   const router = createStaticRouter(dataRoutes, context);
 
-  // 7.
-  return {
-    html: ReactDOM.renderToString(
+  const html = ReactDOM.renderToString(
+    <CacheProvider value={cache}>
       <Provider store={store}>
         <StaticRouterProvider router={router} context={context} />
-      </Provider>,
-    ),
+      </Provider>
+    </CacheProvider>,
+  );
+
+  const emotionChunks = extractCriticalToChunks(html);
+  const emotionCss = constructStyleTagsFromChunks(emotionChunks);
+
+  // 7.
+  return {
+    html,
+    css: emotionCss,
     initialState: store.getState(),
   };
 };

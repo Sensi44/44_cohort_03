@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express, { Request as ExpressRequest } from 'express';
 import fs from 'fs/promises';
@@ -6,12 +7,13 @@ import serialize from 'serialize-javascript';
 import { createServer as createViteServer, ViteDevServer } from 'vite';
 dotenv.config();
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
 const isDev = process.env.NODE_ENV === 'development';
 
 async function createServer() {
   const app = express();
+  app.use(cookieParser());
 
   let vite: ViteDevServer | undefined;
   if (isDev) {
@@ -34,7 +36,7 @@ async function createServer() {
     try {
       let render: (
         req: ExpressRequest,
-      ) => Promise<{ html: string; initialState: unknown }>;
+      ) => Promise<{ html: string; initialState: unknown; css: string }>;
       let template: string;
 
       if (vite) {
@@ -70,20 +72,23 @@ async function createServer() {
       }
 
       // Получаем HTML-строку из JSX
-      const { html: appHtml, initialState } = await render(req);
+      const { html: appHtml, initialState, css } = await render(req);
 
       // Заменяем комментарий на сгенерированную HTML-строку
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(
-        `<!--ssr-initial-state-->`,
-        `<script>window.APP_INITIAL_STATE = ${serialize(initialState, {
-          isJSON: true,
-        })}</script>`,
-      );
+      const html = template
+        .replace(`<!--ssr-css-outlet-->`, css)
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(
+          `<!--ssr-initial-state-->`,
+          `<script>window.APP_INITIAL_STATE = ${serialize(initialState, {
+            isJSON: true,
+          })}</script>`,
+        );
 
       // Завершаем запрос и отдаём HTML-страницу
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
-      // vite.ssrFixStacktrace(e as Error);
+      vite.ssrFixStacktrace(e as Error);
       next(e);
     }
   });

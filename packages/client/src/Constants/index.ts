@@ -7,6 +7,7 @@ export {
   OAUTH_URL_PATH,
   USER_URL_PATH,
 } from './Api';
+export { config } from './Config';
 export { MAX_ENEMY_SPEED } from './Game';
 export {
   changePasswordFormDefaultFormData,

@@ -12,6 +12,12 @@ global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') }),
 );
 
+jest.mock('../../Constants/Config', () => ({
+  config: {
+    isDev: true,
+  },
+}));
+
 test('Example test', async () => {
   render(
     <MemoryRouter>

@@ -5,11 +5,10 @@ import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { startServiceWorker } from '@ServiceWorker';
+import { CacheProvider } from '@emotion/react';
 import { store } from '@Store';
 import { routes } from './routes';
-
-startServiceWorker();
+import { createEmotionCache } from './Utils/createEmotionCache';
 
 const theme = createTheme({
   palette: {
@@ -32,14 +31,21 @@ const router = createBrowserRouter(routes, {
   },
 });
 
+const cache = createEmotionCache();
+
 hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <RouterProvider router={router} future={{ v7_startTransition: true }} />
-      </Provider>
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <CssBaseline />
+          <RouterProvider
+            router={router}
+            future={{ v7_startTransition: true }}
+          />
+        </Provider>
+      </ThemeProvider>
+    </CacheProvider>
   </StrictMode>,
 );
