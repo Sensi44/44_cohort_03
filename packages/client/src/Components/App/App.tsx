@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { DebugPanel, Menu } from '@Components';
+import { DebugPanel, InactivityWarning, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
@@ -97,6 +97,7 @@ export const App = () => {
           <GameIntro onStart={startGame} />
         </div>
       </section>
+      <InactivityWarning stopGame={stopGame} />
     </article>
   );
 };
