@@ -6,10 +6,18 @@ import { DebugPanel, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
+import { config } from '@Constants';
+import { startServiceWorker, stopRegistrationWorker } from '@ServiceWorker';
 import { GameIntro } from '../GameIntro/GameIntro';
 import './App.scss';
 
 export const App = () => {
+  if (config.isDev) {
+    startServiceWorker();
+  } else {
+    stopRegistrationWorker();
+  }
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useGetCanvasSize();
   const ctx = useSetCanvasContext(canvasRef);

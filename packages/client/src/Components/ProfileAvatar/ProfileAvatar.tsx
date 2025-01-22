@@ -3,6 +3,7 @@ import PortraitIcon from '@mui/icons-material/Portrait';
 import { Avatar, Badge, Button, styled } from '@mui/material';
 
 import { BASE_URL } from '@Constants';
+import { ChangeEvent } from 'react';
 import type { IProfileAvatarProps } from './ProfileAvatar.props';
 
 const VisuallyHiddenInput = styled('input')({
@@ -39,7 +40,7 @@ export const ProfileAvatar = ({
           <VisuallyHiddenInput
             type='file'
             accept='.jpeg, .jpg, .png, .gif'
-            onChange={(event: InputEvent) =>
+            onChange={(event: ChangeEvent) =>
               whenChangeAvatar((event.target as HTMLInputElement).files?.[0])
             }
           />
