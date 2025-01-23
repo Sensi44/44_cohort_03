@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import {
+  INACTIVITY_STOP_THRESHOLD,
+  INACTIVITY_WARNING_THRESHOLD,
+} from '@Constants';
+
 import type { FC } from 'react';
 
 interface InactivityWarningProps {
@@ -8,25 +13,25 @@ interface InactivityWarningProps {
 
 export const InactivityWarning: FC<InactivityWarningProps> = ({ stopGame }) => {
   const [inactivityTime, setInactivityTime] = useState(0);
-  const [warningShown, setWarningShown] = useState(false);
-  const [permissionGranted, setPermissionGranted] = useState(false);
+  const [isShowWarning, setIsShowWarning] = useState(false);
+  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
   const [gameStopped, setGameStopped] = useState(false);
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (Notification.permission === 'granted') {
-      setPermissionGranted(true);
+      setIsPermissionGranted(true);
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          setPermissionGranted(true);
+          setIsPermissionGranted(true);
         }
       });
     }
 
     const resetInactivityTimer = () => {
       setInactivityTime(0);
-      setWarningShown(false);
+      setIsShowWarning(false);
       setGameStopped(false);
     };
 
@@ -36,11 +41,11 @@ export const InactivityWarning: FC<InactivityWarningProps> = ({ stopGame }) => {
       }
       setInactivityTime((prev) => prev + 1);
 
-      if (inactivityTime >= 150 && !warningShown) {
+      if (inactivityTime >= INACTIVITY_WARNING_THRESHOLD && !isShowWarning) {
         showWarning();
       }
 
-      if (inactivityTime >= 180 && !gameStopped) {
+      if (inactivityTime >= INACTIVITY_STOP_THRESHOLD && !gameStopped) {
         stopGame();
         setGameStopped(true);
         if (intervalId) {
@@ -50,8 +55,8 @@ export const InactivityWarning: FC<InactivityWarningProps> = ({ stopGame }) => {
     };
 
     const showWarning = () => {
-      setWarningShown(true);
-      if (permissionGranted) {
+      setIsShowWarning(true);
+      if (isPermissionGranted) {
         const notification = new Notification('Внимание!', {
           body: 'Вы давно не совершали действий. Игра будет остановлена через 30 секунд.',
         });
@@ -75,7 +80,7 @@ export const InactivityWarning: FC<InactivityWarningProps> = ({ stopGame }) => {
       window.removeEventListener('keydown', resetInactivityTimer);
       window.removeEventListener('click', resetInactivityTimer);
     };
-  }, [inactivityTime, warningShown, permissionGranted, gameStopped]);
+  }, [inactivityTime, isShowWarning, isPermissionGranted, gameStopped]);
 
   return null;
 };
