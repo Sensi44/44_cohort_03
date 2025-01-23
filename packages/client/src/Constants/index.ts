@@ -5,10 +5,11 @@ export {
   LEADER_BORD_PARAMS,
   METHODS,
   OAUTH_URL_PATH,
+  RATING_FIELD_NAME,
   USER_URL_PATH,
 } from './Api';
 export { config } from './Config';
-export { MAX_ENEMY_SPEED } from './Game';
+export { GAMING_SESSION_TIME, MAX_ENEMY_SPEED } from './Game';
 export {
   changePasswordFormDefaultFormData,
   ChangePasswordTextFieldsKeys,

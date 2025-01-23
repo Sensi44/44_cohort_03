@@ -94,7 +94,7 @@ export const App = () => {
             width={width}
             height={height}
           />
-          <GameIntro onStart={startGame} />
+          <GameIntro onStart={startGame} onStop={stopGame} />
         </div>
       </section>
     </article>

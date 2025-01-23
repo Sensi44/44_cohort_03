@@ -31,6 +31,9 @@ export const gameSlice = createSlice({
     increaseHitsCount(state) {
       state.hitsCount = state.hitsCount + 1;
     },
+    resetHitsCount(state) {
+      state.hitsCount = 0;
+    },
     addEnemy(state, action: PayloadAction<TEnemy>) {
       state.enemies.push(action.payload);
     },
@@ -61,4 +64,5 @@ export const {
   moveEnemy,
   deleteEnemy,
   increaseHitsCount,
+  resetHitsCount,
 } = gameSlice.actions;

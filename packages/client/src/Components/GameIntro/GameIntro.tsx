@@ -1,9 +1,18 @@
+import { GAMING_SESSION_TIME } from '@Constants';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import {
+  getHitsCount,
+  resetHitsCount,
+  useAppDispatch,
+  useAppSelector,
+  useGetUserInfoQuery,
+  useSendScoreMutation,
+} from '@Store';
+import { useEffect, useRef, useState } from 'react';
 import { GameIntroProps } from './GameIntro.props';
 
 const BUTTON_WIDTH = 150;
@@ -12,10 +21,32 @@ const BUTTON_HEIGHT = 42;
 const TIMER_WIDTH = 51;
 const TIMER_HEIGHT = 112;
 
-export const GameIntro = ({ onStart }: GameIntroProps) => {
+export const GameIntro = ({ onStart, onStop }: GameIntroProps) => {
+  const dispatch = useAppDispatch();
+  const hitsCount = useAppSelector(getHitsCount);
+
   const [showButton, setShowButton] = useState(true);
   const [showTimer, setShowTimer] = useState(false);
   const [timer, setTimer] = useState(3);
+
+  const { data: userInfo } = useGetUserInfoQuery();
+  const [sendScore] = useSendScoreMutation();
+
+  const countRef = useRef(hitsCount);
+  useEffect(() => {
+    countRef.current = hitsCount;
+  }, [hitsCount]);
+
+  const gamingSession = () => {
+    setTimeout(() => {
+      onStop();
+      if (userInfo?.login)
+        sendScore({ name: userInfo.login, beaversScore: countRef.current });
+      setTimer(3);
+      setShowButton(true);
+      dispatch(resetHitsCount());
+    }, GAMING_SESSION_TIME);
+  };
 
   const handleClick = () => {
     setShowButton(false);
@@ -26,6 +57,7 @@ export const GameIntro = ({ onStart }: GameIntroProps) => {
           clearInterval(intervalId);
           setShowTimer(false);
           onStart();
+          gamingSession();
           return 0;
         }
         return prevTimer - 1;

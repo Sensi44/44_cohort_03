@@ -34,7 +34,10 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 export { rootReducer } from './Slices';
-export { useGetLeaderBordQuery } from './Slices/Api/LeaderBord.api';
+export {
+  useGetLeaderBordQuery,
+  useSendScoreMutation,
+} from './Slices/Api/LeaderBord.api';
 export {
   useChangeAvatarMutation,
   useChangePasswordMutation,
@@ -58,6 +61,7 @@ export {
   increaseHitsCount,
   moveEnemy,
   movePlayer,
+  resetHitsCount,
   setGameState,
 } from './Slices/Game/Game.slice';
 export { EnemyType } from './Types/Games.types';
