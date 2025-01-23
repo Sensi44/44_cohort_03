@@ -31,7 +31,7 @@ export const App = () => {
     }
   };
 
-  const { startGame, stopGame } = useGameLoop(update, handleRender);
+  const { startGame, stopGame, currentFps } = useGameLoop(update, handleRender);
 
   useEffect(() => {
     // startGame();
@@ -88,6 +88,7 @@ export const App = () => {
         />
 
         <div className={'game-field__canvas-container'}>
+          <div className={'fps-count'}>FPS: {currentFps}</div>
           <canvas
             className={'game-field__canvas'}
             ref={canvasRef}
