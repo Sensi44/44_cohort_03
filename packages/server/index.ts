@@ -1,20 +1,35 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 import express from 'express';
-import { createClientAndConnect } from './db';
+
+import { createCommentRoutes } from './Api/CommentAPI';
+import { createCommentReplyRoutes } from './Api/CommentReplyAPI';
+import { createTopicRoutes } from './Api/TopicAPI';
+import { requireAuth } from './Middleware/RequireAuth';
+import { sanitizeInput } from './Middleware/SanitizeInput';
+import { createClientAndConnect } from './PGClient';
+import { syncSequelize } from './Sequelize';
 
 const app = express();
 app.use(cors());
+app.use(sanitizeInput);
 const port = Number(process.env.SERVER_PORT) || 3001;
 
-createClientAndConnect();
+const router = express.Router();
 
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)');
-});
+createClientAndConnect().then(() => {
+  syncSequelize().then(() => {
+    createTopicRoutes(router);
+    createCommentRoutes(router);
+    createCommentReplyRoutes(router);
 
-app.listen(port, () => {
-  console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+    app.use('/api', requireAuth, router);
+
+    app.listen(port, () => {
+      console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+    });
+  });
 });
