@@ -1,17 +1,10 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 
 import Comment from './Comment';
-
-interface ITopicAttributes {
-  id: number;
-  title: string;
-  created_at: Date;
-  updated_at: Date;
-}
-
-interface ITopicCreationAttributes {
-  title: string;
-}
+import type {
+  ITopicAttributes,
+  ITopicCreationAttributes,
+} from './Types/Topic.types';
 
 @Table
 export default class Topic extends Model<

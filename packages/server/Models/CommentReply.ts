@@ -9,21 +9,10 @@ import {
 } from 'sequelize-typescript';
 
 import Comment from './Comment';
-
-interface ICommentReplyAttributes {
-  id: number;
-  created_at: Date;
-  updated_at: Date;
-  comment_id: string;
-  text: string;
-  parent_reply_id: number | null;
-}
-
-interface ICommentReplyCreationAttributes {
-  comment_id: number;
-  text: string;
-  parent_reply_id?: number | null;
-}
+import type {
+  ICommentReplyAttributes,
+  ICommentReplyCreationAttributes,
+} from './Types/CommentReply.types';
 
 @Table
 export default class CommentReply extends Model<
