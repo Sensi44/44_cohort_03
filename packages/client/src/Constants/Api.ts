@@ -15,8 +15,10 @@ export const baseTransformErrorResponse = (error: {
   data: { reason: string };
 }) => error.data?.reason ?? '';
 
+export const RATING_FIELD_NAME = 'beaversScore';
+
 export const LEADER_BORD_PARAMS = {
-  ratingFieldName: 'score',
+  ratingFieldName: RATING_FIELD_NAME,
   cursor: 0,
-  limit: 20,
+  limit: 10,
 };
