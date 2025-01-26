@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 
+import { Routes } from '../Constants/Routes';
 import TopicService from '../RestServices/TopicService';
 
 class TopicAPI {
@@ -20,5 +21,5 @@ export const createTopicRoutes = (router: Router): void => {
   const topicRouter = Router();
   topicRouter.post('', TopicAPI.create);
 
-  router.use('/topic', topicRouter);
+  router.use(Routes.Topic, topicRouter);
 };

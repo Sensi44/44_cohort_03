@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 
+import { Routes } from '../Constants/Routes';
 import CommentService from '../RestServices/CommentService';
 
 class CommentAPI {
@@ -20,5 +21,5 @@ export const createCommentRoutes = (router: Router): void => {
   const commentRouter = Router();
   commentRouter.post('', CommentAPI.create);
 
-  router.use('/comment', commentRouter);
+  router.use(Routes.Comment, commentRouter);
 };
