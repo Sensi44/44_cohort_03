@@ -1,7 +1,9 @@
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Request, Response, Router } from 'express';
 
 import { Routes } from '../Constants/Routes';
 import logger from '../logger';
+import type { AuthRequest } from '../Middleware/Types/AuthRequest.type';
 import CommentService from '../RestServices/CommentService';
 
 class CommentAPI {
@@ -9,7 +11,11 @@ class CommentAPI {
     const { body } = request;
 
     try {
-      await CommentService.create(body);
+      const dataForCreating = {
+        ...body,
+        user_id: (request as AuthRequest).user.id,
+      };
+      await CommentService.create(dataForCreating);
       response.status(201).send({ message: 'Comment created' });
     } catch (error) {
       logger.error(error);
@@ -20,7 +26,15 @@ class CommentAPI {
 
 export const createCommentRoutes = (router: Router): void => {
   const commentRouter = Router();
-  commentRouter.post('', CommentAPI.create);
+
+  const createCommentSchema = {
+    [Segments.BODY]: Joi.object({
+      topic_id: Joi.number().required(),
+      text: Joi.string().required(),
+    }),
+  };
+
+  commentRouter.post('', celebrate(createCommentSchema), CommentAPI.create);
 
   router.use(Routes.Comment, commentRouter);
 };

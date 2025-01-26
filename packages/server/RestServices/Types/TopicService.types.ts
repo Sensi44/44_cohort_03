@@ -5,4 +5,5 @@ export interface IFindTopicRequest {
 
 export interface ICreateTopicRequest {
   title: string;
+  user_id: number;
 }

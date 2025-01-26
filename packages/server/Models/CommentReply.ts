@@ -13,6 +13,7 @@ import type {
   ICommentReplyAttributes,
   ICommentReplyCreationAttributes,
 } from './Types/CommentReply.types';
+import User from './User';
 
 @Table
 export default class CommentReply extends Model<
@@ -22,6 +23,10 @@ export default class CommentReply extends Model<
   @ForeignKey(() => Comment)
   @Column(DataType.INTEGER)
   comment_id: number;
+
+  @ForeignKey(() => User)
+  @Column(DataType.INTEGER)
+  user_id: number;
 
   @Column(DataType.STRING)
   text: string;
@@ -35,4 +40,7 @@ export default class CommentReply extends Model<
 
   @HasMany(() => CommentReply, 'parent_reply_id')
   childReplies: CommentReply[];
+
+  @BelongsTo(() => User)
+  user: User;
 }

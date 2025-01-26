@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+import { errors } from 'celebrate';
 import express from 'express';
 
 import { createCommentRoutes } from './Api/CommentAPI';
@@ -17,6 +18,8 @@ import { syncSequelize } from './Sequelize';
 const app = express();
 app.use(cors());
 app.use(sanitizeInput);
+app.use(errors());
+app.use(express.json());
 const port = Number(process.env.SERVER_PORT) || 3001;
 
 const router = express.Router();

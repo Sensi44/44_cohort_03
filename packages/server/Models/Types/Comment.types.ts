@@ -9,4 +9,5 @@ export interface ICommentAttributes {
 export interface ICommentCreationAttributes {
   topic_id: number;
   text: string;
+  user_id: number;
 }

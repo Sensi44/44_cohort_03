@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+
 import logger from '../logger';
+import type { AuthRequest } from './Types/AuthRequest.type';
 
 export const requireAuth = (
   request: Request,
@@ -15,8 +17,11 @@ export const requireAuth = (
   }
 
   try {
-    // Логика проверки токена
+    // Здесь должны быть логика проверки токена
     logger.info('Authorization Token: ', token);
+
+    // Заглушка получения user_id из токена
+    (request as AuthRequest).user = { id: 1 };
 
     next();
   } catch (err) {

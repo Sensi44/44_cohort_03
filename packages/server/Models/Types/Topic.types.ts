@@ -7,4 +7,5 @@ export interface ITopicAttributes {
 
 export interface ITopicCreationAttributes {
   title: string;
+  user_id: number;
 }
