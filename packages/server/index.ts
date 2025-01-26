@@ -8,6 +8,7 @@ import express from 'express';
 import { createCommentRoutes } from './Api/CommentAPI';
 import { createCommentReplyRoutes } from './Api/CommentReplyAPI';
 import { createTopicRoutes } from './Api/TopicAPI';
+import logger from './logger';
 import { requireAuth } from './Middleware/RequireAuth';
 import { sanitizeInput } from './Middleware/SanitizeInput';
 import { createClientAndConnect } from './PGClient';
@@ -29,7 +30,7 @@ createClientAndConnect().then(() => {
     app.use('/api', requireAuth, router);
 
     app.listen(port, () => {
-      console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+      logger.info(`  ➜ 🎸 Server is listening on port: ${port}`);
     });
   });
 });

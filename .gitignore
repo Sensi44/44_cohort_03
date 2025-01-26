@@ -4,3 +4,7 @@ node_modules/
 .vscode
 dist
 tmp
+
+# Log files
+error.log
+combined.log

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import logger from '../logger';
 
 export const requireAuth = (
   request: Request,
@@ -15,7 +16,7 @@ export const requireAuth = (
 
   try {
     // Логика проверки токена
-    console.log(`Authorization Token: ${token}`);
+    logger.info('Authorization Token: ', token);
 
     next();
   } catch (err) {

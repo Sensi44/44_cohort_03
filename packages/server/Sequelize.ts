@@ -1,5 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
+import logger from './logger';
+
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
 
@@ -19,8 +21,8 @@ export async function syncSequelize() {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
-    console.log('The database is synchronized successfully.');
+    logger.info('The database is synchronized successfully.');
   } catch (error) {
-    console.error('Unable to connect to the database:', error);
+    logger.error('Unable to connect to the database:', error);
   }
 }
