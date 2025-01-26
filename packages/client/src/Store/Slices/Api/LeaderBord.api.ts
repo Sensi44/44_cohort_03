@@ -30,7 +30,6 @@ export const LeaderBordApi = createApi({
     }),
 
     sendScore: build.mutation<void, TLeaderBordData>({
-      //
       query: (payload) => {
         return {
           url: `/leaderboard`,

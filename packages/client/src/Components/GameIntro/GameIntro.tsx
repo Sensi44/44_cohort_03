@@ -12,7 +12,7 @@ import {
   useGetUserInfoQuery,
   useSendScoreMutation,
 } from '@Store';
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { GameIntroProps } from './GameIntro.props';
 
 const BUTTON_WIDTH = 150;
@@ -21,7 +21,7 @@ const BUTTON_HEIGHT = 42;
 const TIMER_WIDTH = 51;
 const TIMER_HEIGHT = 112;
 
-export const GameIntro = ({ onStart, onStop }: GameIntroProps) => {
+export const GameIntro: FC<GameIntroProps> = ({ onStart, onStop }) => {
   const dispatch = useAppDispatch();
   const hitsCount = useAppSelector(getHitsCount);
 
