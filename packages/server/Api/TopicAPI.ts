@@ -17,8 +17,8 @@ class TopicAPI {
 }
 
 export const createTopicRoutes = (router: Router): void => {
-  const themesRouter = Router();
-  themesRouter.post('', TopicAPI.create);
+  const topicRouter = Router();
+  topicRouter.post('', TopicAPI.create);
 
-  router.use('/topic', themesRouter);
+  router.use('/topic', topicRouter);
 };
