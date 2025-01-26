@@ -8,7 +8,11 @@ export {
   USER_URL_PATH,
 } from './Api';
 export { config } from './Config';
-export { MAX_ENEMY_SPEED } from './Game';
+export {
+  INACTIVITY_STOP_THRESHOLD,
+  INACTIVITY_WARNING_THRESHOLD,
+  MAX_ENEMY_SPEED,
+} from './Game';
 export {
   changePasswordFormDefaultFormData,
   ChangePasswordTextFieldsKeys,
