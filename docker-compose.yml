@@ -10,7 +10,7 @@ services:
         CLIENT_PORT: ${CLIENT_PORT}
     restart: always
     ports:
-      - '${CLIENT_PORT}:80'
+      - '${CLIENT_PORT}:${CLIENT_PORT}'
     environment:
       - INTERNAL_SERVER_URL=${INTERNAL_SERVER_URL}
       - EXTERNAL_SERVER_URL=${EXTERNAL_SERVER_URL}
@@ -26,14 +26,15 @@ services:
     restart: always
     ports:
       - '${SERVER_PORT}:${SERVER_PORT}'
-    environment:
-      SERVER_PORT: ${SERVER_PORT}
+    env_file:
+      - .env
     depends_on:
       - postgres
     networks:
       - postgres
 
   postgres:
+    container_name: beavers-postgres
     image: postgres:14
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
