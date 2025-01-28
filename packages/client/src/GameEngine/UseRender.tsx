@@ -1,7 +1,6 @@
 import {
   drawBackground,
   drawEnemy,
-  drawFps,
   drawHitsCount,
   drawPlayer,
 } from '@RenderFunctions';
@@ -21,7 +20,6 @@ export const useRender = (ctx: TCanvas) => {
   return () => {
     drawBackground(ctx);
     drawPlayer(ctx, player);
-    drawFps(ctx);
     drawHitsCount(ctx, hitsCount);
     enemies.forEach((enemy) => drawEnemy(ctx, enemy));
   };

@@ -1,6 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { BASE_URL, LEADER_BORD_PARAMS, METHODS } from '@Constants';
+import {
+  baseTransformErrorResponse,
+  BASE_URL,
+  LEADER_BORD_PARAMS,
+  METHODS,
+  RATING_FIELD_NAME,
+} from '@Constants';
 import { TLeaderBordData, TLeaderBordResponse } from '@Types';
 import { axiosBaseQuery } from '@Utils';
 
@@ -11,7 +17,7 @@ export const LeaderBordApi = createApi({
     getLeaderBord: build.query<TLeaderBordData[], void>({
       query: () => {
         return {
-          url: `/leaderboard/beavers`,
+          url: `/leaderboard/all`,
           method: METHODS.POST,
           data: LEADER_BORD_PARAMS,
         };
@@ -22,7 +28,21 @@ export const LeaderBordApi = createApi({
         return response?.map((obj) => obj.data);
       },
     }),
+
+    sendScore: build.mutation<void, TLeaderBordData>({
+      query: (payload) => {
+        return {
+          url: `/leaderboard`,
+          method: METHODS.POST,
+          data: {
+            data: payload,
+            ratingFieldName: RATING_FIELD_NAME,
+          },
+        };
+      },
+      transformErrorResponse: baseTransformErrorResponse,
+    }),
   }),
 });
 
-export const { useGetLeaderBordQuery } = LeaderBordApi;
+export const { useGetLeaderBordQuery, useSendScoreMutation } = LeaderBordApi;

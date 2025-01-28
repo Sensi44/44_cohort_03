@@ -1,1 +1,4 @@
 export const MAX_ENEMY_SPEED = 15;
+export const GAMING_SESSION_TIME = 60000;
+export const INACTIVITY_WARNING_THRESHOLD = 150;
+export const INACTIVITY_STOP_THRESHOLD = 180;

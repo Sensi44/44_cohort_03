@@ -1,3 +1,4 @@
-export interface GameIntroProps {
+export type GameIntroProps = {
   onStart: () => void;
-}
+  onStop: () => void;
+};

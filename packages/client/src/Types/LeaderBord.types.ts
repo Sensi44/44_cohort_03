@@ -1,3 +1,5 @@
+import { RATING_FIELD_NAME } from '@Constants';
+
 export type TLeaderBordParams = {
   ratingFieldName: string;
   cursor: number;
@@ -6,12 +8,15 @@ export type TLeaderBordParams = {
 
 export type TLeaderBordData = {
   name: string;
-  score: number;
+  beaversScore: number;
 };
 
 export type TLeaderBordResponse = {
-  data: {
-    name: string;
-    score: number;
-  };
+  data: TLeaderBordData;
+};
+
+export const LEADER_BORD_PARAMS = {
+  ratingFieldName: RATING_FIELD_NAME,
+  cursor: 0,
+  limit: 10,
 };
