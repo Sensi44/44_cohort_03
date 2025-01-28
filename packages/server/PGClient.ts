@@ -1,5 +1,7 @@
 import { Client } from 'pg';
 
+import logger from './logger';
+
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env;
 
@@ -16,12 +18,12 @@ export const createClientAndConnect = async (): Promise<Client | null> => {
     await client.connect();
 
     const res = await client.query('SELECT NOW()');
-    console.log('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now);
+    logger.info('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now);
     client.end();
 
     return client;
   } catch (e) {
-    console.error(e);
+    logger.error(e);
   }
 
   return null;
