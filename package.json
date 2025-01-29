@@ -2,6 +2,7 @@
   "name": "client-server-template-with-vite",
   "private": true,
   "scripts": {
+    "start:docker": "node init.js && docker compose up",
     "bootstrap": "yarn && node init.js && lerna clean && yarn && lerna bootstrap",
     "build": "lerna run build",
     "dev:client": "lerna run dev  --scope=client",

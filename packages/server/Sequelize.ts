@@ -2,11 +2,16 @@ import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
 import logger from './logger';
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env;
+const {
+  POSTGRES_USER,
+  POSTGRES_HOST,
+  POSTGRES_PASSWORD,
+  POSTGRES_DB,
+  POSTGRES_PORT,
+} = process.env;
 
 const sequelizeOptions: SequelizeOptions = {
-  host: 'localhost',
+  host: POSTGRES_HOST,
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
