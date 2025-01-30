@@ -5,6 +5,7 @@ import { Routes } from '../Constants/Routes';
 import logger from '../logger';
 import type { AuthRequest } from '../Middleware/Types/AuthRequest.type';
 import CommentService from '../RestServices/CommentService';
+import TopicService from '../RestServices/TopicService';
 
 class CommentAPI {
   public static create = async (request: Request, response: Response) => {
@@ -15,6 +16,18 @@ class CommentAPI {
         ...body,
         user_id: (request as AuthRequest).user.id,
       };
+
+      const topicExists = await TopicService.find({ id: body.topic_id });
+
+      console.log(topicExists);
+
+      if (!topicExists) {
+        response
+          .status(404)
+          .send({ error: `Topic with id ${body.topic_id} not found` });
+        return;
+      }
+
       await CommentService.create(dataForCreating);
       response.status(201).send({ message: 'Comment created' });
     } catch (error) {
