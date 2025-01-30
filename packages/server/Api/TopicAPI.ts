@@ -22,6 +22,15 @@ class TopicAPI {
       response.status(500).send({ error: 'Failed to create topic' });
     }
   };
+
+  public static getAll = async (_request: Request, response: Response) => {
+    try {
+      const topics = await TopicService.getAll();
+      response.status(200).json({ topics });
+    } catch (error) {
+      response.status(500).send({ error: 'Error while getting topics' });
+    }
+  };
 }
 
 export const createTopicRoutes = (router: Router): void => {
@@ -34,6 +43,7 @@ export const createTopicRoutes = (router: Router): void => {
   };
 
   topicRouter.post('', celebrate(createTopicSchema), TopicAPI.create);
+  topicRouter.get('', celebrate(createTopicSchema), TopicAPI.getAll);
 
   router.use(Routes.Topic, topicRouter);
 };
