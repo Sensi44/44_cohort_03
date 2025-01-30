@@ -1,4 +1,11 @@
-import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  HasMany,
+  HasOne,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 
 import Comment from './Comment';
 import CommentReply from './CommentReply';
@@ -8,6 +15,7 @@ import type {
   IUserAttributes,
   IUserCreationAttributes,
 } from './Types/User.types';
+import UserTheme from './UserTheme';
 
 @Table({
   timestamps: false,
@@ -27,4 +35,7 @@ export default class User extends Model<
 
   @HasMany(() => Topic)
   topics: Topic[];
+
+  @HasOne(() => UserTheme)
+  theme: UserTheme;
 }
