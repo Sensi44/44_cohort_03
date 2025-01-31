@@ -11,7 +11,7 @@ class UserThemeService implements BaseRESTService {
   public find = async (data: IFindUserThemeRequest) => {
     return await UserTheme.findOne({
       where: {
-        user_id: `%${data.user_id}`,
+        user_id: data.user_id,
       },
     });
   };
