@@ -35,6 +35,15 @@ class CommentAPI {
       response.status(500).send({ error: 'Failed to create comment' });
     }
   };
+
+  public static getByTopic = async (request: Request, response: Response) => {
+    try {
+      const comments = await CommentService.find(request.body);
+      response.status(200).json({ comments });
+    } catch (error) {
+      response.status(500).send({ error: 'Error while getting comments' });
+    }
+  };
 }
 
 export const createCommentRoutes = (router: Router): void => {
@@ -48,6 +57,7 @@ export const createCommentRoutes = (router: Router): void => {
   };
 
   commentRouter.post('', celebrate(createCommentSchema), CommentAPI.create);
+  commentRouter.post('/topic', CommentAPI.getByTopic);
 
   router.use(Routes.Comment, commentRouter);
 };

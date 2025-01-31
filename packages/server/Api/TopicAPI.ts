@@ -43,7 +43,7 @@ export const createTopicRoutes = (router: Router): void => {
   };
 
   topicRouter.post('', celebrate(createTopicSchema), TopicAPI.create);
-  topicRouter.get('', celebrate(createTopicSchema), TopicAPI.getAll);
+  topicRouter.get('', TopicAPI.getAll);
 
   router.use(Routes.Topic, topicRouter);
 };

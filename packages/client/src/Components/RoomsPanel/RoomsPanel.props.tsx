@@ -1,9 +1,10 @@
 type TRooms = {
   id: number;
-  name: string;
+  title: string;
 };
 
 export type TRoomsPanelProps = {
   rooms: TRooms[];
-  setSelectedRoomId: (payload: number) => void;
+  setSelectedRoomId: (id: number) => void;
+  whenAddTopic: (name: string) => void;
 };

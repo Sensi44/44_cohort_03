@@ -6,6 +6,7 @@ export {
   METHODS,
   OAUTH_URL_PATH,
   RATING_FIELD_NAME,
+  SERVER_URL,
   USER_URL_PATH,
 } from './Api';
 export { config } from './Config';

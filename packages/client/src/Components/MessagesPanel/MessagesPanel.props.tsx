@@ -1,10 +1,11 @@
 export type TMessagesProps = {
   currentRoomMessages: TMessage[];
+  selectedRoomTitle: string;
+  whenCreateComment: (comment: string) => void;
 };
 
 export type TMessage = {
-  id: number;
   text: string;
-  user: string;
-  time: string;
+  user_id: number;
+  createdAt: string;
 };

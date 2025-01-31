@@ -5,6 +5,7 @@ import {
   type TypedUseSelectorHook,
 } from 'react-redux';
 import { rootReducer } from './Slices';
+import { ForumApi } from './Slices/Api/Forum.api';
 import { LeaderBordApi } from './Slices/Api/LeaderBord.api';
 import { ProfileApi } from './Slices/Api/Profile.api';
 
@@ -24,6 +25,7 @@ export const store = configureStore({
     getDefaultMiddleware().concat([
       ProfileApi.middleware,
       LeaderBordApi.middleware,
+      ForumApi.middleware,
     ]),
   devTools: true,
 });
@@ -34,6 +36,12 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 export { rootReducer } from './Slices';
+export {
+  useCreateCommentMutation,
+  useCreateTopicMutation,
+  useGetCommentsMutation,
+  useGetTopicsQuery,
+} from './Slices/Api/Forum.api';
 export {
   useGetLeaderBordQuery,
   useSendScoreMutation,
@@ -64,6 +72,12 @@ export {
   resetHitsCount,
   setGameState,
 } from './Slices/Game/Game.slice';
+export type {
+  IComment,
+  ICreateComment,
+  ITopic,
+  ITopicCreate,
+} from './Types/Forum.types';
 export { EnemyType } from './Types/Games.types';
 export type {
   IGameInitState,
