@@ -25,8 +25,11 @@ class UserThemeAPI {
       const dataForFind = {
         user_id: (request as AuthRequest).user.id,
       };
-      const result = await UserThemeService.find(dataForFind);
-      response.status(200).send(result);
+
+      const userTheme = await UserThemeService.find(dataForFind);
+      const theme = userTheme ? userTheme.theme : null;
+
+      response.status(200).send({ theme });
     } catch (error) {
       logger.error(error);
       response.status(500).send({ error: 'Failed to get UserTheme' });
@@ -41,7 +44,7 @@ class UserThemeAPI {
         ...body,
         user_id: (request as AuthRequest).user.id,
       };
-      await UserThemeService.find(dataForUpdate);
+      await UserThemeService.update(dataForUpdate);
       response.status(200).send({ message: 'UserTheme update' });
     } catch (error) {
       logger.error(error);
@@ -55,7 +58,7 @@ export const createUserThemeRoutes = (router: Router): void => {
 
   const updateUserThemeSchema = {
     [Segments.BODY]: Joi.object({
-      theme: Joi.string().min(3).max(5).required(),
+      theme: Joi.string().max(6).required(),
     }),
   };
 

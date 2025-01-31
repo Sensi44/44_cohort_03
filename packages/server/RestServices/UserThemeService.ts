@@ -9,19 +9,11 @@ import {
 
 class UserThemeService implements BaseRESTService {
   public find = async (data: IFindUserThemeRequest) => {
-    const user_id = { data };
-
-    const theme = await UserTheme.findOne({
+    return await UserTheme.findOne({
       where: {
-        user_id: `%${user_id}`,
+        user_id: `%${data.user_id}`,
       },
     });
-
-    if (theme) {
-      return theme.theme;
-    }
-
-    return null;
   };
 
   public create = async (data: ICreateUserThemeRequest) => {
@@ -29,15 +21,10 @@ class UserThemeService implements BaseRESTService {
   };
 
   public update = async (data: IUpdateUserThemeRequest) => {
-    const { user_id, theme } = data;
-    const model = await UserTheme.findOne({
-      where: {
-        user_id: `%${user_id}`,
-      },
-    });
-    if (!model) return null;
-    model.theme = theme;
-    return await model.save();
+    const userTheme = await this.find(data);
+    if (!userTheme) return null;
+    userTheme.theme = data.theme;
+    return await userTheme.save();
   };
 }
 
