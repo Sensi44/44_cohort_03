@@ -13,6 +13,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { rootReducer } from '@Store';
 import { createFetchRequest } from './entry-service.utils';
 import { routes } from './routes';
+import { ForumApi } from './Store/Slices/Api/Forum.api';
 import { LeaderBordApi } from './Store/Slices/Api/LeaderBord.api';
 import { ProfileApi } from './Store/Slices/Api/Profile.api';
 import { createEmotionCache } from './Utils/createEmotionCache';
@@ -43,6 +44,7 @@ export const render = async (req: ExpressRequest) => {
       getDefaultMiddleware().concat([
         ProfileApi.middleware,
         LeaderBordApi.middleware,
+        ForumApi.middleware,
       ]),
   });
 

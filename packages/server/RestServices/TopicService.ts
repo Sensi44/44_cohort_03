@@ -22,6 +22,10 @@ class TopicService implements BaseRESTService {
   public create = async (data: ICreateTopicRequest) => {
     return await Topic.create(data);
   };
+
+  public getAll = async () => {
+    return await Topic.findAll();
+  };
 }
 
 export default new TopicService();
