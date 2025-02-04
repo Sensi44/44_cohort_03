@@ -83,15 +83,6 @@ async function createServer() {
 
       const { html: appHtml, initialState, css } = await render(req);
 
-      // initialState.theme = themeName;
-      console.log(initialState);
-
-      // // Встраиваем данные в HTML
-      // const fullInitialState = {
-      //   ...initialState,
-      //   theme: themeName, // Убедимся, что тема передана клиенту
-      // };
-
       const html = template
         .replace(`<!--ssr-css-outlet-->`, css)
         .replace(`<!--ssr-outlet-->`, appHtml)
