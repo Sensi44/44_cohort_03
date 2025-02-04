@@ -1,16 +1,16 @@
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
+import { createTheme, ThemeProvider } from '@mui/material';
 import { configureStore } from '@reduxjs/toolkit';
+import { rootReducer } from '@Store';
 import { Request as ExpressRequest } from 'express';
-import ReactDOM from 'react-dom/server';
+import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import {
   createStaticHandler,
   createStaticRouter,
   StaticRouterProvider,
 } from 'react-router-dom/server';
-
-import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
-import { rootReducer } from '@Store';
 import { createFetchRequest } from './entry-service.utils';
 import { routes } from './routes';
 import { ForumApi } from './Store/Slices/Api/Forum.api';
@@ -19,11 +19,23 @@ import { ProfileApi } from './Store/Slices/Api/Profile.api';
 import { createEmotionCache } from './Utils/createEmotionCache';
 
 export const render = async (req: ExpressRequest) => {
+  const themeName = req.cookies.theme || 'light'; // light/dark
   const cache = createEmotionCache();
-
   const { extractCriticalToChunks, constructStyleTagsFromChunks } =
     createEmotionServer(cache);
-  // Render the component to a string.
+
+  // Создаём тему на основе полученного значения
+  const theme = createTheme({
+    palette: {
+      mode: themeName,
+      primary: {
+        main: '#5c6bc0',
+      },
+      secondary: {
+        main: '#4caf50',
+      },
+    },
+  });
 
   // 1.
   const { query, dataRoutes } = createStaticHandler(routes);
@@ -51,14 +63,17 @@ export const render = async (req: ExpressRequest) => {
   // 6.
   const router = createStaticRouter(dataRoutes, context);
 
-  const html = ReactDOM.renderToString(
+  const html = ReactDOMServer.renderToString(
     <CacheProvider value={cache}>
       <Provider store={store}>
-        <StaticRouterProvider router={router} context={context} />
+        <ThemeProvider theme={theme}>
+          <StaticRouterProvider router={router} context={context} />
+        </ThemeProvider>
       </Provider>
     </CacheProvider>,
   );
 
+  // Извлекаем CSS для Emotion
   const emotionChunks = extractCriticalToChunks(html);
   const emotionCss = constructStyleTagsFromChunks(emotionChunks);
 
@@ -66,6 +81,6 @@ export const render = async (req: ExpressRequest) => {
   return {
     html,
     css: emotionCss,
-    initialState: store.getState(),
+    initialState: store.getState(), // Передаём начальное состояние Redux, включая тему
   };
 };

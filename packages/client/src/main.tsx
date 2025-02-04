@@ -1,22 +1,23 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
+import { CacheProvider } from '@emotion/react';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { store } from '@Store';
 import { StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-
-import { CacheProvider } from '@emotion/react';
-import { store } from '@Store';
 import { routes } from './routes';
 import { createEmotionCache } from './Utils/createEmotionCache';
 
+const initialTheme = window.THEME || 'light';
+
 const theme = createTheme({
   palette: {
+    mode: initialTheme,
     primary: {
-      main: purple[400],
+      main: '#5c6bc0',
     },
     secondary: {
-      main: green[500],
+      main: '#4caf50',
     },
   },
 });
@@ -39,11 +40,7 @@ hydrateRoot(
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <CssBaseline />
-          <RouterProvider
-            router={router}
-            future={{ v7_startTransition: true }}
-          />
+          <RouterProvider router={router} />
         </Provider>
       </ThemeProvider>
     </CacheProvider>
