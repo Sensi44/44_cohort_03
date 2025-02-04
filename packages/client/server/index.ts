@@ -10,6 +10,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
 const isDev = process.env.NODE_ENV === 'development';
+const baseUrl = process.env.EXTERNAL_SERVER_URL;
 
 async function createServer() {
   const app = express();
@@ -41,9 +42,7 @@ async function createServer() {
         themeName = req.cookies.theme;
       } else {
         try {
-          const themeResponse = await fetch(
-            'http://localhost:3001/api/user_theme',
-          );
+          const themeResponse = await fetch(`${baseUrl}/api/user_theme`);
           const themeData = await themeResponse.json();
           themeName = themeData.theme || 'light';
         } catch (error) {
