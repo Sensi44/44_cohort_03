@@ -13,6 +13,7 @@ export type {
 export { ErrorBlock } from './ErrorBlock/ErrorBlock';
 export type { IErrorBlockProps } from './ErrorBlock/ErrorBlock.props';
 export { ErrorNotification } from './ErrorNotification/ErrorNotification';
+export { InactivityWarning } from './InactivityWarning/InactivityWarning';
 export { LogoutButton } from './LogoutButton/LogoutButton';
 export { Menu } from './Menu/Menu';
 export { MessagesPanel } from './MessagesPanel/MessagesPanel';

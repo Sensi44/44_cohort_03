@@ -5,14 +5,17 @@ import {
   baseTransformErrorResponse,
   BASE_URL,
   METHODS,
+  OAUTH_URL_PATH,
   USER_URL_PATH,
 } from '@Constants';
 import { IProfileDataState } from '@Store';
 import type {
+  IOAuthSignInData,
   IUserChange,
   IUserChangePassword,
   IUserCreate,
   IUserLogin,
+  TServiceIdResponse,
   TUserProfileResponse,
 } from '@Types';
 import { axiosBaseQuery } from '@Utils';
@@ -109,6 +112,30 @@ export const ProfileApi = createApi({
       },
       transformErrorResponse: baseTransformErrorResponse,
     }),
+    getServiceId: build.query<TServiceIdResponse, void>({
+      query: () => {
+        const redirectUri = encodeURIComponent(window.location.origin);
+        const queryData = `?redirect_uri=${redirectUri}`;
+        return {
+          url: `${OAUTH_URL_PATH}/yandex/service-id${queryData}`,
+          method: METHODS.GET,
+        };
+      },
+      transformResponse: (response: TServiceIdResponse): TServiceIdResponse => {
+        return { service_id: response.service_id ?? null };
+      },
+      transformErrorResponse: baseTransformErrorResponse,
+    }),
+    oAuthSignIn: build.mutation<void, IOAuthSignInData>({
+      query: (payload) => {
+        return {
+          url: `${OAUTH_URL_PATH}/yandex`,
+          method: METHODS.POST,
+          data: payload,
+        };
+      },
+      transformErrorResponse: baseTransformErrorResponse,
+    }),
   }),
 });
 
@@ -120,4 +147,6 @@ export const {
   useChangeAvatarMutation,
   useChangePasswordMutation,
   useEditUserMutation,
+  useGetServiceIdQuery,
+  useOAuthSignInMutation,
 } = ProfileApi;

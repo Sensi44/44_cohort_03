@@ -1,92 +1,48 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
+import { CacheProvider } from '@emotion/react';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { store } from '@Store';
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { routes } from './routes';
+import { createEmotionCache } from './Utils/createEmotionCache';
 
-import { App } from '@Components';
-import { Routes } from '@Constants';
-import {
-  ErrorPage,
-  ForumPage,
-  LeaderBordPage,
-  NotFoundPage,
-  ProfilePage,
-  SignInPage,
-  SignUpPage,
-} from '@Pages';
-import { startServiceWorker } from '@ServiceWorker';
-import { store } from '@Store';
-
-import { PrivateRoutes } from './privateRoutes';
-
-startServiceWorker();
+const initialTheme = window.THEME || 'light';
 
 const theme = createTheme({
   palette: {
+    mode: initialTheme,
     primary: {
-      main: purple[400],
+      main: '#5c6bc0',
     },
     secondary: {
-      main: green[500],
+      main: '#4caf50',
     },
   },
 });
 
-const router = createBrowserRouter(
-  [
-    {
-      path: Routes.SignIn,
-      element: <SignInPage />,
-    },
-    {
-      path: Routes.SignUp,
-      element: <SignUpPage />,
-    },
-    {
-      element: <PrivateRoutes />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: Routes.Main,
-          element: <App />,
-          errorElement: <ErrorPage />,
-        },
-        { path: Routes.Forum, element: <ForumPage /> },
-        {
-          path: Routes.LeaderBord,
-          element: <LeaderBordPage />,
-        },
-        {
-          path: Routes.Profile,
-          element: <ProfilePage />,
-        },
-      ],
-    },
-    {
-      path: '*',
-      element: <NotFoundPage />,
-    },
-  ],
-  {
-    future: {
-      v7_fetcherPersist: true,
-      v7_relativeSplatPath: true,
-      v7_partialHydration: true,
-      v7_normalizeFormMethod: true,
-      v7_skipActionErrorRevalidation: true,
-    },
+const router = createBrowserRouter(routes, {
+  future: {
+    v7_fetcherPersist: true,
+    v7_relativeSplatPath: true,
+    v7_partialHydration: true,
+    v7_normalizeFormMethod: true,
+    v7_skipActionErrorRevalidation: true,
   },
-);
+});
 
-createRoot(document.getElementById('root') as HTMLElement).render(
+const cache = createEmotionCache();
+
+hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <CssBaseline />
-        <RouterProvider router={router} future={{ v7_startTransition: true }} />
-      </Provider>
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ThemeProvider>
+    </CacheProvider>
   </StrictMode>,
 );

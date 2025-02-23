@@ -2,14 +2,22 @@ import { Typography } from '@mui/material';
 import { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { DebugPanel, Menu } from '@Components';
+import { DebugPanel, InactivityWarning, Menu } from '@Components';
 import { useRender, useUpdate } from '@Game';
 import { useGameLoop, useGetCanvasSize, useSetCanvasContext } from '@Hooks';
 
+import { config } from '@Constants';
+import { startServiceWorker, stopRegistrationWorker } from '@ServiceWorker';
 import { GameIntro } from '../GameIntro/GameIntro';
 import './App.scss';
 
 export const App = () => {
+  if (config.isDev) {
+    startServiceWorker();
+  } else {
+    stopRegistrationWorker();
+  }
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [width, height] = useGetCanvasSize();
   const ctx = useSetCanvasContext(canvasRef);
@@ -23,7 +31,7 @@ export const App = () => {
     }
   };
 
-  const { startGame, stopGame } = useGameLoop(update, handleRender);
+  const { startGame, stopGame, currentFps } = useGameLoop(update, handleRender);
 
   useEffect(() => {
     // startGame();
@@ -80,15 +88,17 @@ export const App = () => {
         />
 
         <div className={'game-field__canvas-container'}>
+          <div className={'fps-count'}>FPS: {currentFps}</div>
           <canvas
             className={'game-field__canvas'}
             ref={canvasRef}
             width={width}
             height={height}
           />
-          <GameIntro onStart={startGame} />
+          <GameIntro onStart={startGame} onStop={stopGame} />
         </div>
       </section>
+      <InactivityWarning stopGame={stopGame} />
     </article>
   );
 };

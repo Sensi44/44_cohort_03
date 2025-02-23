@@ -1,20 +1,46 @@
 import cors from 'cors';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
+import { errors } from 'celebrate';
 import express from 'express';
-import { createClientAndConnect } from './db';
+
+import { createCommentRoutes } from './Api/CommentAPI';
+import { createCommentReplyRoutes } from './Api/CommentReplyAPI';
+import { createTopicRoutes } from './Api/TopicAPI';
+import { createUserThemeRoutes } from './Api/UserThemeAPI';
+import logger from './logger';
+import { requireAuth } from './Middleware/RequireAuth';
+import { sanitizeInput } from './Middleware/SanitizeInput';
+import { createClientAndConnect } from './PGClient';
+import { syncSequelize } from './Sequelize';
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [`http://localhost:${process.env.CLIENT_PORT}`],
+    credentials: true,
+  }),
+);
+app.use(sanitizeInput);
+app.use(errors());
+app.use(express.json());
 const port = Number(process.env.SERVER_PORT) || 3001;
 
-createClientAndConnect();
+const router = express.Router();
 
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :)');
-});
+createClientAndConnect().then(() => {
+  syncSequelize().then(() => {
+    createTopicRoutes(router);
+    createCommentRoutes(router);
+    createCommentReplyRoutes(router);
+    createUserThemeRoutes(router);
 
-app.listen(port, () => {
-  console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+    app.use('/api', requireAuth, router);
+
+    app.listen(port, () => {
+      logger.info(`  ➜ 🎸 Server is listening on port: ${port}`);
+    });
+  });
 });

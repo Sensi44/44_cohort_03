@@ -1,5 +1,5 @@
 module.exports = {
-  ignorePatterns: ['dist/'],
+  ignorePatterns: ['dist/', '**/*.js'],
   env: {
     browser: true,
     es2020: true,

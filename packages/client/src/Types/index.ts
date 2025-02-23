@@ -4,6 +4,7 @@ export type {
   TLeaderBordParams,
   TLeaderBordResponse,
 } from './LeaderBord.types';
+export type { IOAuthSignInData, TServiceIdResponse } from './OAuth.types';
 export type {
   IUserChange,
   IUserChangePassword,

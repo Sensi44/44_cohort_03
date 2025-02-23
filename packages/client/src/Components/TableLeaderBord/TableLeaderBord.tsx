@@ -35,7 +35,7 @@ export const TableLeaderBord = ({ rows }: ITableLeaderBordProps) => {
               </TableCell>
               <TableCell align='center'>{row.name}</TableCell>
               <TableCell width={30} align='right'>
-                {row.score}
+                {row.beaversScore}
               </TableCell>
             </TableRow>
           ))}
