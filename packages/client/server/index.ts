@@ -10,6 +10,7 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
 const isDev = process.env.NODE_ENV === 'development';
+const baseUrl = process.env.EXTERNAL_SERVER_URL;
 
 async function createServer() {
   const app = express();
@@ -34,6 +35,23 @@ async function createServer() {
     const url = req.originalUrl;
 
     try {
+      let themeName = 'light';
+
+      // Проверяем наличие темы в куках
+      if (req.cookies.theme) {
+        themeName = req.cookies.theme;
+      } else {
+        try {
+          const themeResponse = await fetch(`${baseUrl}/api/user_theme`);
+          const themeData = await themeResponse.json();
+          themeName = themeData.theme || 'light';
+        } catch (error) {
+          console.error('Ошибка при получении темы:', error);
+        }
+      }
+
+      res.cookie('theme', themeName, { maxAge: 900000, httpOnly: true });
+
       let render: (
         req: ExpressRequest,
       ) => Promise<{ html: string; initialState: unknown; css: string }>;
@@ -44,12 +62,7 @@ async function createServer() {
           path.resolve(clientPath, 'index.html'),
           'utf-8',
         );
-
-        // Применяем встроенные HTML-преобразования Vite и плагинов
         template = await vite.transformIndexHtml(url, template);
-
-        // Загружаем модуль клиента, который писали выше,
-        // он будет рендерить HTML-код
         render = (
           await vite.ssrLoadModule(
             path.join(clientPath, 'src/entry-service.tsx'),
@@ -60,35 +73,32 @@ async function createServer() {
           path.join(clientPath, 'dist/client/index.html'),
           'utf-8',
         );
-
-        // Получаем путь до модуля клиента, чтобы не тащить средства сборки клиента на сервер
         const pathToServer = path.join(
           clientPath,
           'dist/server/entry-service.js',
         );
-
-        // Импортируем этот модуль и вызываем с начальным состоянием
         render = (await import(pathToServer)).render;
       }
 
-      // Получаем HTML-строку из JSX
       const { html: appHtml, initialState, css } = await render(req);
 
-      // Заменяем комментарий на сгенерированную HTML-строку
       const html = template
         .replace(`<!--ssr-css-outlet-->`, css)
         .replace(`<!--ssr-outlet-->`, appHtml)
         .replace(
           `<!--ssr-initial-state-->`,
-          `<script>window.APP_INITIAL_STATE = ${serialize(initialState, {
-            isJSON: true,
-          })}</script>`,
+          `<script>window.APP_INITIAL_STATE = ${serialize(initialState, { isJSON: true })}</script>`,
+        )
+        .replace(
+          `<!--ssr-theme-->`,
+          `<script>window.THEME = ${JSON.stringify(themeName)}</script>`,
         );
 
-      // Завершаем запрос и отдаём HTML-страницу
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
+      if (vite) {
+        vite.ssrFixStacktrace(e as Error);
+      }
       next(e);
     }
   });

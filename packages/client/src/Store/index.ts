@@ -14,6 +14,7 @@ import { ProfileApi } from './Slices/Api/Profile.api';
 declare global {
   interface Window {
     APP_INITIAL_STATE: RootState;
+    THEME: 'light' | 'dark';
   }
 }
 
