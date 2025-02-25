@@ -7,13 +7,13 @@ import {
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
+import { SERVER_URL } from '@Constants';
 import {
   useCreateCommentMutation,
   useCreateTopicMutation,
   useGetCommentsMutation,
   useGetTopicsQuery,
 } from '@Store';
-import { SERVER_URL } from '@Constants';
 
 export const ForumPage = () => {
   const { data: rooms, refetch } = useGetTopicsQuery();

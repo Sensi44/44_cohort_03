@@ -10,7 +10,12 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
 const isDev = process.env.NODE_ENV === 'development';
-const baseUrl = process.env.EXTERNAL_SERVER_URL;
+const baseUrl = isDev
+  ? process.env.EXTERNAL_SERVER_URL
+  : 'http://158.160.91.178:3001';
+
+console.log('baseUrl', baseUrl);
+console.log('isDev', isDev);
 
 async function createServer() {
   const app = express();
