@@ -1,4 +1,4 @@
-import * as process from 'node:process';
+import * as process from 'process';
 import { SERVER_HOST } from './server-constants';
 
 export const BASE_URL = 'https://ya-praktikum.tech/api/v2';
