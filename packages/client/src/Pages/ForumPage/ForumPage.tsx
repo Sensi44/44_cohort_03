@@ -13,6 +13,7 @@ import {
   useGetCommentsMutation,
   useGetTopicsQuery,
 } from '@Store';
+import { SERVER_URL } from '@Constants';
 
 export const ForumPage = () => {
   const { data: rooms, refetch } = useGetTopicsQuery();
@@ -51,6 +52,7 @@ export const ForumPage = () => {
   };
 
   const handeAddTopic = async (message: string) => {
+    console.log(SERVER_URL);
     createTopic({ title: message })
       .unwrap()
       .then(() => refetch().unwrap())
