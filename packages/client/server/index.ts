@@ -63,7 +63,7 @@ async function createServer() {
 
       if (vite) {
         template = await fs.readFile(
-          path.resolve(clientPath, 'index.html'),
+          path.resolve(clientPath, 'dist/client/index.html'),
           'utf-8',
         );
         template = await vite.transformIndexHtml(url, template);
