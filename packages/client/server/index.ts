@@ -9,7 +9,7 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = false;
 const baseUrl = process.env.EXTERNAL_SERVER_URL;
 
 console.log(process.env.NODE_ENV, process.env.EXTERNAL_SERVER_URL, baseUrl);
@@ -63,7 +63,7 @@ async function createServer() {
 
       if (vite) {
         template = await fs.readFile(
-          path.resolve(clientPath, 'dist/client/index.html'),
+          path.resolve(clientPath, 'index.html'),
           'utf-8',
         );
         template = await vite.transformIndexHtml(url, template);
