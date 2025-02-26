@@ -9,8 +9,10 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 const clientPath = path.join(__dirname, '..');
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = false;
 const baseUrl = process.env.EXTERNAL_SERVER_URL;
+
+console.log(process.env.NODE_ENV, process.env.EXTERNAL_SERVER_URL, baseUrl);
 
 async function createServer() {
   const app = express();
@@ -42,7 +44,9 @@ async function createServer() {
         themeName = req.cookies.theme;
       } else {
         try {
-          const themeResponse = await fetch(`${baseUrl}/api/user_theme`);
+          const themeResponse = await fetch(
+            `http://51.250.20.109:3001/api/user_theme`,
+          );
           const themeData = await themeResponse.json();
           themeName = themeData.theme || 'light';
         } catch (error) {

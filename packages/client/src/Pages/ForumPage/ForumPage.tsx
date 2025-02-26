@@ -7,6 +7,7 @@ import {
 import { Box } from '@mui/material';
 import { useState } from 'react';
 
+import { SERVER_URL } from '@Constants';
 import {
   useCreateCommentMutation,
   useCreateTopicMutation,
@@ -51,6 +52,7 @@ export const ForumPage = () => {
   };
 
   const handeAddTopic = async (message: string) => {
+    console.log(SERVER_URL);
     createTopic({ title: message })
       .unwrap()
       .then(() => refetch().unwrap())
