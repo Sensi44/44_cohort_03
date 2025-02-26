@@ -23,9 +23,11 @@ const CLIENT_ORIGIN =
     ? `http://localhost:${process.env.CLIENT_PORT}`
     : `http://${process.env.CLIENT_ORIGIN}:${process.env.CLIENT_PORT}`;
 
+console.log(CLIENT_ORIGIN);
+
 app.use(
   cors({
-    origin: [CLIENT_ORIGIN],
+    origin: ['*'],
     credentials: true,
   }),
 );
